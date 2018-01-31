@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 
 <head>
   <title>Edusol</title>
@@ -24,11 +24,11 @@
 </head>
     <body>
         <div class="container">
-            <div ng-controller="myController">
+            <div>
                 <div class = "row" ng-model="template">
                     <br>
                     <div class="page-content">
-                        <div class="alert alert-success" role="alert">The mark <span style="font-weight: bold;">80</span> has been added to <span style="font-weight: bold;">Saint-Cyr MAPOUKA - #STD123</span> successfully !</div>
+                        <div class="alert alert-success" role="alert">The mark <span style="font-weight: bold;"> <span ng-bind="mark">{{ mark }}</span></span> has been added to <span style="font-weight: bold;">Saint-Cyr MAPOUKA - #STD123</span> successfully !</div>
                     <!--<div class="alert alert-danger" role="alert">Oh snap ! something went wrong when adding mark for Saint-Cyr MAPOUKA</div>-->
                     <div class="col-lg-4">
                         <div class="panel panel-primary">
@@ -37,12 +37,12 @@
                             </div>
                             <div class="panel-body">
                                 <div class="col-xs-12 col-sm-12" style="color: black;">
-                                    <p> <strong>Class: <span style="color: blue;"> GRAD 1 </span></strong></p>
-                                    <p> <strong>Term: <span style="color: blue;"> Three </span></strong></p>
-                                    <p> <strong>Student Number: <span style="color: blue;"> 60 </span></strong></p>
-                                    <p> <strong>Highest Class Mark: <span style="color: blue;"> 90 % </span></strong></p>
-                                    <p> <strong>Avarage Class Mark: <span style="color: blue;"> 75 % </span></strong></p>
-                                    <p> <strong>Lowest Class Mark: <span style="color: blue;"> 60 % </span></strong></p>
+                                    <p> <strong>Class: <span id="class" style="color: blue;"> GRAD 1 </span></strong></p>
+                                    <p> <strong>Term: <span id="term" style="color: blue;"> Three </span></strong></p>
+                                    <p> <strong>Student Number: <span id="class_student_number" style="color: blue;"> 60 </span></strong></p>
+                                    <p> <strong>Highest Class Mark: <span id="hight_mark" style="color: blue;"> 90 % </span></strong></p>
+                                    <p> <strong>Avarage Class Mark: <span id="average_mark" style="color: blue;"> 75 % </span></strong></p>
+                                    <p> <strong>Lowest Class Mark: <span id="low_mark" style="color: blue;"> 60 % </span></strong></p>
                                 </div>
                             </div>
                             
@@ -55,12 +55,12 @@
                             </div>
                             <div class="panel-body">
                                 <div class="col-xs-12 col-sm-12" style="color: black;">
-                                    <p> <strong>Full Name: <span ng-bind="studentName" style="color: blue;"> {{ studentName }} </span></strong></p>
-                                    <p> <strong>Last Mark: <span ng-bind="lastMark" style="color: blue;"> {{ lastMark }} </span></strong></p>
-                                    <p> <strong>Last Position: <span ng-bind="lastPosition" style="color: red;"> {{ lastPosition }} </span></strong></p>
-                                    <p> <strong>Student #ID: <span ng-bind="studentId" style="color: blue;"> {{ studentId }} </span></strong></p>
-                                    <p> <strong>Last Performance: <span ng-bind="performance" style="color: red;"> {{ performance }} </span></strong></p>
-                                    <p> <strong>Parent phone: <span ng-bind="parentPhone" style="color: red;"> {{ parentPhone }} </span></strong></p>
+                                    <p> <strong>Full Name: <span id="student_name" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Mark: <span id="student_last_mark" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Position: <span id="student_last_position" style="color: red;">  </span></strong></p>
+                                    <p> <strong>Student #ID: <span id="student_id" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>Last Performance: <span id="student_performance" style="color: red;">  </span></strong></p>
+                                    <p> <strong>Parent phone: <span id="student_parent_phone" style="color: red;">  </span></strong></p>
                                 </div>
                             </div>
                             
@@ -68,21 +68,22 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="">
-                            <img src = "{{ picture }}" alt = "Generic placeholder thumbnail" class="img-thumbnail" width="260px">
+                            <img id="student_image" src="next.jpg" alt="Generic placeholder thumbnail" class="img-thumbnail" width="260px">
                         </div>
                     </div>
                     <div class = "col-sm-6 col-md-3">
                       
                        <div class = "caption">
                            <br>
-                           <input type="text", class="form-control" ng-model="currentMark" placeholder="Input the current mark"/> 
-                          <form ng-submit="getStudent()">
-                              <input style="opacity: 0.5;" autocomplete="off" type="text" ng-model="barcode" autofocus="" id="barcode" rfocus="Input1"/>
-                          </form>
-                              <p  ng-click="submission()" class = "btn btn-primary" role = "button">
-                                Save & Next
-                             </p> 
-                          </p>
+                           <form onsubmit="submission()">
+                               <input required="required" type="text", class="form-control" id="current_mark"
+                                      style="opacity: 0"  placeholder="Input the current mark"/>
+                               
+                           </form>
+                           <button id="pause">Pause</button>
+                                                       
+                            
+                         
                        </div>
                     </div>
                 </div>
@@ -90,69 +91,61 @@
             </div>
         </div>
     </body>
-    <script>
+    <script type="text/javascript" src="lib/jquery.scannerdetection.js"></script>
+    <script type="text/javascript">
         
         var students = [
-            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"9780964729230", "lastMark":18.50, "picture":"2.jpg",
-            "parentPhone":"+233 000 000 00", "lastPosition":"2nd", "performance":"EXTRA ORDINARY"},
-            {"id":2, "name":"Mexan MAPOUKA", "barcode":"8992929754008", "lastMark":19.50, "picture":"mexan.jpg", 
+            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"2008811054005", "last_mark":18.50, "image":"2.jpg",
+            "parent_phone":"+233 000 000 00", "last_position":"2nd", "performance":"EXTRA ORDINARY"},
+            {"id":2, "name":"Mexan MAPOUKA", "barcode":"2001532314403", "lastMark":19.50, "picture":"2.jpg", 
                 "parentPhone":"+233 268 568 006", "lastPosition":"1st", "performance":"EXCELLENT"}
         ];
         
+        function submission(){
+            alert('submitted !');
+            $('#student_image').attr('src', '1.gif');
+        }
         
-        angular.module('myApp', []).controller('myController', ['$scope', '$http', function myController($scope, $http){
-                $scope.studentName = '';
-                $scope.studentId = '';
-                $scope.lastMark = '';
-                $scope.picture = 'blank.jpg';
-                
-            
-            $scope.submission = function(){
-                    alert('Name: '+$scope.studentName+', ID: '+$scope.studentId+', Current Mark: '+$scope.currentMark+', Barcode: '+$scope.barcode);
-                    //Send it to the server
-                    $http.get('http://localhost/TEST/index2.json').success(function(response){
-                });
-                $scope.studentName = '';
-                $scope.studentId = '';
-                $scope.lastMark = '';
-                $scope.barcode = '';
-                
-                
-            }
-            
-            
-            
-            $scope.getStudent = function(){
-                for(var key in students){
-                    if(students[key].barcode == $scope.barcode){
-                        $scope.studentName = students[key].name;
-                        $scope.studentId = students[key].id;
-                        $scope.lastMark = students[key].lastMark;
-                        $scope.picture = students[key].picture;
-                        $scope.parentPhone = students[key].parentPhone;
-                        $scope.lastPosition = students[key].lastPosition;
-                        $scope.performance = students[key].performance;
-                    }  
-                }
-            }
-            
-            
-        }]);
+        
+
+        
+	$(document).scannerDetection({
+	timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+	startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+	endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+	avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+	onComplete: function(barcode, qty){
+            //Set the found variable to true
+            if(students.includes(students.barcode)){alert("OK");}
+            var found = true;
+            for(var key in students){
+                    if(students[key].barcode && (students[key].barcode == barcode)){
+                        $('#student_name').text(students[key].name);
+                        $('#student_id').text(students[key].id);
+                        $('#student_last_mark').text(students[key].last_mark);
+                        $('#student_image').text(students[key].image);
+                        $('#student_parent_phone').text(students[key].parent_phone);
+                        $('#student_last_position').text(students[key].last_position);
+                        $('#student_performance').text(students[key].performance);
+                        $('#student_image').attr('src', students[key].image);
+                        $('#current_mark').focus();
+                        //Change the value style attibute
+                        $('#current_mark').attr('style', 'opacity: 1');
+                        break;
+                    }else{
+                        var audioElement = document.createElement('audio');
+                        audioElement.setAttribute('src', '1.mp3');
+                        audioElement.play();
+                        $('#student_image').attr('src', '11.jpg');
+                        //audioElement.pause();
+                        alert('Sorry this student is not part of Section 5em 2');
+                    }
+        
+            }}        	
+    });
     
-        
-    myApp.directive('rfocus',function(){
-    return {
-        restrict: 'A',
-        controller: function($scope, $element, $attrs){
-            var fooName = 'setFocus' + $attrs.rfocus; 
-            $scope[fooName] = function(){
-                $element.focus();                
-            } 
-        },
-    }    
-});
-  
-        
+    
+    
     </script>
 </html>
 
