@@ -95,7 +95,7 @@
     <script type="text/javascript">
         
         var students = [
-            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"2008811054005", "last_mark":18.50, "image":"2.jpg",
+            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"6951670901262", "last_mark":18.50, "image":"2.jpg",
             "parent_phone":"+233 000 000 00", "last_position":"2nd", "performance":"EXTRA ORDINARY"},
             {"id":2, "name":"Mexan MAPOUKA", "barcode":"2001532314403", "lastMark":19.50, "picture":"2.jpg", 
                 "parentPhone":"+233 268 568 006", "lastPosition":"1st", "performance":"EXCELLENT"}
