@@ -95,7 +95,7 @@
     <script type="text/javascript">
         
         var students = [
-            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"6951670901262", "last_mark":18.50, "image":"2.jpg",
+            {"id":1, "name":"Saint-Cyr MAPOUKA", "barcode":"6692141211076", "last_mark":18.50, "image":"2.jpg",
             "parent_phone":"+233 000 000 00", "last_position":"2nd", "performance":"EXTRA ORDINARY"},
             {"id":2, "name":"Mexan MAPOUKA", "barcode":"2001532314403", "lastMark":19.50, "picture":"2.jpg", 
                 "parentPhone":"+233 268 568 006", "lastPosition":"1st", "performance":"EXCELLENT"}
@@ -106,9 +106,6 @@
             $('#student_image').attr('src', '1.gif');
         }
         
-        
-
-        
 	$(document).scannerDetection({
 	timeBeforeScanTest: 200, // wait for the next character for upto 200ms
 	startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
@@ -116,32 +113,30 @@
 	avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
 	onComplete: function(barcode, qty){
             //Set the found variable to true
-            if(students.includes(students.barcode)){alert("OK");}
-            var found = true;
-            for(var key in students){
-                    if(students[key].barcode && (students[key].barcode == barcode)){
-                        $('#student_name').text(students[key].name);
-                        $('#student_id').text(students[key].id);
-                        $('#student_last_mark').text(students[key].last_mark);
-                        $('#student_image').text(students[key].image);
-                        $('#student_parent_phone').text(students[key].parent_phone);
-                        $('#student_last_position').text(students[key].last_position);
-                        $('#student_performance').text(students[key].performance);
-                        $('#student_image').attr('src', students[key].image);
+	    var std = students.find(x => x.barcode === barcode);
+	    if(!(typeof std == 'undefined')){
+		$('#student_name').text(std.name);
+		$('#student_id').text(std.id);
+                        $('#student_last_mark').text(std.last_mark);
+                        $('#student_image').text(std.image);
+                        $('#student_parent_phone').text(std.parent_phone);
+                        $('#student_last_position').text(std.last_position);
+                        $('#student_performance').text(std.performance);
+                        $('#student_image').attr('src', std.image);
                         $('#current_mark').focus();
                         //Change the value style attibute
                         $('#current_mark').attr('style', 'opacity: 1');
-                        break;
-                    }else{
-                        var audioElement = document.createElement('audio');
+	    }else{
+		var audioElement = document.createElement('audio');
                         audioElement.setAttribute('src', '1.mp3');
                         audioElement.play();
                         $('#student_image').attr('src', '11.jpg');
                         //audioElement.pause();
                         alert('Sorry this student is not part of Section 5em 2');
-                    }
-        
-            }}        	
+	    }	    
+
+
+            }        	
     });
     
     
