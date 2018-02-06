@@ -3,34 +3,22 @@
 
 <head>
   <title>Edusol</title>
-  <!--<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
-  <script data-require="jquery@*" data-semver="2.0.3" src="vendor/jquery-3.1.0.min.js"></script>
-
-  <!--<script data-require="angular.js@1.2.13" data-semver="1.2.13" src="http://code.angularjs.org/1.2.13/angular.js"></script>-->
-  <script data-require="angular.js@1.2.13" data-semver="1.2.13" src="vendor/angular-1.2.13/angular.js"></script>
-  <!--<script data-require="angular.js@1.2.13" data-semver="1.2.13" src="http://code.angularjs.org/1.2.13/angular-animate.js"></script>-->
-  <script data-require="angular.js@1.2.13" data-semver="1.2.13" src="vendor/angular-1.2.13/angular-animate.js"></script>
-
-<!-- Latest compiled and minified CSS -->
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">-->
-<link rel="stylesheet" href="vendor/bootstrap.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
-<script src="vendor/bootstrap.min.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css"/>
-  <script src="app.js"></script>
+  <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
+<script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
     <body>
         <div class="container">
             <div>
                 <div class = "row" ng-model="template">
                     <br>
+                    {% verbatim %}
                     <div class="page-content">
                         <div class="alert alert-success" role="alert">The mark <span style="font-weight: bold;"> <span ng-bind="mark">{{ mark }}</span></span> has been added to <span style="font-weight: bold;">Saint-Cyr MAPOUKA - #STD123</span> successfully !</div>
                     <!--<div class="alert alert-danger" role="alert">Oh snap ! something went wrong when adding mark for Saint-Cyr MAPOUKA</div>-->
                     <div class="col-lg-4">
+                    {% endverbatim %}
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 General Informations
@@ -68,7 +56,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="">
-                            <img id="student_image" src="next.jpg" alt="Generic placeholder thumbnail" class="img-thumbnail" width="260px">
+                            <img id="student_image" src="{{ asset('images/next.jpg') }}" alt="Generic placeholder thumbnail" class="img-thumbnail" width="260px">
                         </div>
                     </div>
                     <div class = "col-sm-6 col-md-3">
@@ -79,10 +67,7 @@
                                <input required="required" type="text", class="form-control" id="current_mark"
                                       style="opacity: 0"  placeholder="Input the current mark"/>
                                
-                           </form>
-                           <button id="pause">Pause</button>
-                                                       
-                            
+                           </form>       
                          
                        </div>
                     </div>
@@ -91,7 +76,7 @@
             </div>
         </div>
     </body>
-    <script type="text/javascript" src="lib/jquery.scannerdetection.js"></script>
+    <script type="text/javascript" src="{{ asset('lib/jquery.scannerdetection.js') }}"></script>
     <script type="text/javascript">
         
         var students = [
@@ -117,29 +102,26 @@
 	    if(!(typeof std == 'undefined')){
 		$('#student_name').text(std.name);
 		$('#student_id').text(std.id);
-                        $('#student_last_mark').text(std.last_mark);
-                        $('#student_image').text(std.image);
-                        $('#student_parent_phone').text(std.parent_phone);
-                        $('#student_last_position').text(std.last_position);
-                        $('#student_performance').text(std.performance);
-                        $('#student_image').attr('src', std.image);
-                        $('#current_mark').focus();
-                        //Change the value style attibute
-                        $('#current_mark').attr('style', 'opacity: 1');
+                $('#student_last_mark').text(std.last_mark);
+                $('#student_parent_phone').text(std.parent_phone);
+                $('#student_last_position').text(std.last_position);
+                $('#student_performance').text(std.performance);
+                $('#student_image').attr('src', '{{ asset('images/') }}'+std.image);
+                $('#current_mark').focus();
+                //Change the value style attibute
+                $('#current_mark').attr('style', 'opacity: 1');
 	    }else{
 		var audioElement = document.createElement('audio');
-                        audioElement.setAttribute('src', '1.mp3');
-                        audioElement.play();
-                        $('#student_image').attr('src', '11.jpg');
-                        //audioElement.pause();
-                        alert('Sorry this student is not part of Section 5em 2');
+                audioElement.setAttribute('src', '{{ asset('1.mp3') }}');
+                audioElement.play();
+                $('#student_image').attr('src', '{{ asset('images/11.jpg') }}');
+                //audioElement.pause();
+                alert('Sorry this student is not part of Section 5em 2');
 	    }	    
 
 
             }        	
     });
-    
-    
     
     </script>
 </html>

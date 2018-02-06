@@ -1,0 +1,3 @@
+mark_input:
+    path:     /mark_input
+    defaults: { _controller: AppBundle:Default:markInput }
