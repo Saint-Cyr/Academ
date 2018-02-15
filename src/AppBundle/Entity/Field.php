@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Level
+ * Field
  *
- * @ORM\Table(name="level")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\LevelRepository")
+ * @ORM\Table(name="field")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FieldRepository")
  */
-class Level
+class Field
 {
     /**
      * @var int
@@ -22,20 +22,9 @@ class Level
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="level")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="field", cascade="remove")
      */
     private $programs;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Section", mappedBy="level")
-     */
-    private $sections;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="levels")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $cycle;
 
     /**
      * @var string
@@ -60,7 +49,7 @@ class Level
      *
      * @param string $name
      *
-     * @return Level
+     * @return Field
      */
     public function setName($name)
     {
@@ -91,7 +80,7 @@ class Level
      *
      * @param \AppBundle\Entity\Program $program
      *
-     * @return Level
+     * @return Field
      */
     public function addProgram(\AppBundle\Entity\Program $program)
     {
@@ -118,63 +107,5 @@ class Level
     public function getPrograms()
     {
         return $this->programs;
-    }
-
-    /**
-     * Set cycle
-     *
-     * @param \AppBundle\Entity\Cycle $cycle
-     *
-     * @return Level
-     */
-    public function setCycle(\AppBundle\Entity\Cycle $cycle)
-    {
-        $this->cycle = $cycle;
-
-        return $this;
-    }
-
-    /**
-     * Get cycle
-     *
-     * @return \AppBundle\Entity\Cycle
-     */
-    public function getCycle()
-    {
-        return $this->cycle;
-    }
-
-    /**
-     * Add section
-     *
-     * @param \AppBundle\Entity\Section $section
-     *
-     * @return Level
-     */
-    public function addSection(\AppBundle\Entity\Section $section)
-    {
-        $this->sections[] = $section;
-
-        return $this;
-    }
-
-    /**
-     * Remove section
-     *
-     * @param \AppBundle\Entity\Section $section
-     */
-    public function removeSection(\AppBundle\Entity\Section $section)
-    {
-        $this->sections->removeElement($section);
-    }
-
-    /**
-     * Get sections
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSections()
-    {
-        return $this->sections;
     }
 }

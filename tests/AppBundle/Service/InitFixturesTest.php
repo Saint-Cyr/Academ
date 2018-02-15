@@ -36,7 +36,7 @@ class InitFixturesTest extends WebTestCase
     public function testInit()
     {
         $this->assertTrue(true);
-        //$this->Init();
+        $this->Init();
     }
 
     
@@ -81,7 +81,7 @@ class InitFixturesTest extends WebTestCase
         $executor->execute( 
                             $this->em,
                             $loaderGenerator->generate($loader, $fixtureLoader, $kernel->getBundles(), 'test'),
-                            $fixtureFinder->resolveFixtures($kernel, array('@AppBundle/Fixtures/1.yml')),
+                            $fixtureFinder->resolveFixtures($kernel, array('@AppBundle/Fixtures/LTB.yml')),
                             false,
                             false
                           );

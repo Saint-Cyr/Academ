@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Level
+ * MainTeacher
  *
- * @ORM\Table(name="level")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\LevelRepository")
+ * @ORM\Table(name="main_teacher")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MainTeacherRepository")
  */
-class Level
+class MainTeacher
 {
     /**
      * @var int
@@ -22,20 +22,16 @@ class Level
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="level")
-     */
-    private $programs;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Section", mappedBy="level")
-     */
-    private $sections;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="levels")
+     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="mainTeachers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $cycle;
+    private $teacher;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Section", mappedBy="mainTeacher")
+     */
+    private $sections;
 
     /**
      * @var string
@@ -60,7 +56,7 @@ class Level
      *
      * @param string $name
      *
-     * @return Level
+     * @return MainTeacher
      */
     public function setName($name)
     {
@@ -83,65 +79,31 @@ class Level
      */
     public function __construct()
     {
-        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add program
+     * Set teacher
      *
-     * @param \AppBundle\Entity\Program $program
+     * @param \AppBundle\Entity\Teacher $teacher
      *
-     * @return Level
+     * @return MainTeacher
      */
-    public function addProgram(\AppBundle\Entity\Program $program)
+    public function setTeacher(\AppBundle\Entity\Teacher $teacher)
     {
-        $this->programs[] = $program;
+        $this->teacher = $teacher;
 
         return $this;
     }
 
     /**
-     * Remove program
+     * Get teacher
      *
-     * @param \AppBundle\Entity\Program $program
+     * @return \AppBundle\Entity\Teacher
      */
-    public function removeProgram(\AppBundle\Entity\Program $program)
+    public function getTeacher()
     {
-        $this->programs->removeElement($program);
-    }
-
-    /**
-     * Get programs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrograms()
-    {
-        return $this->programs;
-    }
-
-    /**
-     * Set cycle
-     *
-     * @param \AppBundle\Entity\Cycle $cycle
-     *
-     * @return Level
-     */
-    public function setCycle(\AppBundle\Entity\Cycle $cycle)
-    {
-        $this->cycle = $cycle;
-
-        return $this;
-    }
-
-    /**
-     * Get cycle
-     *
-     * @return \AppBundle\Entity\Cycle
-     */
-    public function getCycle()
-    {
-        return $this->cycle;
+        return $this->teacher;
     }
 
     /**
@@ -149,7 +111,7 @@ class Level
      *
      * @param \AppBundle\Entity\Section $section
      *
-     * @return Level
+     * @return MainTeacher
      */
     public function addSection(\AppBundle\Entity\Section $section)
     {

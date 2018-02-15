@@ -3,33 +3,24 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@UserBundle/Resources/config/services.yml" }
-
-sonata_blocks:
+    
+sonata_block:
+    default_contexts: [sonata_page_bundle]
     blocks:
+        # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
             
-sonata_admin:
-    security:
-        handler: sonata.admin.security.handler.role
-    templates:
-        layout: AppBundle::standard_layout.html.twig
-    title_logo: images/logo.png
-    title: Academ
-    #dashboard:
-     #   blocks:
-      #      - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [Transaction]} }
-       #     - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Admin]} }
-        #    - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]} }
-
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
 
 framework:
+    templating:
+        engine: ['twig']
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
