@@ -1,3 +1,7 @@
-mark_input:
-    path:     /mark_input
-    defaults: { _controller: AppBundle:Default:markInput }
+mark_upload:
+    path: /mark_upload
+    default: { _controller: AppBundle:Default:markUpload }
+    
+generate_codbare:
+    path: /barcode
+    default: { _controller: AppBundle:Default:barcode }

@@ -1,0 +1,7 @@
+services:
+    app.admin.mark:
+        class: AppBundle\Admin\MarkAdmin
+        arguments: [~, AppBundle\Entity\Mark, AppBundle:MarkAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Mark }
+        public: true

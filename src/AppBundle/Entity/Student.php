@@ -49,6 +49,13 @@ class Student
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="barcode", type="string", length=255, unique=true)
+     */
+    private $barcode;
 
 
     /**
@@ -206,5 +213,29 @@ class Student
     public function getMarks()
     {
         return $this->marks;
+    }
+
+    /**
+     * Set barcode
+     *
+     * @param string $barcode
+     *
+     * @return Student
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    /**
+     * Get barcode
+     *
+     * @return string
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
     }
 }

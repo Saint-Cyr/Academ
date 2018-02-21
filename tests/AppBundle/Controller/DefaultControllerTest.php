@@ -19,8 +19,11 @@ class DefaultControllerTest extends WebTestCase
     public function testInputMark()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/input_mark');
+        $crawler = $client->request('GET', '/input_mark/2');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('KOYASSANGOU', $client->getResponse()->getContent());
         
     }
+    
+    
 }

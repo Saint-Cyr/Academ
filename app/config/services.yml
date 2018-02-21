@@ -36,3 +36,10 @@ services:
     # add more services, or override services that need manual wiring
     AppBundle\Service\BuildMarkTableLTBHandler:
         arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
+    
+    app.admin.mark:
+        class: AppBundle\Admin\MarkAdmin
+        arguments: [~, AppBundle\Entity\Mark, AppBundle:MarkAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Mark }
+        public: true

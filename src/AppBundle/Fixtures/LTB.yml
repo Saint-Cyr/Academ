@@ -91,6 +91,7 @@ AppBundle\Entity\Evaluation:
         sequence: "@sequence_1"
         program: "@program_1"
         section: "@section_2"
+        name: Devoire N<sup>o</sup>1
     evaluation_2:
         createdAt: <(new \DateTime('01-10-2018'))>
         evaluationType: "@evaluation_type_1"
@@ -106,10 +107,12 @@ AppBundle\Entity\Evaluation:
         
 AppBundle\Entity\Student:
     student_1:
-        name: KOYASSANGOU
+        name: KOYASSANGOU Ursula
+        barcode: 8993242593848
         section: "@section_2"
     student_2:
         name: GAZAMBETI
+        barcode: 9782608123015
         section: "@section_2"
         
 AppBundle\Entity\Mark:

@@ -49,6 +49,13 @@ class Student
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="barcode", type="string", length=255)
+     */
+    private $barcode;
 
 
     /**
@@ -172,5 +179,39 @@ class Student
     public function getSection()
     {
         return $this->section;
+    }
+
+    /**
+     * Add mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     *
+     * @return Student
+     */
+    public function addMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks[] = $mark;
+
+        return $this;
+    }
+
+    /**
+     * Remove mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     */
+    public function removeMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks->removeElement($mark);
+    }
+
+    /**
+     * Get marks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMarks()
+    {
+        return $this->marks;
     }
 }
