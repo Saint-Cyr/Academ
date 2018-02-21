@@ -43,6 +43,15 @@ class EvaluationType
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        
+        if($this->name){
+            return $this->name;
+        };
+        
+        return 'New EvaluationType';
+    }
 
     /**
      * Set name

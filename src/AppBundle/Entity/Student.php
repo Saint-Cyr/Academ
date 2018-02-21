@@ -67,6 +67,15 @@ class Student
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        
+        if($this->name){
+            return $this->name;
+        }
+        
+        return 'New Student';
+    }
 
     /**
      * Set name

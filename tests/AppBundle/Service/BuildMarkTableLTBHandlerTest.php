@@ -44,12 +44,13 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         $this->assertEquals($sequence->getName(), '1er Trimestre');
         //Get all student for the given section based on fixture, they have to be two
         $students = $section->getStudents();
-        $this->assertEquals($students[0]->getName(), 'KOYASSANGOU');
+        $this->assertEquals($students[0]->getName(), 'KOYASSANGOU Ursula');
         $this->assertEquals($students[1]->getName(), 'GAZAMBETI');
         //Test it now
         $outPut = $this->buildMarkTableLTBHandler->generateMarkTableLTB($section, $sequence);
         //Make sure it return array
         $this->assertEquals(count($outPut), 2);
+        $this->assertEquals($outPut['parameters'], array());
     }
     
     public function testBuildMarkTableOneStudentLTB()
@@ -60,7 +61,7 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         $student2 = $this->em->getRepository('AppBundle:Student')->find(2);
         $student1 = $this->em->getRepository('AppBundle:Student')->find(1);
         //Make sure student is KOYASSANGOU
-        $this->assertEquals($student1->getName(), 'KOYASSANGOU');
+        $this->assertEquals($student1->getName(), 'KOYASSANGOU Ursula');
         $section = $student1->getSection();
         //Make sure section is for KOYASSANGOU (Sec 1ere G3B)
         $this->assertEquals($section->getName(), 'Sec 1ere G3B');
@@ -70,38 +71,40 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         $this->assertEquals($programs[1]->getName(), 'Prog Maths 1ere G3');
         //For the current version of LTB.yml only 2 items in $programs
         $this->assertEquals(count($programs), 2);
-        $this->assertEquals('KOYASSANGOU', $student1->getName());
+        $this->assertEquals('KOYASSANGOU Ursula', $student1->getName());
         
         //Now call the method and check MarkTable values for KOYASSANGOU
         $markTableOneStudent = $this->buildMarkTableLTBHandler->buildMarkTableOneStudentLTB($student1, $sequence);
-        //Make sure the mark table for KOYANSSANGOU is right at this point
-        //Make sure $markTableOneStudent have two rows because there are two programs
+        //Make sure the mark table is for KOYANSSANGOU
+        $this->assertEquals($markTableOneStudent['student_name'], 'KOYASSANGOU Ursula');
+        //Make sure $markTableOneStudent have 3 items (two rows + student name) because there are two programs
         $this->assertEquals(count($markTableOneStudent), 2);
+        $this->assertEquals(count($markTableOneStudent['rows']), 2);
         //Check the first row (program => 'Prog 1ere G3B', coef => 2, ...) for
-        $this->assertEquals($markTableOneStudent[0]['program_name'], 'Prog Info 1ere G3');
-        $this->assertEquals($markTableOneStudent[0]['coefficient'], 2);
-        $this->assertEquals($markTableOneStudent[0]['mark'], 10.5);
-        $this->assertEquals($markTableOneStudent[0]['mark_coefficient'], 21);
-        $this->assertEquals($markTableOneStudent[0]['teacher'], 'MAPOUKA Saint-Cyr');
+        $this->assertEquals($markTableOneStudent['rows'][0]['program_name'], 'Prog Info 1ere G3');
+        $this->assertEquals($markTableOneStudent['rows'][0]['coefficient'], 2);
+        $this->assertEquals($markTableOneStudent['rows'][0]['mark'], 10.5);
+        $this->assertEquals($markTableOneStudent['rows'][0]['mark_coefficient'], 21);
+        $this->assertEquals($markTableOneStudent['rows'][0]['teacher'], 'MAPOUKA Saint-Cyr');
         
         //Now call the method and check MarkTable values for KOYASSANGOU
         $markTableOneStudent2 = $this->buildMarkTableLTBHandler->buildMarkTableOneStudentLTB($student2, $sequence);
         //Make sure the mark table for KOYANSSANGOU is right at this point
-        //Make sure $markTableOneStudent have two rows because there are two programs
+        //Make sure $markTableOneStudent have 3 items (two rows + student_name) because there are two programs
         $this->assertEquals(count($markTableOneStudent2), 2);
         //Check the first row (program => 'Prog 1ere G3B', coef => 2, ...) for
-        $this->assertEquals($markTableOneStudent2[0]['program_name'], 'Prog Info 1ere G3');
-        $this->assertEquals($markTableOneStudent2[0]['coefficient'], 2);
-        $this->assertEquals($markTableOneStudent2[0]['mark'], 12.75);
-        $this->assertEquals($markTableOneStudent2[0]['mark_coefficient'], 25.5);
-        $this->assertEquals($markTableOneStudent[0]['teacher'], 'MAPOUKA Saint-Cyr');
+        $this->assertEquals($markTableOneStudent2['rows'][0]['program_name'], 'Prog Info 1ere G3');
+        $this->assertEquals($markTableOneStudent2['rows'][0]['coefficient'], 2);
+        $this->assertEquals($markTableOneStudent2['rows'][0]['mark'], 12.75);
+        $this->assertEquals($markTableOneStudent2['rows'][0]['mark_coefficient'], 25.5);
+        $this->assertEquals($markTableOneStudent2['rows'][0]['teacher'], 'MAPOUKA Saint-Cyr');
         //Check the second row (program => 'Prog 1ere G3B', coef => 2, ...) for
-        $this->assertEquals($markTableOneStudent2[1]['program_name'], 'Prog Maths 1ere G3');
-        $this->assertEquals($markTableOneStudent2[1]['coefficient'], 3);
-        $this->assertEquals($markTableOneStudent2[1]['mark'], 7.5);
-        $this->assertEquals($markTableOneStudent2[1]['mark_coefficient'], 22.5);
-        $this->assertEquals($markTableOneStudent2[1]['teacher'], 'SARKO');
-        $this->assertEquals($markTableOneStudent2[1]['appreciation'], 'Faible');
+        $this->assertEquals($markTableOneStudent2['rows'][1]['program_name'], 'Prog Maths 1ere G3');
+        $this->assertEquals($markTableOneStudent2['rows'][1]['coefficient'], 3);
+        $this->assertEquals($markTableOneStudent2['rows'][1]['mark'], 7.5);
+        $this->assertEquals($markTableOneStudent2['rows'][1]['mark_coefficient'], 22.5);
+        $this->assertEquals($markTableOneStudent2['rows'][1]['teacher'], 'SARKO');
+        $this->assertEquals($markTableOneStudent2['rows'][1]['appreciation'], 'Faible');
     }
 }
 

@@ -8,30 +8,25 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class MarkAdmin extends AbstractAdmin
+class StudentAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('student')
-            ->add('value')
-            ->add('evaluation.evaluationType')
-            ->add('evaluation.section')
-            ->add('evaluation.program')
-            ->add('evaluation.sequence')
+            //->add('id')
+            ->add('name')
+            ->add('barcode')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            //->add('')
-            ->add('value')
-            ->add('student')
-            ->add('evaluation', 'html')
-            ->add('evaluation.program')
-            ->add('evaluation.sequence')
-            
+            //->add('id')
+            ->add('name')
+            ->add('section')
+            ->add('studentParent')
+            ->add('barcode')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -46,7 +41,10 @@ class MarkAdmin extends AbstractAdmin
     {
         $formMapper
             //->add('id')
-            ->add('value')
+            ->add('name')
+            ->add('section')
+            ->add('studentParent')
+            ->add('barcode')
         ;
     }
 
@@ -54,7 +52,8 @@ class MarkAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('value')
+            ->add('name')
+            ->add('barcode')
         ;
     }
 }

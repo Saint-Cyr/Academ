@@ -85,14 +85,14 @@
                     <div class="col-lg-4">
                         <div class="">
                             <img id="student_image" src="{{ asset('images/next.jpg') }}" alt="Generic placeholder thumbnail" 
-                                 class="img-thumbnail" width="345px">
+                                 class="img-circle" width="345px">
                         </div>
                     </div>
                     <div class = "col-sm-6 col-md-3">
                       
                        <div class = "caption">
                            <br>
-                           <form onsubmit="submission(event)">
+                           <form onsubmit="submission(event)"  style="padding-left: 70px">
                                <input required="required" type="number" class="form-control" id="current_mark"
                                      max="20" min="0" step="any" style="opacity: 0"  placeholder="Input mark example: 13.5"
                                      autocomplete="off" name="new_mark"/>
@@ -115,7 +115,7 @@
                     {% endfor %}];
         
         function submission(e){
-            $('#student_image').attr('src', '{{ asset('images/1.gif') }}');
+            $('#student_image').attr('src', '{{ asset('images/animated2.gif') }}');
             //Prepare all variables that need to be sent to server
             var sectionId = {{ section.id }};
             var evaluationId = {{ evaluation.id }};
@@ -123,7 +123,7 @@
             var newMark = $('input[name="new_mark"]').val();
             
             $.ajax({
-                url:'{{ (path('app_default_markupload')) }}',
+                url:'{{ path('mark_upload') }}',
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -138,7 +138,7 @@
                 async: true,
                 success: function (data)
                 {
-                    alert('Submited! '+data);
+                    alert(data);
                     $('#current_mark').attr('style', 'opacity: 0');
                     $('#student_performance').text('N/A');
                     $('#student_image').attr('src', '{{ asset('images/next.jpg') }}');

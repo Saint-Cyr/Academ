@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\Mark;
 
 class DefaultController extends Controller
 {
@@ -36,9 +37,7 @@ class DefaultController extends Controller
                              array('students' => $students, 'section' => $section, 'evaluation' => $evaluation));
     }
     
-    /**
-     * @Route("/mark_upload")
-     */
+    
     public function markUploadAction(Request $request)
     {
         
@@ -47,14 +46,26 @@ class DefaultController extends Controller
         if($request->request->get('data')){
             //Get all the necessary variable
             $inputData = $request->request->get('data');
+            $markValue = $inputData['mark'];
+            $student = $em->getRepository('AppBundle:Student')->find($inputData['student_id']);
+            //$section = $em->getRepository('AppBundle:Section')->find($inputData['section_id']);
+            $evaluation = $em->getRepository('AppBundle:Evaluation')->find($inputData['evaluation_id']);
+            if(!$student || !$evaluation){
+                throw $this->createNotFoundException('User of #ID '.$inputData['student_id'].' or Evaluation not found in DB');
+            }
+            //create new Mark object
+            $markObject = new Mark();
+            $markObject->setValue($markValue);
+            $markObject->setEvaluation($evaluation);
+            $markObject->setStudent($student);
+            $em->persist($markObject);
+            $em->flush();
             
-            return new JsonResponse('Mark: '.$inputData['mark'].' Student #ID: '.$inputData['student_id'].'Section #ID: '.$inputData['section_id']);
+            return new JsonResponse('[ok] Sucessfull submission!');
             
         }
-        
-        $arrData = ['d1' => 'val1'];
                 
-        return new JsonResponse($arrData);
+        return new JsonResponse('Error: Wrong parameters.');
         
     }
     
@@ -62,9 +73,24 @@ class DefaultController extends Controller
      * 
      * @Route("/mark_table")
      */
-    public function markTableAction()
+    public function markTableAction($section_id)
     {
-        return $this->render("@App/Default/mark_table.html.twig");
+        //We will need DB connection
+        $em = $this->getDoctrine()->getManager();
+        $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
+        
+        $sequence = $setting->getSequence();
+        
+        if(!$setting){
+            throw $this->createNotFoundException('Setting not found');
+        }
+        
+        //Get the section from DB
+        $section = $em->getRepository('AppBundle:Section')->find($section_id);
+        
+        //Get the service
+        $markTable = $this->get('AppBundle\Service\BuildMarkTableLTBHandler')->generateMarkTableLTB($section, $sequence);
+        return $this->render("@App/Default/mark_table.html.twig", array('markTables' => $markTable));
     }
     
     /**
@@ -73,19 +99,19 @@ class DefaultController extends Controller
     public function barcodeAction()
     {
         $options = array(
-    'code'   => '0000000001002',
-    'type'   => 'codabar',
-    'format' => 'png',
-    'width'  => 2,
-    'height' => 40,
-    'color'  => array(0, 0, 0),
-    );
+        'code'   => '0000000001002',
+        'type'   => 'codabar',
+        'format' => 'png',
+        'width'  => 2,
+        'height' => 40,
+        'color'  => array(0, 0, 0),
+        );
 
-$barcode =
-    $this->get('cibincasso_barcode.generator')->generate($options);
+        $barcode =
+            $this->get('cibincasso_barcode.generator')->generate($options);
 
-return new Response('<img src="data:image/png;base64,'.$barcode.'" />');
-return $this->render("@App/Default/mark_table.html.twig", array('barcode' => $barcode));
+        return new Response('<img src="data:image/png;base64,'.$barcode.'" />');
+        return $this->render("@App/Default/mark_table.html.twig", array('barcode' => $barcode));
     }
     
      /**

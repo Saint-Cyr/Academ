@@ -1,7 +1,42 @@
 services:
+    app.admin.student:
+        class: AppBundle\Admin\StudentAdmin
+        arguments: [~, AppBundle\Entity\Student, AppBundle:StudentAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Student }
+        public: true
+
+    app.admin.evaluation:
+        class: AppBundle\Admin\EvaluationAdmin
+        arguments: [~, AppBundle\Entity\Evaluation, AppBundle:EvaluationAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Evaluation }
+        public: true
+        
     app.admin.mark:
         class: AppBundle\Admin\MarkAdmin
         arguments: [~, AppBundle\Entity\Mark, AppBundle:MarkAdmin]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Mark }
+        public: true
+
+    app.admin.evaluation_type:
+        class: AppBundle\Admin\EvaluationTypeAdmin
+        arguments: [~, AppBundle\Entity\EvaluationType, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: EvaluationType }
+        public: true
+
+    app.admin.section:
+        class: AppBundle\Admin\SectionAdmin
+        arguments: [~, AppBundle\Entity\Section, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Section }
+        public: true
+
+    app.admin.setting:
+        class: AppBundle\Admin\SettingAdmin
+        arguments: [~, AppBundle\Entity\Setting, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Setting }
         public: true

@@ -20,7 +20,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='{{ asset('images/favicon.ico') }}' />
   </head>
 
-
+{% for markTableOneStudent in markTables.mark_tables %}
 <body onload="window.print();">
 <div class="wrapper">
   <!-- Main content -->
@@ -50,7 +50,7 @@
   <tbody>
     <tr>
       
-      <td><b>Nom(s) et Prenom :</b> GAZAMBETI Angela</td>
+      <td><b>Nom(s) et Prenom :</b> {{ markTableOneStudent.student_name }}</td>
       <td><b>Professeur Principal:</b> MOIGONODE Sarko</td>
       
     </tr>
@@ -75,78 +75,35 @@
   </thead>
   <tbody>
     <tr>
-      <td>Discipline</td>
-      <td>Note/20</td>
-      <td>Coef</td>
-      <td>Note</td>
-      <td>Appreciation</td>
-      <td>Nom du Prof.</td>
-      
+      <td><b> Discipline</b></td>
+      <td><b>Note/20</b></td>
+      <td><b>Coef</b></td>
+      <td><b>Note</b></td>
+      <td><b>Appreciation</b></td>
+      <td><b>Nom du Prof.</b></td>
+  
     </tr>
+    {% set nb = (8 - markTableOneStudent|length) %}
+    {% for row in markTableOneStudent.rows %}
     <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
+      <td>{{ row.program_name }}</td>
+      <td>{{ row.mark }}</td>
+      <td>{{ row.coefficient }}</td>
+      <td>{{ row.mark_coefficient }}</td>
+      <td>{{ row.appreciation }}</td>
+      <td>{{ row.teacher }}</td>
     </tr>
+    {% endfor %}
+    {% for i in 1..nb %}
     <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
     </tr>
-    <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
-    </tr>
-    <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
-    </tr>
-    <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
-    </tr>
-    <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
-    </tr>
-    <tr>
-      <td>Informatique</td>
-      <td>12.5</td>
-      <td>2</td>
-      <td>25</td>
-      <td>Assez Bien</td>
-      <td>Saint-Cyr MAPOUKA</td>
-    </tr>
-   
-    <tr>
-      <td>TOTAL</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-    </tr>
-             
+    {% endfor %}
   </tbody>
 </table>
 
@@ -224,4 +181,5 @@
 </div>
 <!-- ./wrapper -->
 </body>
+{% endfor %}
 </html>

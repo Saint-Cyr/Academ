@@ -1,7 +1,15 @@
 mark_upload:
     path: /mark_upload
-    default: { _controller: AppBundle:Default:markUpload }
+    defaults: { _controller: AppBundle:Default:markUpload }
     
 generate_codbare:
     path: /barcode
-    default: { _controller: AppBundle:Default:barcode }
+    defaults: { _controller: AppBundle:Default:barcode }
+    
+mark_input:
+    path: /mark_input/{section_id}/{evaluation_id}
+    defaults: { _controller: AppBundle:Default:markInput }
+    
+mark_table:
+    path: /mark_table/{section_id}
+    defaults: { _controller: AppBundle:Default:markTable }

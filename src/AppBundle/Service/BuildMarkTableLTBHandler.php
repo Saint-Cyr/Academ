@@ -37,7 +37,7 @@ class BuildMarkTableLTBHandler
         //For each programs, build the columns
         $programs = $student->getSection()->getLevel()->getPrograms();
         //Prepare the variable that can content the markTable for one student
-        $markTableOneStudent = array();
+        $markTableOneStudent = array('student_name' => $student->getName());
         //For each program belonging to the section of the current student,
         //Build column one after another
         foreach ($programs as $prog){
@@ -61,9 +61,11 @@ class BuildMarkTableLTBHandler
                          'mark_coefficient' => $markCoef,
                          'teacher' => $teacherName,
                          'appreciation' => $appreciation);
-            $markTableOneStudent[] = $row;
+                         $rows[] = $row;
+            
         }
         
+        $markTableOneStudent['rows'] = $rows;
         
         return $markTableOneStudent;
     }

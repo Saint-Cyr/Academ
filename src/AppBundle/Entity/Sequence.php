@@ -43,6 +43,14 @@ class Sequence
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        };
+        
+        return 'New Sequence';
+    }
 
     /**
      * Set name

@@ -108,7 +108,7 @@ AppBundle\Entity\Evaluation:
 AppBundle\Entity\Student:
     student_1:
         name: KOYASSANGOU Ursula
-        barcode: 8993242593848
+        barcode: 6954941712178
         section: "@section_2"
     student_2:
         name: GAZAMBETI
@@ -140,3 +140,8 @@ AppBundle\Entity\Mark:
         value: 7.5
         evaluation: "@evaluation_3"
         student: "@student_2"
+
+AppBundle\Entity\Setting:
+    setting_1:
+        name: setting
+        sequence: "@sequence_1"
