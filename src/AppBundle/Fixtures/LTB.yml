@@ -106,6 +106,10 @@ AppBundle\Entity\Evaluation:
         section: "@section_2"
         
 AppBundle\Entity\Student:
+    student_{1..2000}:
+        name: <name()>
+        barcode(unique): <numberBetween(1, 3000)>
+        
     student_1:
         name: KOYASSANGOU Ursula
         barcode: 6954941712178

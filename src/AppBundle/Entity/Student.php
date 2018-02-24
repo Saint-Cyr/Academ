@@ -39,7 +39,7 @@ class Student
     private $absenceCompters;
     
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="student")
+     * @ORM\OneToMany(targetEntity="Mark", mappedBy="student", cascade="remove")
      */
     private $marks;
 

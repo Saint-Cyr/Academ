@@ -13,3 +13,7 @@ mark_input:
 mark_table:
     path: /mark_table/{section_id}
     defaults: { _controller: AppBundle:Default:markTable }
+    
+shortyImportCSV:
+    path: /admin/csv/import
+    defaults:  { _controller: AppBundle:Default:importFile }

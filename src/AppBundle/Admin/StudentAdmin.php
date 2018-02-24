@@ -13,7 +13,7 @@ class StudentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            //->add('id')
+            ->add('section')
             ->add('name')
             ->add('barcode')
         ;
@@ -22,7 +22,7 @@ class StudentAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            //->add('id')
+            ->add('id')
             ->add('name')
             ->add('section')
             ->add('studentParent')

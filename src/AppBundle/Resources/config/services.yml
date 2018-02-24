@@ -40,3 +40,16 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Setting }
         public: true
+        
+    sonata.block_csv:
+        class: AppBundle\Service\Csv
+        arguments: ["app.block_import_csv", "@templating", "@service_container"]
+        tags:
+            - { name: sonata.block }
+            
+    console_command.csv_import:
+        class: AppBundle\Command\CsvImportCommand
+        arguments:
+            -  "@doctrine.orm.entity_manager"
+        tags: 
+            - { name: console.command }

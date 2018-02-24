@@ -23,7 +23,6 @@
     "require": {
         "php": ">=5.5.9",
         "cibincasso/barcode-bundle": "^1.0",
-        "ddeboer/data-import-bundle": "^0.1.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "doctrine/orm": "^2.5",
@@ -31,6 +30,7 @@
         "hautelook/alice-bundle": "v1.4.1",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-snappy": "v1.0.4",
+        "league/csv": "^8.2",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "sonata-project/admin-bundle": "3.31.0",

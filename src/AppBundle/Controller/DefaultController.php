@@ -8,6 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Mark;
+use AppBundle\Helper\CSVTypes;
+
+use Ddeboer\DataImport\ValueConverter\StringToObjectConverter;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Ddeboer\DataImport\Reader\CsvReader;
+use Ddeboer\DataImport\Workflow;
+use Ddeboer\DataImport\Writer\DoctrineWriter;
+use Ddeboer\DataImport\Workflow\StepAggregator;
+
 
 class DefaultController extends Controller
 {
@@ -126,4 +135,73 @@ class DefaultController extends Controller
    {
       return (!$public) ? $this->get('kernel')->getRootDir(). '/../web/upload/barcode/cache' : '/upload/barcode/cache';
    }
+   
+    public function importFileAction(Request $request) 
+    {
+         // Get FileId to "import"
+        $param = $request->request;
+        $fileId = (int)trim($param->get("fileId"));
+        $curType=trim($param->get("fileType"));
+        $uploadedFile = $request->files->get("csvFile");
+        $sectionId = $param->get('section');
+        //var_dump($uploadedFile->guessExtension());exit;
+        
+        // if upload was not ok, just redirect to "shortyStatWrongPArameters"
+        if (!CSVTypes::existsType($curType) || $uploadedFile==null){
+            $this->get('session')->getFlashBag()
+                 ->add('sonata_flash_info', 'Sorry... cannot upload the file(s). Check documentation or see super-administrator');
+            
+            return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
+        }
+        
+        // generate dummy dir
+        $dummyImport = getcwd()."/dummyImport";
+        $fname= $uploadedFile->getClientOriginalName();
+        $filename=$dummyImport."/".$fname;
+        @mkdir($dummyImport);
+        @unlink($filename);
+        
+        // move file to dummy filename
+        $uploadedFile->move($dummyImport, $fname);            
+        echo "Starting to Import file. Type: ".CSVTypes::getNameOfType($curType)."<br />n";
+        
+        /** By @Saint-Cyr **/
+        $file = new \SplFileObject($dummyImport.'/'.$fname);
+        $reader = new CsvReader($file);
+        //set the hander in order to build an associative array
+        $reader->setHeaderRowNumber(0);
+        // Create the workflow from the reader
+        $workflow = new StepAggregator($reader);
+        //doctrine writer
+        $em = $this->getDoctrine()->getManager();
+        
+        $doctrineWriter = new DoctrineWriter($em, CSVTypes::getEntityClass($curType));
+        
+        //disable truncate
+        $doctrineWriter->disableTruncate();
+        
+        try{
+            
+            $workflow->addWriter($doctrineWriter);
+            $repository = $em->getRepository('AppBundle:Student');
+            
+            //$converter = new StringToObjectConverter($repository, 'code');
+            //$workflow->addValueConverter($property, $converter);
+            $result = $workflow->process();
+            
+        }catch (UniqueConstraintViolationException $e){
+            $this->get('session')->getFlashBag()
+                 ->add('sonata_flash_error', 'Error: cannot import the CSV file because it contains one or many entry that allready '
+                         . 'exists in the Data Base');
+            return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
+        }
+    
+        
+        /** End if code by S@int-Cyr **/
+        $this->get('session')->getFlashBag()
+             ->add('sonata_flash_success', CSVTypes::getNameOfType($curType)." CSV file uploaded successfully ! processing time: ".$result->getElapsed()->s);
+            
+        return $this->redirect($this->generateUrl('admin_app_student_list'));
+
+    }
 }

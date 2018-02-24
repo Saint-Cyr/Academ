@@ -67,7 +67,7 @@ class Section
             return $this->name;
         };
         
-        return 'New Section';
+        //return 'New Section';
     }
 
     /**
