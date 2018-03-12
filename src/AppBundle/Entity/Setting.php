@@ -29,6 +29,27 @@ class Setting
     private $name;
     
     /**
+     * @var dateTime
+     *
+     * @ORM\Column(name="councilDate", type="datetime")
+     */
+    private $councilDate;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="schoolName", type="string", length=255, nullable=true)
+     */
+    private $schoolName;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="academicYear", type="string", length=255, nullable=true)
+     */
+    private $academicYear;
+    
+    /**
      * @ORM\OneToOne(targetEntity="Sequence")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -101,5 +122,77 @@ class Setting
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set schoolName
+     *
+     * @param string $schoolName
+     *
+     * @return Setting
+     */
+    public function setSchoolName($schoolName)
+    {
+        $this->schoolName = $schoolName;
+
+        return $this;
+    }
+
+    /**
+     * Get schoolName
+     *
+     * @return string
+     */
+    public function getSchoolName()
+    {
+        return $this->schoolName;
+    }
+
+    /**
+     * Set academicYear
+     *
+     * @param string $academicYear
+     *
+     * @return Setting
+     */
+    public function setAcademicYear($academicYear)
+    {
+        $this->academicYear = $academicYear;
+
+        return $this;
+    }
+
+    /**
+     * Get academicYear
+     *
+     * @return string
+     */
+    public function getAcademicYear()
+    {
+        return $this->academicYear;
+    }
+
+    /**
+     * Set councilDate
+     *
+     * @param \DateTime $councilDate
+     *
+     * @return Setting
+     */
+    public function setCouncilDate($councilDate)
+    {
+        $this->councilDate = $councilDate;
+
+        return $this;
+    }
+
+    /**
+     * Get councilDate
+     *
+     * @return \DateTime
+     */
+    public function getCouncilDate()
+    {
+        return $this->councilDate;
     }
 }

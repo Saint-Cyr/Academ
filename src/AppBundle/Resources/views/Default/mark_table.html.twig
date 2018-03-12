@@ -28,11 +28,16 @@
     <!-- title row -->
     <div class="row">
       
-      <div class="col-xs-12">
-        <h2 class="page-header">
-          <img src="{{ asset('images/logo_ltb.png') }}" style="" width='100px'/>
-        </h2>
+      <div class="col-xs-12" style="margin-bottom: 100px;">
+        
+          <img src="{{ asset('images/logo_ltb.png') }}" style="" width='100px' />
+          <span style="margin-left: 500px;">
+          <img src="{{ asset('images/logo.png') }}" style="" width='100px' />
+          </span>
+        
       </div>
+      
+      
       <!-- /.col -->
     </div>
         <div>
@@ -55,7 +60,7 @@
       
     </tr>
     <tr>
-        <td><b>Class :</b> 1<sup>ere</sup> G3B</td>
+        <td><b>Class :</b> Class_name_goes_here</td>
       <td><b>Date du conseil:</b> {{ "now"|date("d/m/Y") }}</td>
     </tr>
     <tr>
@@ -87,9 +92,9 @@
     {% for row in markTableOneStudent.rows %}
     <tr>
       <td>{{ row.program_name }}</td>
-      <td>{{ row.mark }}</td>
+      <td>{{ row.mark|number_format(2) }}</td>
       <td>{{ row.coefficient }}</td>
-      <td>{{ row.mark_coefficient }}</td>
+      <td>{{ row.mark_coefficient|number_format(2) }}</td>
       <td>{{ row.appreciation }}</td>
       <td>{{ row.teacher }}</td>
     </tr>
@@ -133,7 +138,7 @@
         </div>
        
        
-      <img src="{{ asset('images/barcode_student.png') }}" style="padding-top: 2px; padding-left: 8px;"/>  
+      {#<img src="{{ asset('images/barcode_student.png') }}" style="padding-top: 2px; padding-left: 8px;"/>#}  
       </div>
       
       <!-- /.col -->

@@ -23,7 +23,12 @@
             </div>
         </div>
                     </br></br></br></br></br>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            <style>
+            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                background-color: #a09fa3 !important;
+            }
+        </style>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     {{ evaluation.program.name }} || {{ section.name }}
 </button>
 
@@ -33,6 +38,11 @@
     <div class="modal-content">
       <div class="modal-header">
           <h3 class="modal-title" id="exampleModalLabel" style="color: red;"><b>{{ evaluation.program.name }} || {{ section.name }}</b></h3>
+        <style>
+            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                background-color: #a09fa3 !important;
+            }
+        </style>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -40,15 +50,20 @@
       <div class="modal-body">
           <div class="panel-heading">
         </div>
+        <style>
+                .panel > .panel-heading {
+                    background-color: #a09fa3;
+                }
+            </style>
         <div class="panel-body" style="font-size: 23px">
             <div class="col-xs-12 col-sm-12" style="color: black;">
                 <p> <strong><u>Evaluation</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} ({{ evaluation.createdAt|date("d/m/y") }})</span></strong></p>
-                <p> <strong><u>Type d'Evaluation</u>: <span id="class" style="color: blue;"> {{ evaluation.evaluationType.name }} </span></strong></p>
-                <p> <strong><u>Prof</u>: <span id="class" style="color: blue;"> GOUNOUMOUNDJOU Sarko </span></strong></p>
-                <p> <strong><u>Sequence</u>: <span id="term" style="color: blue;"> <b>1<sup>er</sup> Trimestre</b> </span></strong></p>
-                <p> <strong><u>Effectif</u>: <span id="class_student_number" style="color: blue;"> 60 </span></strong></p>
-                <p> <strong><u>Recente Meilleur note</u>: <span id="hight_mark" style="color: blue;"> 15.5</span></strong></p>
-                <p> <strong><u>Recent(e) meilleur eleve</u>: <span id="average_mark" style="color: blue;">GAZAMBETI Angela </span></strong></p>
+                <p> <strong><u>Type d'Evaluation</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
+                <p> <strong><u>Prof</u>: <span id="class" style="color: #a09fa3;"> GOUNOUMOUNDJOU Sarko </span></strong></p>
+                <p> <strong><u>Sequence</u>: <span id="term" style="color: #a09fa3;"> <b>1<sup>er</sup> Trimestre</b> </span></strong></p>
+                <p> <strong><u>Effectif</u>: <span id="class_student_number" style="color: #a09fa3;"> 60 </span></strong></p>
+                <p> <strong><u>Recente Meilleur note</u>: <span id="hight_mark" style="color: #a09fa3;"> 15.5</span></strong></p>
+                <p> <strong><u>Recent(e) meilleur eleve</u>: <span id="average_mark" style="color: #a09fa3;">GAZAMBETI Angela </span></strong></p>
             </div>
         </div>
       </div>
@@ -84,7 +99,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="">
-                            <img id="student_image" src="{{ asset('images/next.jpg') }}" alt="Generic placeholder thumbnail" 
+                            <img id="student_image" src="{{ asset('images/next.png') }}" alt="Generic placeholder thumbnail" 
                                  class="img-circle" width="345px">
                         </div>
                     </div>
@@ -271,7 +286,7 @@
     #alertBox h1 {
         margin:0;
         font:bold 0.9em verdana,arial;
-        background-color:#1d08a6;
+        background-color:#a09fa3;
         color:#FFF;
         border-bottom:1px solid #000;
         padding:2px 0 2px 5px;
@@ -297,7 +312,7 @@
         text-transform:uppercase;
         text-align:center;
         color:#FFF;
-        background-color:#1d08a6;
+        background-color:#a09fa3;
         border-radius: 3px;
         text-decoration:none;
     }

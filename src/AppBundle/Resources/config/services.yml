@@ -40,12 +40,6 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Setting }
         public: true
-        
-    sonata.block_csv:
-        class: AppBundle\Service\Csv
-        arguments: ["app.block_import_csv", "@templating", "@service_container"]
-        tags:
-            - { name: sonata.block }
             
     console_command.csv_import:
         class: AppBundle\Command\CsvImportCommand
@@ -53,3 +47,78 @@ services:
             -  "@doctrine.orm.entity_manager"
         tags: 
             - { name: console.command }
+            
+    app.utils:
+        class: AppBundle\Service\Utils
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        
+    app.build_marktable_handler:
+        class: AppBundle\Service\BuildMarkTableHandler
+        arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
+        
+    app.build_marktableLTB_handler:
+        class: AppBundle\Service\BuildMarkTableLTBHandler
+        arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
+    
+    app.admin.student_parent:
+        class: AppBundle\Admin\StudentParentAdmin
+        arguments: [~, AppBundle\Entity\StudentParent, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: StudentParent }
+        public: true
+
+    app.admin.main_teacher:
+        class: AppBundle\Admin\MainTeacherAdmin
+        arguments: [~, AppBundle\Entity\MainTeacher, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: MainTeacher }
+        public: true
+
+    app.admin.teacher:
+        class: AppBundle\Admin\TeacherAdmin
+        arguments: [~, AppBundle\Entity\Teacher, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Teacher }
+        public: true
+
+    app.admin.sequence:
+        class: AppBundle\Admin\SequenceAdmin
+        arguments: [~, AppBundle\Entity\Sequence, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Sequence }
+        public: true
+
+    app.admin.level:
+        class: AppBundle\Admin\LevelAdmin
+        arguments: [~, AppBundle\Entity\Level, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Level }
+        public: true
+
+    app.admin.coefficient:
+        class: AppBundle\Admin\CoefficientAdmin
+        arguments: [~, AppBundle\Entity\Coefficient, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Coefficient }
+        public: true
+
+    app.admin.program:
+        class: AppBundle\Admin\ProgramAdmin
+        arguments: [~, AppBundle\Entity\Program, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Program }
+        public: true
+
+    app.admin.field:
+        class: AppBundle\Admin\FieldAdmin
+        arguments: [~, AppBundle\Entity\Field, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Field }
+        public: true
+
+    app.admin.absence_compter:
+        class: AppBundle\Admin\AbsenceCompterAdmin
+        arguments: [~, AppBundle\Entity\AbsenceCompter, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: AbsenceCompter }
+        public: true

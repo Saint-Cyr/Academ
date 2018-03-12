@@ -26,7 +26,7 @@ class MarkAdmin extends AbstractAdmin
     {
         $listMapper
             //->add('')
-            ->add('value')
+            ->add('value', null, array('editable' => true))
             ->add('student')
             ->add('evaluation', 'html')
             ->add('evaluation.program')

@@ -25,6 +25,20 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /*$pw = '';
+        $user = $this->getDoctrine()->getManager()->getRepository('UserBundle:User')->find(1);
+        $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $pw, "main", array("ROLE_USER"));
+        $utils = $this->get('app.utils');
+        $utils->getSecurityHandler()->setToken($token);
+
+        $event = new \Symfony\Component\Security\Http\Event\InteractiveLoginEvent($request, $token);
+        $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
+
+        $user = $utils->getSecurityHandler()->getToken()->getUser();
+        //var_dump($user->getUserName());exit;*/
+        
+     //var_dump($this->getUser()->getRoles());exit;
+        
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
@@ -40,10 +54,18 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         //We need the evaluation
         $evaluation = $em->getRepository('AppBundle:Evaluation')->find($evaluation_id);
-        $section = $em->getRepository('AppBundle:Section')->find($section_id);
-        $students = $section->getStudents();
-        return $this->render("@App/Teacher/input_mark.html.twig",
-                             array('students' => $students, 'section' => $section, 'evaluation' => $evaluation));
+        //Make sure the evaluation is related to the current section
+        //Exemple we want to avoid a situation where 1ere G3B evaluation
+        //is loaded when student of 1ere G3A suppose to receive mark...
+        if($evaluation->getSection()->getId() == $section_id){
+            $section = $em->getRepository('AppBundle:Section')->find($section_id);
+            $students = $section->getStudents();
+            return $this->render("@App/Teacher/input_mark.html.twig",
+                                 array('students' => $students, 'section' => $section, 'evaluation' => $evaluation));
+        }else{
+            throw $this->createNotFoundException('Evaluation #ID: '.$evaluation_id.' & Section #ID: '.$section_id.' are not related.');
+        }
+        
     }
     
     
@@ -61,6 +83,12 @@ class DefaultController extends Controller
             $evaluation = $em->getRepository('AppBundle:Evaluation')->find($inputData['evaluation_id']);
             if(!$student || !$evaluation){
                 throw $this->createNotFoundException('User of #ID '.$inputData['student_id'].' or Evaluation not found in DB');
+            }
+            //check whether this student all ready have a mark for the current evaluation
+            foreach ($evaluation->getMarks() as $mark){
+                if($mark->getStudent()->getId() == $student->getId()){
+                    return new JsonResponse('[Error] This student all ready have a mark:'.$mark->getValue());
+                }
             }
             //create new Mark object
             $markObject = new Mark();
@@ -102,6 +130,27 @@ class DefaultController extends Controller
         return $this->render("@App/Default/mark_table.html.twig", array('markTables' => $markTable));
     }
     
+    public function markTableStdAction($section_id)
+    {
+        //We will need DB connection
+        $em = $this->getDoctrine()->getManager();
+        $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
+        
+        $sequence = $setting->getSequence();
+        
+        if(!$setting){
+            throw $this->createNotFoundException('Setting not found');
+        }
+        
+        //Get the section from DB
+        $section = $em->getRepository('AppBundle:Section')->find($section_id);
+        
+        //Get the service
+        $markTable = $this->get('app.build_marktable_handler')->generateMarkTable($section, $sequence);
+       
+        return $this->render("@App/Default/mark_table_std.html.twig", array('markTables' => $markTable, 'parameters' => $setting));
+    }
+    
     /**
      * @Route("/barcode")
      */
@@ -116,9 +165,8 @@ class DefaultController extends Controller
         'color'  => array(0, 0, 0),
         );
 
-        $barcode =
-            $this->get('cibincasso_barcode.generator')->generate($options);
-
+        $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+        return $this->render("@App/Teacher/teacher_card.html.twig", array('barcode' => $barcode));
         return new Response('<img src="data:image/png;base64,'.$barcode.'" />');
         return $this->render("@App/Default/mark_table.html.twig", array('barcode' => $barcode));
     }
@@ -203,5 +251,10 @@ class DefaultController extends Controller
             
         return $this->redirect($this->generateUrl('admin_app_student_list'));
 
+    }
+    
+    public function teacherCardAction()
+    {
+        return $this->render("@App/Teacher/teacher_card.html.twig");
     }
 }

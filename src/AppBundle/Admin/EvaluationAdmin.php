@@ -13,9 +13,12 @@ class EvaluationAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
+            ->add('sequence')
             ->add('createdAt')
             ->add('name')
+            ->add('evaluationType')
+            ->add('program')
+            ->add('section')
         ;
     }
 
@@ -23,8 +26,13 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('createdAt')
+            ->add('sequence')
             ->add('name', 'html')
+            ->add('evaluationType')
+            ->add('program')
+            ->add('section')
+            //->add('average')
+            ->add('createdAt')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -41,6 +49,11 @@ class EvaluationAdmin extends AbstractAdmin
             //->add('id')
             ->add('createdAt')
             ->add('name')
+            ->add('sequence')
+            ->add('name')
+            ->add('evaluationType')
+            ->add('program')
+            ->add('section')
         ;
     }
 

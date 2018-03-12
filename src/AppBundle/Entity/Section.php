@@ -62,6 +62,31 @@ class Section
         return $this->id;
     }
     
+    /**
+     * @return the total value of all coefficients
+     */
+    public function getTotalCoefficient()
+    {
+        $coefValue = null;
+        
+        foreach ($this->getLevel()->getPrograms() as $program){
+            if($program->getCoefficient()->getValue()){
+                $coefValue = $coefValue + $program->getCoefficient()->getValue();
+            }
+        }
+        
+        return $coefValue;
+    }
+    
+    /**
+     * @return the total number of students for
+     * the current section
+     */
+    public function getStudentNumber()
+    {
+        return count($this->getStudents());
+    }
+    
     public function __toString() {
         if($this->name){
             return $this->name;

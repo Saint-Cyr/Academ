@@ -36,7 +36,9 @@ class SettingAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
+            ->add('sequence')
+            ->add('schoolName')
+            ->add('academicYear')
             ->add('name')
         ;
     }

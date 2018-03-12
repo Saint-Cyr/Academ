@@ -23,6 +23,7 @@ class SectionAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
+            ->add('evaluations')
             ->add('name')
             ->add('_action', null, [
                 'actions' => [

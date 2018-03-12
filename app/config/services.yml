@@ -28,11 +28,7 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
-    app.utils:
-        class: AppBundle\Service\Utils
-        arguments: ["@doctrine.orm.entity_manager"]
         
     # add more services, or override services that need manual wiring
-    AppBundle\Service\BuildMarkTableLTBHandler:
-        arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
+    #AppBundle\Service\BuildMarkTableLTBHandler:
+    #    arguments: ["@doctrine.orm.entity_manager", "@app.utils"]

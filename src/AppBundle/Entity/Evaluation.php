@@ -79,6 +79,18 @@ class Evaluation
         return $this->id;
     }
     
+    public function getAverage()
+    {
+        $markAverage = null;
+        $nb = 0;
+        foreach ($this->getMarks() as $mark){
+            $nb = $nb + 1;
+            $markAverage = $markAverage + $mark->getValue();
+        }
+        
+        return $markAverage/$nb;
+    }
+    
     public function __toString() {
         if($this->name){
             return $this->name;

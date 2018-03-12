@@ -28,7 +28,7 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         
         $this->application = new Application(static::$kernel);
         $this->em = $this->application->getKernel()->getContainer()->get('doctrine.orm.entity_manager');
-        $this->buildMarkTableLTBHandler = $this->application->getKernel()->getContainer()->get('AppBundle\Service\BuildMarkTableLTBHandler');
+        $this->buildMarkTableLTBHandler = $this->application->getKernel()->getContainer()->get('app.build_markTableLTB_handler');
     }
     
     /*This is the main intrance of the algorithm that suppose to generate 
@@ -59,6 +59,7 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         $sequence = $this->em->getRepository('AppBundle:Sequence')->find(1);
         $this->assertEquals($sequence->getName(), '1er Trimestre');
         $student2 = $this->em->getRepository('AppBundle:Student')->find(2);
+        $student3 = $this->em->getRepository('AppBundle:Student')->find(3);
         $student1 = $this->em->getRepository('AppBundle:Student')->find(1);
         //Make sure student is KOYASSANGOU
         $this->assertEquals($student1->getName(), 'KOYASSANGOU Ursula');
@@ -105,6 +106,18 @@ class BuildMarkTableLTBHandlerTest extends WebTestCase
         $this->assertEquals($markTableOneStudent2['rows'][1]['mark_coefficient'], 22.5);
         $this->assertEquals($markTableOneStudent2['rows'][1]['teacher'], 'SARKO');
         $this->assertEquals($markTableOneStudent2['rows'][1]['appreciation'], 'Faible');
+        
+        //Now call the method and check MarkTable values for KOYASSANGOU
+        $markTableOneStudent3 = $this->buildMarkTableLTBHandler->buildMarkTableOneStudentLTB($student3, $sequence);
+        //Make sure $markTableOneStudent3 have 3 items (two rows + student_name) because there are two programs
+        $this->assertEquals(count($markTableOneStudent3), 2);
+        //Check the first row (program => 'Prog 1ere G3B', coef => 2, ...) for
+        $this->assertEquals($markTableOneStudent3['rows'][0]['program_name'], 'Prog Info 1ere G3');
+         $this->assertEquals($markTableOneStudent3['rows'][0]['coefficient'], 2);
+        $this->assertEquals($markTableOneStudent3['rows'][0]['mark'], 8);
+        $this->assertEquals($markTableOneStudent3['rows'][0]['mark_coefficient'], 16);
+        $this->assertEquals($markTableOneStudent3['rows'][0]['teacher'], 'MAPOUKA Saint-Cyr');
+        $this->assertEquals($markTableOneStudent3['rows'][1]['program_name'], 'Prog Maths 1ere G3');
     }
 }
 
