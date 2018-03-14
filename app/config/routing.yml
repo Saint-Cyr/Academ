@@ -5,10 +5,6 @@ user:
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
-
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
     
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
@@ -21,3 +17,7 @@ _sonata_admin:
     
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+coresphere_console:
+    resource: .
+    type: extra

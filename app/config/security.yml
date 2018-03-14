@@ -157,11 +157,33 @@ security:
             - ROLE_CYCLE_READER
             - ROLE_EVALUATION_READER
             
-            
-            
+        ROLE_LEVEL2:
+            - ROLE_MARK_READER
+            - ROLE_MARK_EDITOR
+            - ROLE_APP_ADMIN_STUDENT_CREATE
+            - ROLE_STUDENT_READER
+            - ROLE_STUDENT_PARENT_READER
+            - ROLE_STUDENT_PARENT_EDITOR
+            - ROLE_MAIN_TEACHER_READER
+            - ROLE_MAIN_TEACHER_EDITOR
+            - ROLE_APP_ADMIN_SEQUENCE_CREATE
+            - ROLE_APP_ADMIN_SECTION_CREATE
+            - ROLE_SECTION_READER
+            - ROLE_APP_ADMIN_SECTION_EDIT
+            - ROLE_COEFFICIENT_READER
+            - ROLE_PROGRAM_READER
+            - ROLE_APP_ADMIN_PROGRAM_EDIT
+            - ROLE_FIELD_READER
+            - ROLE_APP_ADMIN_FIELD_EDIT
+            - ROLE_ABSENCE_COMPTER_READER
+            - ROLE_ABSENCE_COMPTER_EDITOR
+            - ROLE_APP_ADMIN_EVALUATION_CREATE
+            - ROLE_EVALUATION_READER
+            - ROLE_APP_ADMIN_EVALUATION_EDIT
             
         ROLE_SUPER_ADMIN:
             - ROLE_LEVEL1
+            - ROLE_LEVEL2
 
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt

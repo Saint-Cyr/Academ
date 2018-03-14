@@ -22,6 +22,7 @@ class SecurityController extends Controller
 {
     public function loginAction(Request $request)
     {
+        
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 

@@ -5,7 +5,3 @@ user_homepage:
 login_barcode:
     path:    /login_barcode
     defaults: { _controller: UserBundle:Security:loginBarcode }
-    
-login_keyboard:
-    path:   /login_keyboard
-    defaults: { _controller: UserBundle:Security:loginKeyBoard }
