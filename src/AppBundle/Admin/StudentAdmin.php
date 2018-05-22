@@ -15,7 +15,7 @@ class StudentAdmin extends AbstractAdmin
         $datagridMapper
             ->add('section')
             ->add('name')
-            ->add('barcode')
+            
         ;
     }
 
@@ -26,7 +26,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('name')
             ->add('section')
             ->add('studentParent')
-            ->add('barcode')
+            ->add('barcodeValue')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -44,7 +44,6 @@ class StudentAdmin extends AbstractAdmin
             ->add('name')
             ->add('section')
             ->add('studentParent')
-            ->add('barcode')
         ;
     }
 

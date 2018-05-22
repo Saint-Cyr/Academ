@@ -214,7 +214,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_LEVEL1 }
+        #- { path: ^/admin/, role: ROLE_LEVEL1 }
         - { path: ^/report, role: ROLE_SUPER_ADMIN }
         - { path: ^/pos_barcode, role: ROLE_SELLER }
         - { path: ^/pos2, role: ROLE_SELLER }

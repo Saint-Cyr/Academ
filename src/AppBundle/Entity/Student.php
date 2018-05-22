@@ -50,11 +50,6 @@ class Student
      */
     private $name;
     
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="barcode", type="string", length=255, unique=true)
-     */
     private $barcode;
 
 
@@ -66,6 +61,11 @@ class Student
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getBarcodeValue()
+    {
+        return str_pad($this->getId(),5,"0",STR_PAD_LEFT);
     }
     
     public function __toString() {
@@ -224,13 +224,7 @@ class Student
         return $this->marks;
     }
 
-    /**
-     * Set barcode
-     *
-     * @param string $barcode
-     *
-     * @return Student
-     */
+   
     public function setBarcode($barcode)
     {
         $this->barcode = $barcode;
@@ -238,11 +232,7 @@ class Student
         return $this;
     }
 
-    /**
-     * Get barcode
-     *
-     * @return string
-     */
+    
     public function getBarcode()
     {
         return $this->barcode;

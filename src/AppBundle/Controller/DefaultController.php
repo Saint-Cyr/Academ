@@ -144,27 +144,34 @@ class DefaultController extends Controller
     }
     
    
-    public function barcodeAction()
+    public function studentBarcodeAction($selectedStudents = null)
     {
-        /*by @Saint-Cyr*/
+        //Get all the teacher
+        $em = $this->getDoctrine()->getManager();
+        if(!$selectedStudents){
+            $students = $em->getRepository('AppBundle:Student')->findAll();
+        }else{
+            $students = $selectedStudents;
+        }
         
-        $number = 2183;
-        $text = str_pad($number,8,"0",STR_PAD_LEFT); 
-        //var_dump($text);exit;
-        /*end by @Saint-Cyr*/
-        $options = array(
-        'code'   => '0000000000000001',
-        'type'   => 'codabar',
-        'format' => 'png',
-        'width'  => 1,
-        'height' => 18,
-        'color'  => array(0, 0, 0),
-        );
-
-        $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
-        return $this->render("@App/Teacher/teacher_card.html.twig", array('barcode' => $barcode));
+        //Build the barcode for each teacher
+        foreach ($students as $student){
+            
+            $formatedId = str_pad($student->getId(),5,"0",STR_PAD_LEFT); 
+            $options = array(
+                'code'   => $formatedId,
+                'type'   => 'codabar',
+                'format' => 'png',
+                'width'  => 1,
+                'height' => 18,
+                'color'  => array(0, 0, 0),
+                );
+             
+            $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+            $student->setBarcode($barcode);
+        }
         
-        //return $this->render("@App/Default/mark_table.html.twig", array('barcode' => $barcode));
+        return $this->render("@App/Default/student_barcode.html.twig", array('students' => $students));
     }
     
      /**
@@ -249,8 +256,40 @@ class DefaultController extends Controller
 
     }
     
-    public function teacherCardAction()
+    /* If a preselected list of teachers is
+     * sent (from sonata list for exple) then
+     * it need to be consider instead of using
+     * all the list of teachers from DB
+     */
+    public function teacherCardAction($selectedTeachers = null)
     {
-        return $this->render("@App/Teacher/teacher_card.html.twig");
+        
+        //Get all the teacher
+        $em = $this->getDoctrine()->getManager();
+        if(!$selectedTeachers){
+            $teachers = $em->getRepository('AppBundle:Teacher')->findAll();
+        }else{
+            $teachers = $selectedTeachers;
+        }
+        
+        //Build the barcode for each teacher
+        foreach ($teachers as $teach){
+            
+            $formatedId = str_pad($teach->getId(),18,"0",STR_PAD_LEFT); 
+            $options = array(
+                'code'   => $formatedId,
+                'type'   => 'codabar',
+                'format' => 'png',
+                'width'  => 1,
+                'height' => 18,
+                'color'  => array(0, 0, 0),
+                );
+             
+            $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+            $teach->setBarcode($barcode);
+        }
+        
+        
+        return $this->render("@App/Teacher/teacher_card2.html.twig", array('teachers' => $teachers));
     }
 }

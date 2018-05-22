@@ -1,0 +1,19 @@
+
+
+
+<table width=680 border=1 cellpadding=20 cellspacing=0>
+{% for student in students %}
+{% for i in 1..9 %}
+<tr align=center>
+    {% for j in 1..5 %}
+        <td>
+            <img src="data:image/png;base64, {{ student.barcode }}" width="120px"/>
+            <b>{{ student.name }}</b>
+            <br>
+            (Tle G3D)
+        </td>
+    {% endfor %}
+</tr>
+{% endfor %}
+{% endfor %}
+</table>

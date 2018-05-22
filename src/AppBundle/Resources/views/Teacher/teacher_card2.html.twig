@@ -1,57 +1,44 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
-<div class="container" style="padding-bottom: -1px;">
 
-{% for teacher in teachers %}
-    {% if loop.index is divisibleby(2) %} 
-        <div class="row">
-    {% endif %}
-    
-    <div class="twPc-div col-sm-6 col-md-6 col-xs-6{% if loop.index is divisibleby(2) %} pull-right{% endif %}">
-    <a class="twPc-bg twPc-block"></a>
-	<div>
-		<a class="twPc-avatarLink">
-			<img alt="academ" src="{{ asset('images/logo.png') }}" class="twPc-avatarImg"/>
-		</a>
+<table width=780 border=1 cellpadding=10 cellspacing=0>
+{% for j in 1..5 %}
+<tr align=center>
+    {% for i in 1..2 %}
+        <td>
+            <div class="twPc-div col-sm-6 col-md-6 col-xs-6">
+            <a class="twPc-bg twPc-block"></a>
+            <div>
+                <a class="twPc-avatarLink">
+                    <img alt="academ" src="{{ asset('images/logo.jpg') }}" width="120px"/>
+                </a>
+                <div class="twPc-button">
+                    <div class="twPc-divName" style="padding-right: 45px; color: red;">
+                        <br>
+                        
+                    </div>
+                    <span>
 
-		<div class="twPc-button">
-			<div class="twPc-divName" style="padding-right: 45px;">
-                            ACCESS CARD.
-			</div>
-			<span>
-				
-			</span>
-		</div>
+                    </span>
+                </div>
                 <br>
                 <div class="twPc-divUser">
-			<div class="twPc-divName" style="padding-left: 80px;">
-				{{ teacher.name }}
-			</div>
-                        <div class="twPc-divName" style="padding-left: 80px; color: red">
-				
-			</div>
-			<img src="data:image/png;base64, {{ teacher.barcode }}" width="230px" style="padding-left: 100px;"/>
-		</div>
-	</div>
-    </div>
-                
-                
-{% if loop.index is divisibleby(2) %} 
-        </div>
-        <hr>
-    {% endif %}
+                    <div class="twPc-divName" style="padding-left: 80px;">
+                            #TEACHER NAME
+                    </div>
+                    <div class="twPc-divName" style="padding-left: 80px; color: red">
+
+                    </div>
+                    <img src="{{ asset('images/barcode_student.png') }}" width="120px"/>
+                </div>
+            </div>
+            </div>
+        </td>
+    {% endfor %}
+</tr>
 {% endfor %}
 
-<!-- code end -->
-</div>
-                
-                
-                
-                
-</div>
+
+</table>
 <style>
     
     @media print{
@@ -66,13 +53,13 @@
     max-width: 340px; 
 }
 .twPc-bg {
-    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-image: url("{{ asset('images/security4.jpg') }}");
     background-position: 0 50%;
     background-size: 100% auto;
     border-bottom: 1px solid #e1e8ed;
     border-radius: 4px 4px 0 0;
     height: 95px;
-    width: 100%;
+    width: 50%;
 }
 .twPc-block {
     display: block !important;

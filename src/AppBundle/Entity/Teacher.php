@@ -37,6 +37,8 @@ class Teacher
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    private $barcode;
 
 
     /**
@@ -72,6 +74,32 @@ class Teacher
     {
         return $this->name;
     }
+    
+    /**
+     * Set barcode
+     *
+     * @param string $barcode
+     *
+     * @return Teacher
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    /**
+     * Get barcode
+     *
+     * @return string
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+   
+    
     /**
      * Constructor
      */
