@@ -289,7 +289,6 @@ class DefaultController extends Controller
             $teach->setBarcode($barcode);
         }
         
-        
         return $this->render("@App/Teacher/teacher_card2.html.twig", array('teachers' => $teachers));
     }
 }

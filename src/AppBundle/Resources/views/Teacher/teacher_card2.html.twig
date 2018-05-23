@@ -1,15 +1,19 @@
 
 
-<table width=780 border=1 cellpadding=10 cellspacing=0>
-{% for j in 1..5 %}
-<tr align=center>
-    {% for i in 1..2 %}
-        <td>
+
+
+
+
+<table width=780 border=0 cellpadding=7 cellspacing=2>
+{% for row in teachers|batch(2) %}
+    <tr align=center>
+        {% for column in row %}
+            <td width="50%">
             <div class="twPc-div col-sm-6 col-md-6 col-xs-6">
             <a class="twPc-bg twPc-block"></a>
             <div>
                 <a class="twPc-avatarLink">
-                    <img alt="academ" src="{{ asset('images/logo.jpg') }}" width="120px"/>
+                    <img alt="academ" src="{{ asset('images/logo.jpg') }}" width="120px" class="passportPicture"/>
                 </a>
                 <div class="twPc-button">
                     <div class="twPc-divName" style="padding-right: 45px; color: red;">
@@ -23,7 +27,7 @@
                 <br>
                 <div class="twPc-divUser">
                     <div class="twPc-divName" style="padding-left: 80px;">
-                            #TEACHER NAME
+                        {{ column.name|length > 23 ? column.name|slice(0, 23) ~ '...' : column.name  }}
                     </div>
                     <div class="twPc-divName" style="padding-left: 80px; color: red">
 
@@ -33,12 +37,13 @@
             </div>
             </div>
         </td>
-    {% endfor %}
-</tr>
+        {% endfor %}
+    </tr>
 {% endfor %}
-
-
 </table>
+
+
+
 <style>
     
     @media print{
@@ -137,4 +142,11 @@ ul.twPc-Arrange {
     text-transform: uppercase;
     transition: color 0.15s ease-in-out 0s;
 }
+
+.passportPicture {
+    border-radius: 150%;
+}
 </style>
+<script>
+    window.print();
+</script>

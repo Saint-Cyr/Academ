@@ -12,6 +12,7 @@ namespace Tests\AppBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use AppBundle\Entity\Teacher;
 
 class UtilsTest extends WebTestCase
 {
@@ -189,5 +190,7 @@ class UtilsTest extends WebTestCase
         $this->assertEquals(true, $outPut['th']);
         $this->assertEquals(false, $outPut['exclusion']);
     }
+    
+    
 }
 
