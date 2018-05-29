@@ -291,4 +291,40 @@ class DefaultController extends Controller
         
         return $this->render("@App/Teacher/teacher_card2.html.twig", array('teachers' => $teachers));
     }
+    
+    /* If a preselected list of students is
+     * sent (from sonata list for exple) then
+     * it need to be consider instead of using
+     * all the list of students from DB
+     */
+    public function studentCardAction($selectedStudents = null)
+    {
+        
+        //Get all the students (rarely like this)
+        $em = $this->getDoctrine()->getManager();
+        if(!$selectedStudents){
+            $students = $em->getRepository('AppBundle:Student')->findAll();
+        }else{
+            $students = $selectedStudents;
+        }
+        
+        //Build the barcode for each teacher
+        foreach ($students as $std){
+            
+            $formatedId = str_pad($std->getId(),18,"0",STR_PAD_LEFT); 
+            $options = array(
+                'code'   => $formatedId,
+                'type'   => 'codabar',
+                'format' => 'png',
+                'width'  => 1,
+                'height' => 18,
+                'color'  => array(0, 0, 0),
+                );
+             
+            $barcode = $this->get('cibincasso_barcode.generator')->generate($options);
+            $std->setBarcode($barcode);
+        }
+        
+        return $this->render("@App/Default/students_card.html.twig", array('students' => $students));
+    }
 }

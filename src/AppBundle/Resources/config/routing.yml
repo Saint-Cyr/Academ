@@ -25,3 +25,7 @@ shortyImportCSV:
 tacher_card:
     path: /teacher_card
     defaults:  { _controller: AppBundle:Default:teacherCard }
+    
+student_card:
+    path: /student_card
+    defaults:  { _controller: AppBundle:Default:studentCard }
