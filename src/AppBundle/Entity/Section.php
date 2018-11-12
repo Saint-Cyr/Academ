@@ -90,7 +90,9 @@ class Section
     public function __toString() {
         if($this->name){
             return $this->name;
-        };
+        }else{
+            return 'New Section';
+        }
         
         //return 'New Section';
     }

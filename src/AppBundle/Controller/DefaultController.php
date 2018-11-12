@@ -22,26 +22,21 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
-        /*$pw = '';
-        $user = $this->getDoctrine()->getManager()->getRepository('UserBundle:User')->find(1);
-        $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $pw, "main", array("ROLE_USER"));
-        $utils = $this->get('app.utils');
-        $utils->getSecurityHandler()->setToken($token);
-
-        $event = new \Symfony\Component\Security\Http\Event\InteractiveLoginEvent($request, $token);
-        $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
-
-        $user = $utils->getSecurityHandler()->getToken()->getUser();
-        //var_dump($user->getUserName());exit;*/
-        
-     //var_dump($this->getUser()->getRoles());exit;
-        
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render("@App/Default/front.html.twig");
     }
     
+    public function settingAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
+        
+        if(!$setting){
+            throw $this->createNotFoundException('No object setting found');
+        }
+        
+        return $this->redirectToRoute('admin_app_setting_edit', array('id' => $setting->getId()));
+        
+    }
     
     public function markInputAction($section_id, $evaluation_id)
     {
@@ -55,8 +50,9 @@ class DefaultController extends Controller
         if($evaluation->getSection()->getId() == $section_id){
             $section = $em->getRepository('AppBundle:Section')->find($section_id);
             $students = $section->getStudents();
-            return $this->render("@App/Teacher/input_mark.html.twig",
-                                 array('students' => $students, 'section' => $section, 'evaluation' => $evaluation));
+            return $this->render("@App/Teacher/input_mark.html.twig", array('students' => $students, 
+                                                                            'section' => $section,
+                                                                            'evaluation' => $evaluation));
         }else{
             throw $this->createNotFoundException('Evaluation #ID: '.$evaluation_id.' & Section #ID: '.$section_id.' are not related.');
         }
@@ -118,8 +114,71 @@ class DefaultController extends Controller
         $section = $em->getRepository('AppBundle:Section')->find($section_id);
         
         //Get the service
-        $markTable = $this->get('AppBundle\Service\BuildMarkTableLTBHandler')->generateMarkTableLTB($section, $sequence);
+        $markTable = $this->get('app.build_marktableLTB_handler')->generateMarkTableLTB($section, $sequence);
         return $this->render("@App/Default/mark_table.html.twig", array('markTables' => $markTable));
+    }
+    
+    public function markInputParametersAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        //Get the parameters sent by the user
+        $sectionId = $request->get('_section_id');
+        $message = '';
+        //If the form has been submitted then redirect to input_mark page 
+        if($sectionId){
+            //Get all the related evaluations and send it to the view
+            $section = $em->getRepository('AppBundle:Section')->find($sectionId);
+            $evaluations = $section->getEvaluations();
+            
+            if(count($evaluations) > 0){
+                return $this->redirectToRoute('mark_input_parameters2', array('section_id' => $sectionId));
+            }
+            
+            $message = 'No evaluation found for the section you have choosen: '.$section->getName();
+        }
+        //Get all the section and the field to send to the view
+        $sections = $em->getRepository('AppBundle:Section')->findAll();
+        
+        return $this->render("@App/Default/mark_input_parameters.html.twig", array('sections' => $sections,
+                                                                                    'message' => $message));
+    }
+    
+    public function markInputParameters2Action(Request $request, $section_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $programId = $request->get('_program_id');
+        
+        //In order to redirect to input_mark, we need the section id
+        if($programId){
+            return $this->redirectToRoute('mark_input_parameters3', array('program_id' => $programId, 'section_id' => $section_id));
+        }
+        //Get all the related evaluations and send it to the view
+        $section = $em->getRepository('AppBundle:Section')->find($section_id);
+        $programs = $section->getLevel()->getPrograms();
+        return $this->render("@App/Default/mark_input_parameters2.html.twig", array('programs' => $programs,
+                                                                                    'section' => $section,
+                                                                                    'section_id' => $section_id));
+    }
+    
+    public function markInputParameters3Action(Request $request, $program_id, $section_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluationId = $request->get('_evaluation_id');
+        
+        $program = $em->getRepository('AppBundle:Program')->find($program_id);
+        
+        //In order to redirect to input_mark, we need the section id
+        if($evaluationId){
+            $section = $em->getRepository('AppBundle:Section')->find($section_id);
+            return $this->redirectToRoute('mark_input', array('section_id' => $section->getId(), 'evaluation_id' => $evaluationId));
+        }
+        //Get all the related evaluations and send it to the view
+        $section = $em->getRepository('AppBundle:Section')->find($section_id);
+        $evaluations = $section->getEvaluations();
+        
+        return $this->render("@App/Default/mark_input_parameters3.html.twig", array('evaluations' => $evaluations,
+                                                                                    'section' => $section,
+                                                                                    'program' => $program));
     }
     
     public function markTableStdAction($section_id)
@@ -129,17 +188,14 @@ class DefaultController extends Controller
         $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
         
         $sequence = $setting->getSequence();
-        
         if(!$setting){
             throw $this->createNotFoundException('Setting not found');
         }
         
         //Get the section from DB
         $section = $em->getRepository('AppBundle:Section')->find($section_id);
-        
         //Get the service
-        $markTable = $this->get('app.build_marktable_handler')->generateMarkTable($section, $sequence);
-       
+        $markTable = $this->get('app.build_marktable_handler')->generateMarkTable($section, $sequence);   
         return $this->render("@App/Default/mark_table_std.html.twig", array('markTables' => $markTable, 'parameters' => $setting));
     }
     

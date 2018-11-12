@@ -29,3 +29,19 @@ tacher_card:
 student_card:
     path: /student_card
     defaults:  { _controller: AppBundle:Default:studentCard }
+    
+setting:
+    path: /setting
+    defaults:  { _controller: AppBundle:Default:setting }
+    
+mark_input_parameters:
+    path: /mark_input_parameters
+    defaults: { _controller: AppBundle:Default:markInputParameters }
+    
+mark_input_parameters2:
+    path: /mark_input_parameters2/{section_id}
+    defaults: { _controller: AppBundle:Default:markInputParameters2 }
+    
+mark_input_parameters3:
+    path: /mark_input_parameters3/{section_id}/{program_id}
+    defaults: { _controller: AppBundle:Default:markInputParameters3 }

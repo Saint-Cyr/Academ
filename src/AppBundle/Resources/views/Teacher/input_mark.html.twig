@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="">
-                            <img id="student_image" src="{{ asset('images/next.png') }}" alt="Generic placeholder thumbnail" 
+                            <img id="student_image" src="{{ asset('images/next.png') }}" alt="Generic placeholder thumbnail---" 
                                  class="img-circle" width="345px">
                         </div>
                     </div>
@@ -125,7 +125,7 @@
     <script type="text/javascript" src="{{ asset('lib/jquery.scannerdetection.js') }}"></script>
     <script type="text/javascript">
         
-        students = [{% for std in students %} { "id":{{std.id}}, "name":"{{std.name}}", "barcode":"{{std.barcode}}", 
+        students = [{% for std in students %} { "id":{{std.id}}, "name":"{{std.name}}", "barcode":"8692641040365", 
                 "last_mark": null, "image":"2.jpg", "parent_phone":null, "last_position": null, "performance":null},
                     {% endfor %}];
         
@@ -156,7 +156,7 @@
                     alert(data);
                     $('#current_mark').attr('style', 'opacity: 0');
                     $('#student_performance').text('N/A');
-                    $('#student_image').attr('src', '{{ asset('images/next.jpg') }}');
+                    $('#student_image').attr('src', '{{ asset('images/next.png') }}');
                     $('#current_mark').val('');
                     $('#last_transaction').text(data);
                 },

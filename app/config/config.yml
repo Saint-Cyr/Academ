@@ -19,11 +19,16 @@ fos_user:
 sonata_block:
     default_contexts: [sonata_page_bundle]
     blocks:
+        sonata.admin.block.search_result:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
         
 sonata_admin:
+    templates:
+        layout: AppBundle::standard_layout.html.twig
+    title: Academ
+    title_logo: images/logo.jpg
  #   security:
   #      handler: sonata.admin.security.handler.role
             

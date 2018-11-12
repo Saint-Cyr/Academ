@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Program as Program;
 
 /**
  * Student
@@ -236,5 +237,31 @@ class Student
     public function getBarcode()
     {
         return $this->barcode;
+    }
+    
+    /*
+     * @deprecated since 0.5.1
+     * This method suppose to get only marks
+     *  for the current student that are related to a given
+     * Sequence and a given program
+     * 
+     */
+    public function getMarksBySequenceByProgram(Sequence $sequence, Program $program)
+    {
+        //Prepare a tab to store filtered marks
+        $marksTab = array();
+        //Filter marks by theire sequence: going firstly by Evaluation
+        //and then by sequence
+        foreach ($this->getMarks() as $mark){
+            //Make sure the current mark is related to $sequence
+            if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
+                    && 
+                $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
+                
+                $marksTab[] = $mark;
+            }
+        }
+        
+        return $marksTab;
     }
 }

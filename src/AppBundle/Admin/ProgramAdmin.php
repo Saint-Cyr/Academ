@@ -13,16 +13,20 @@ class ProgramAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
             ->add('name')
+            ->add('coefficient')
+            ->add('field')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('name')
+            ->add('name', null, array('editable' => true))
+            ->add('coefficient', null, array('editable' => true))
+            ->add('teacher')
+            ->add('field')
+                
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,8 +40,11 @@ class ProgramAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('name')
+            ->add('teacher')
+            ->add('coefficient')
+            ->add('level')
+            ->add('field')
         ;
     }
 
@@ -47,5 +54,23 @@ class ProgramAdmin extends AbstractAdmin
             ->add('id')
             ->add('name')
         ;
+    }
+    
+    public function prePersist($object) {
+        parent::prePersist($object);
+        //Set the name automatically in the case the user does not set it
+        if(!$object->getName()){
+            $object->setName($object->getField()->getName().' / '.$object->getLevel()->getName());
+        }
+        
+    }
+    
+    public function preUpdate($object) {
+        parent::prePersist($object);
+        //Set the name automatically in the case the user does not set it
+        if(!$object->getName()){
+            $object->setName($object->getField()->getName().' / '.$object->getLevel()->getName());
+        }
+        
     }
 }

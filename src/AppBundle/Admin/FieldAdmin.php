@@ -13,7 +13,6 @@ class FieldAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
             ->add('name')
         ;
     }
@@ -21,8 +20,7 @@ class FieldAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('name')
+            ->add('name', null, array('editable' => true))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,7 +34,6 @@ class FieldAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('name')
         ;
     }

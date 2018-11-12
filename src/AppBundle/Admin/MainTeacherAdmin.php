@@ -13,8 +13,7 @@ class MainTeacherAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('name')
+            ->add('teacher')
         ;
     }
 
@@ -22,7 +21,7 @@ class MainTeacherAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('name')
+            ->add('teacher')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,16 +35,15 @@ class MainTeacherAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
-            ->add('name')
+            ->add('teacher')
         ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
-            ->add('name')
+            
+            ->add('teacher')
         ;
     }
 }

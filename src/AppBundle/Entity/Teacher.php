@@ -22,7 +22,7 @@ class Teacher
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher", cascade={"persist"}, orphanRemoval=true)
      */
     private $programs;
     
@@ -49,6 +49,25 @@ class Teacher
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        }else{
+            return 'New Teacher';
+        };
+    }
+    
+    public function setPrograms($programs)
+    {
+        if (count($programs) > 0) {
+            foreach ($programs as $p) {
+                $this->addProgram($p);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -118,9 +137,12 @@ class Teacher
      */
     public function addProgram(\AppBundle\Entity\Program $program)
     {
-        $this->programs[] = $program;
+        $program->setTeacher($this);
+        $this->programs->add($program);
+    
+        //$this->programs[] = $program;
 
-        return $this;
+        //return $this;
     }
 
     /**

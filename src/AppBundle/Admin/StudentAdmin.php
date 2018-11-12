@@ -27,6 +27,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('section')
             ->add('studentParent')
             ->add('barcodeValue')
+            ->add('barcode')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -43,6 +44,7 @@ class StudentAdmin extends AbstractAdmin
             //->add('id')
             ->add('name')
             ->add('section')
+            
             ->add('studentParent')
         ;
     }

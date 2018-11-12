@@ -23,6 +23,7 @@ class TeacherAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('name')
+            ->add('programs')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -38,6 +39,7 @@ class TeacherAdmin extends AbstractAdmin
         $formMapper
             //->add('id')
             ->add('name')
+            ->add('programs')
         ;
     }
 
@@ -47,5 +49,15 @@ class TeacherAdmin extends AbstractAdmin
             ->add('id')
             ->add('name')
         ;
+    }
+    
+    public function prePersist($project)
+    {
+        $this->preUpdate($project);
+    }
+
+    public function preUpdate($project)
+    {
+        $project->setPrograms($project->getPrograms());
     }
 }

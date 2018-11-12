@@ -25,6 +25,7 @@ class SectionAdmin extends AbstractAdmin
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
             ->add('evaluations')
             ->add('name')
+            ->add('mainTeacher')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -40,6 +41,8 @@ class SectionAdmin extends AbstractAdmin
         $formMapper
             //->add('id')
             ->add('name')
+            ->add('mainTeacher')
+            ->add('level')
         ;
     }
 

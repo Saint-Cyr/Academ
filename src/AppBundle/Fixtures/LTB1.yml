@@ -20,6 +20,10 @@ AppBundle\Entity\Field:
         name: Info
     field_2:
         name: Maths
+    field_3:
+        name: Francais
+    field_4:
+        name: Stenographie
 
 AppBundle\Entity\Cycle:
     cycle_1:
@@ -44,6 +48,8 @@ AppBundle\Entity\Coefficient:
         value: 2
     coefficient_2:
         value: 3
+    coefficient_3:
+        value: 0
         
 AppBundle\Entity\Teacher:
     teacher_1:
@@ -84,7 +90,16 @@ AppBundle\Entity\Program:
         level: "@level_4"
         field: "@field_2"
         coefficient: "@coefficient_2"
-
+    program_7:
+        name: Prog. Francais 1erG3
+        level: "@level_1"
+        field: "@field_3"
+        coefficient: "@coefficient_3"
+    program_8:
+        name: Prog. Stenographie 1erG3
+        level: "@level_1"
+        field: "@field_4"
+        
 AppBundle\Entity\Sequence:
     sequence_1:
         name: 1er Trimestre

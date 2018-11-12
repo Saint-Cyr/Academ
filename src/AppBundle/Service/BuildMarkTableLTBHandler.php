@@ -18,6 +18,11 @@ class BuildMarkTableLTBHandler
         $this->utils = $utils;
     }
     
+    /*This is the main intrance of the algorithm that suppose to generate 
+    * markTable for LTB as design on physical Doc.
+    * return a Matrix (array()) of markTables that suppose to be printed as pdf later
+    * Data structure of the outPut : array('parameters' => $parameters, 'mark_tables' => $markTables);
+    */
     public function generateMarkTableLTB(Section $section, Sequence $sequence)
     {
         //Get all the parameters like school name, year, ...
@@ -32,6 +37,11 @@ class BuildMarkTableLTBHandler
         return array('parameters' => $parameters, 'mark_tables' => $markTables);
     }
     
+    /*
+     * This methode suppose to generate mark table for one student for a given sequence
+     * @return array $markTableOneStudent['rows'] = $rows;
+     * Notice that $rows itself is an array
+     */
     public function buildMarkTableOneStudentLTB(Student $student, Sequence $sequence)
     {
         //For each programs, build the columns
@@ -46,7 +56,12 @@ class BuildMarkTableLTBHandler
             //Get appreciation
             $appreciation = $this->utils->getAppreciation($computedMark);
             //Prepare the mark time coefficient
-            $markCoef = ($computedMark * $prog->getCoefficient()->getValue());
+            //Notice that coefficient must not be null in order to avoid Error
+            if($prog->getCoefficient()){
+                $markCoef = ($computedMark * $prog->getCoefficient()->getValue());
+                $coefficientValue = $prog->getCoefficient()->getValue();
+            }
+            
             //Prepare teacher name Notice if null, then make sure to set it to unknown
             if(is_object($prog->getTeacher())){
                 $teacherName = $prog->getTeacher()->getName();
@@ -56,7 +71,7 @@ class BuildMarkTableLTBHandler
             
             //Build columns for the current program or current row (program Name, coef, mark/20, mark*Coef, ...)
             $row = array('program_name' => $prog->getName(),
-                         'coefficient' => $prog->getCoefficient()->getValue(),
+                         'coefficient' => $coefficientValue,
                          'mark' => $computedMark,
                          'mark_coefficient' => $markCoef,
                          'teacher' => $teacherName,

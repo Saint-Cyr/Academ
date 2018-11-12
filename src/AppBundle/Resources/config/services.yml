@@ -52,6 +52,14 @@ services:
         class: AppBundle\Service\Utils
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
         
+    app.utilsLTB:
+        class: AppBundle\Service\UtilsLTB
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        
+    app.utilsSTD:
+        class: AppBundle\Service\UtilsSTD
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        
     app.build_marktable_handler:
         class: AppBundle\Service\BuildMarkTableHandler
         arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
@@ -121,4 +129,11 @@ services:
         arguments: [~, AppBundle\Entity\AbsenceCompter, SonataAdminBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: AbsenceCompter }
+        public: true
+
+    app.admin.cycle:
+        class: AppBundle\Admin\CycleAdmin
+        arguments: [~, AppBundle\Entity\Cycle, AppBundle:CycleAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Cycle }
         public: true

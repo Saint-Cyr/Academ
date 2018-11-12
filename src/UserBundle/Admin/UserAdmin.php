@@ -25,6 +25,7 @@ class UserAdmin extends AbstractAdmin
             ->add('image', null, array('template' => 'UserBundle:Default:list.html.twig'))
             ->add('name')
             ->add('email')
+            ->add('barcode')
             ->add('enabled', null, array('editable' => true))
             ->add('lastLogin')
             ->add('roles')

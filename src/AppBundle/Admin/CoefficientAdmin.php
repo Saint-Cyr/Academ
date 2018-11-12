@@ -38,8 +38,8 @@ class CoefficientAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('value')
+            ->add('programs')
         ;
     }
 
@@ -49,5 +49,15 @@ class CoefficientAdmin extends AbstractAdmin
             ->add('id')
             ->add('value')
         ;
+    }
+    
+    public function prePersist($project)
+    {
+        $this->preUpdate($project);
+    }
+
+    public function preUpdate($project)
+    {
+        $project->setPrograms($project->getPrograms());
     }
 }

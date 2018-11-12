@@ -31,7 +31,7 @@ class Setting
     /**
      * @var dateTime
      *
-     * @ORM\Column(name="councilDate", type="datetime")
+     * @ORM\Column(name="councilDate", type="datetime", nullable=true)
      */
     private $councilDate;
     

@@ -28,8 +28,6 @@ class Utils
      * the current prog ($prog) and give back the avarage value
      * Exple: if the student have two mark in Math 1ere C such as 12.5 & 7.5
      * then the avarage will be (12.5+7.5)/2
-     * By the 3rd argument (default = true) indicate whether considere only Devoir (false) or
-     * both Devoir and Composition (true)
      */
     public function getComputedMark(Student $student, Program $prog, $allMark = true)
     {
