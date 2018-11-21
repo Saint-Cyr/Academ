@@ -97,9 +97,13 @@ class DefaultController extends Controller
         
     }
     
-    
     public function markTableAction($section_id)
     {
+        //Disable the profiler in order to see the printable template perfectly
+        if ($this->container->has('profiler'))
+        {
+            //$this->container->get('profiler')->disable();
+        }
         //We will need DB connection
         $em = $this->getDoctrine()->getManager();
         $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
@@ -115,7 +119,7 @@ class DefaultController extends Controller
         
         //Get the service
         $markTable = $this->get('app.build_marktableLTB_handler')->generateMarkTableLTB($section, $sequence);
-        return $this->render("@App/Default/mark_table.html.twig", array('markTables' => $markTable));
+        return $this->render("@App/Default/mark_table_test.html.twig", array('markTables' => $markTable));
     }
     
     public function markInputParametersAction(Request $request)
