@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Emulating real sheets of paper in web documents (using HTML and CSS)">
-        <title>Sheets of Paper---</title>
+        <title>STD Mark Table</title>
         <link rel="stylesheet" type="text/css" href="{{ asset("css/sheets-of-paper-a4.css") }}">
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <style>
@@ -178,23 +178,32 @@
         <br>
         <div style="text-align: center">
             <span style="font-size: 10px;"><b>LYCEE TECHNIQUE DE BANGUI</b></span><br>
-            <span class="text-center" style="font-size: 10px"><b> BULLETIN DE NOTES DU 2em TRIMESTRE 2017 - 2018</b></span>
+            <span class="text-center" style="font-size: 10px"><b> BULLETIN DE NOTES DU 
+                    {% if markTables.parameters.sequence == 1 %}
+                        PREMIER TRIMESTRE
+                    {% elseif markTables.parameters.sequence == 2 %}
+                        DEUXIEME TRIMESTRE
+                    {% else %}
+                        TROISIEME TRIMESTRE
+                    {% endif %}
+                </b>
+            </span>
         </div>
             <table class="table table-bordered">
     <thead>
     </thead>
     <tbody>
     <tr>
-      <td style="font-size: 10px;"><b>Nom(s) et Prenom :</b> {{ markTableOneStudent.student_name }}</td>
-      <td style="font-size: 10px;"><b>Professeur Principal:</b> MOIGONODE Sarko</td>
+      <td style="font-size: 10px;"><b>Nom(s) et Prenom :</b> {{ markTableOneStudent.param.student_name }}</td>
+      <td style="font-size: 10px;"><b>Professeur Principal:</b> {{ markTables.parameters.main_teacher }}</td>
     </tr>
     <tr>
-        <td style="font-size: 10px;"><b>Class :</b> Class_name_goes_here</td>
-      <td style="font-size: 10px;"><b>Date du conseil:</b> {{ "now"|date("d/m/Y") }}</td>
+        <td style="font-size: 10px;"><b>Section :</b> {{ markTables.parameters.section_name }}</td>
+        <td style="font-size: 10px;"><b>Date du conseil:</b> {{ markTables.parameters.council_date|date('d/m/y') }}</td>
     </tr>
     <tr>
-        <td style="font-size: 10px;"><b>Effectif:</b> 122</td>
-        <td style="font-size: 10px;"><b>Nom(s) de(s) Parent(s):</b> GAZAMBETI Christian </td>
+        <td style="font-size: 10px;"><b>Effectif:</b> {{ markTables.parameters.student_number }}</td>
+        
     </tr>
     <tr>
     </tr>     
@@ -224,16 +233,6 @@
       <td>{{ row.teacher }}</td>
     </tr>
     {% endfor %}
-    {#% for i in 1..nb %}
-    <tr>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-    </tr>
-    {% endfor %#}
   </tbody>
 </table>
  <div class="row">
@@ -243,29 +242,32 @@
         <div class="table-responsive"  style='font-size: 12px'>
           <table class="table">
             <tr>
-              <th>Moy. du 1<sup>ere</sup> Trimestre:</th>
-              <td>12.5</td>
+              <th>Moy. du 1<sup>er</sup> Trimestre:</th></th>
+              <td>{{ markTableOneStudent.param.marks_by_sequence.first }} / 20</td>
             </tr>
             <tr>
               <th>Moy. du 2<sup>eme</sup> Trimestre:</th>
-              <td>N/A</td>
+              <td>{{ markTableOneStudent.param.marks_by_sequence.two }}</td>
             </tr>
             <tr>
               <th>Moy. du 3<sup>eme</sup> Trimestre:</th>
-              <td>N/A</td>
+              <td>{{ markTableOneStudent.param.marks_by_sequence.three }}</td>
             </tr>
+            
+            <tr style="color: green;">
+              <th>Moy. Generale:</th>
+              <td><b style="font-size: 13px;">{{ markTableOneStudent.param.marks_by_sequence.Gen }}</b></td>
+            </tr>
+            
             <tr>
               <th>Rang:</th>
               <td>1er</td>
             </tr>
           </table>
-          <img src="{{ asset('images/stamp.jpg') }}" width="80px;"/>
+          <img src="{{ asset('images/stanp.JPG') }}" width="100px;"/>
         </div>
-       
-       
       {#<img src="{{ asset('images/barcode_student.png') }}" style="padding-top: 2px; padding-left: 8px;"/>#}  
       </div>
-      
       <!-- /.col -->
       <div class="col-xs-6">
 
@@ -308,10 +310,7 @@
     </section>
 <div class="page-break"></div>
 {% endfor %}
-        
-        
     </div>
-    
     <script type="text/javascript">
     // window.print();
     </script>

@@ -22,7 +22,9 @@ class SettingAdmin extends AbstractAdmin
     {
         $listMapper
             //->add('id')
-            //->add('name')
+            ->add('name')
+            ->add('sequence')
+            ->add('definedYearlySequenceNumber', null, array('editable' => true))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,11 +38,18 @@ class SettingAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('sequence')
-            ->add('schoolName')
-            ->add('academicYear')
-            ->add('name')
-        ;
+            ->with('General', array('class' => 'col-md-3'))
+                ->add('schoolName')
+                ->add('academicYear')
+            ->end()
+            ->with('Sequence', array('class' => 'col-md-3'))
+                ->add('sequence')
+                ->add('definedYearlySequenceNumber')
+            ->end()
+            ->with('Technical Info.', array('class' => 'col-md-3'))
+                ->add('name', null, array('disabled' => true))
+            ->end()
+            ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -48,6 +57,7 @@ class SettingAdmin extends AbstractAdmin
         $showMapper
             //->add('id')
             ->add('name')
+            ->add('sequence')
         ;
     }
 }

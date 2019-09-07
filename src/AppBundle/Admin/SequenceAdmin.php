@@ -21,6 +21,7 @@ class SequenceAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name')
+            ->add('sequenceOrder', null, (array('editable' => true)))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,6 +37,7 @@ class SequenceAdmin extends AbstractAdmin
         $formMapper
             
             ->add('name')
+            ->add('sequenceOrder')
         ;
     }
 

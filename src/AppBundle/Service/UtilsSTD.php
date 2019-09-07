@@ -39,13 +39,13 @@ class UtilsSTD
         //Prepare the variable that will hold all the selected mark.(the one belongs to $prog)
         $selectedMark = 0;
         //Select only marks that belong to $prog
-        foreach ($student->getMarks() as $mark){
+        foreach ($student->getDevoirMarksBySequenceByProgram($sequence, $prog) as $mark){
             //if $allMark = false, then treated only mark of Devoir
             if(!$allMark){
                 
                 //if this mark belongs to $prog and is for Devoir, then select it
                 if(($mark->getEvaluation()->getProgram()->getId() == $prog->getId())
-                        && ($mark->getEvaluation()->getEvaluationType()->getName() == 'Devoire')){
+                        && ($mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir')){
                     //Make sure to count the number of evaluation for the current program
                     $markNb = $markNb + 1;
                     $selectedMark = $selectedMark + $mark->getValue();
@@ -159,8 +159,6 @@ class UtilsSTD
     /**
      * @return array() like $tab['th_congratulation'], $tab['th_ this methode return the global
      * appreciation about the globale mark for a sequence.
-     * 
-     * 
      */
     public function getGlobalAppreciation($mark)
     {
@@ -246,5 +244,10 @@ class UtilsSTD
         
         return array();
         
+    }
+    
+    public function checkGenerateMarkTableSTDRequirements()
+    {
+        return true;
     }
 }

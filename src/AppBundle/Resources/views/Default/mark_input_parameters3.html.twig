@@ -47,7 +47,7 @@
                                     <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
                                         <select class="input100" type="select" name="_evaluation_id" autocomplete="off">
                                         {% for evaluation in evaluations %}
-                                            <option value="{{ evaluation.id }}">{{ evaluation.name|striptags }}</option>
+                                            <option value="{{ evaluation.id }}">{{ evaluation.name|striptags }} ({{ evaluation.sequence.name }})</option>
                                         {% endfor %}
                                         </select>
                                     </div>

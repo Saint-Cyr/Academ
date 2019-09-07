@@ -29,9 +29,16 @@ class Setting
     private $name;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="defined_yearly_sequence_number", type="integer", length=2)
+     */
+    private $definedYearlySequenceNumber;
+    
+    /**
      * @var dateTime
      *
-     * @ORM\Column(name="councilDate", type="datetime")
+     * @ORM\Column(name="councilDate", type="datetime", nullable=true)
      */
     private $councilDate;
     
@@ -170,5 +177,29 @@ class Setting
     public function getAcademicYear()
     {
         return $this->academicYear;
+    }
+
+    /**
+     * Set councilDate
+     *
+     * @param \DateTime $councilDate
+     *
+     * @return Setting
+     */
+    public function setCouncilDate($councilDate)
+    {
+        $this->councilDate = $councilDate;
+
+        return $this;
+    }
+
+    /**
+     * Get councilDate
+     *
+     * @return \DateTime
+     */
+    public function getCouncilDate()
+    {
+        return $this->councilDate;
     }
 }

@@ -28,10 +28,10 @@ class Utils
      * the current prog ($prog) and give back the avarage value
      * Exple: if the student have two mark in Math 1ere C such as 12.5 & 7.5
      * then the avarage will be (12.5+7.5)/2
+     * @deprecated since 0.2
      */
     public function getComputedMark(Student $student, Program $prog, $allMark = true)
-    {
-        
+    {   
         //Get the mark number
         $markNb = 0;
         //Prepare the variable that will hold all the selected mark.(the one belongs to $prog)
@@ -63,12 +63,48 @@ class Utils
         //return the average value of the marks for the program $prog only
         //if $markNb != 0
         if($markNb > 0){
-            return ($selectedMark / $markNb);
+            return number_format(($selectedMark / $markNb), 2);
         }else{
             return null;
         }
         
     }
+    
+    /*
+     * This methode suppose to compute all mark for a given student based on
+     * the current prog ($prog) and give back the avarage value
+     * Exple: if the student have two mark in Math 1ere C such as 12.5 & 7.5
+     * then the avarage will be (12.5+7.5)/2
+     */
+    public function getComputedMarkForDevoir(Student $student, Program $prog, Sequence $sequence)
+    {
+        //Get the mark number
+        $markNb = 0;
+        //Prepare the variable that will hold all the selected mark.(the one belongs to $prog)
+        $selectedMark = 0;
+        $marks = $student->getDevoirMarksBySequenceByProgram($sequence, $prog);
+        //Select only marks that belong to $prog
+        foreach ($marks as $mark){
+            $evaluation = $mark->getEvaluation();
+            //if this mark belongs to $prog and is for Devoir, then select it
+            if(($evaluation->getProgram()->getId() == $prog->getId())
+                    && ($evaluation->getEvaluationType()->getName() == 'Devoire')){
+                //Make sure to count the number of evaluation for the current program
+                $markNb = $markNb + 1;
+                $selectedMark = $selectedMark + $mark->getValue();
+            }
+        }
+        //return the average value of the marks for the program $prog only
+        //if $markNb != 0
+        if($markNb > 0){
+            return $markNb;
+            return number_format(($selectedMark / $markNb), 2);
+        }else{
+            return null;
+        }
+    }
+    
+    
     
     /*
      * return a mark (value * 2) when it related evaluation type is composition

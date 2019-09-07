@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Program as Program;
+use AppBundle\Entity\Sequence;
 
 /**
  * Student
@@ -62,6 +63,22 @@ class Student
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getMarksBySequence(Sequence $sequence)
+    {
+        //Collect all the marks for the current $sequence
+        $sequenceMarks = array();
+        foreach ($sequence->getEvaluations() as $evaluations){
+            foreach ($evaluations as $eval){
+                //Make sure the marks is for the current student
+                //if($this->getMar)
+                $sequenceMarks[] = $eval->getMark();
+            }
+        }
+        
+        
+        return $marks;
     }
     
     public function getBarcodeValue()
@@ -241,13 +258,14 @@ class Student
     
     /*
      * @deprecated since 0.5.1
-     * This method suppose to get only marks
+     * This method suppose to return the average of marks
      *  for the current student that are related to a given
      * Sequence and a given program
      * 
      */
-    public function getMarksBySequenceByProgram(Sequence $sequence, Program $program)
+    public function getDevoirMarksBySequenceByProgram(Sequence $sequence, Program $program)
     {
+        $nb = 0;
         //Prepare a tab to store filtered marks
         $marksTab = array();
         //Filter marks by theire sequence: going firstly by Evaluation
@@ -256,12 +274,21 @@ class Student
             //Make sure the current mark is related to $sequence
             if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
                     && 
+                $mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir'
+                    &&
                 $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
                 
-                $marksTab[] = $mark;
+                $marksTab[] = $mark->getvalue();
+                //Count the number of the values
+                $nb++;
             }
         }
         
-        return $marksTab;
+        if($nb == 0){
+            return null;
+        }else{
+            return number_format((array_sum($marksTab)/$nb), 2);
+        }
+        
     }
 }

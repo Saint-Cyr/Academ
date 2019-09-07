@@ -49,7 +49,7 @@
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
                                             <select class="input100" type="select" name="_program_id" autocomplete="off">
                                             {% for program in programs %}
-                                                <option value="{{ program.id }}">{{ program.name|striptags }}</option>
+                                                <option value="{{ program.id }}">{{ program.name|striptags }} ({{ program.level.name }})</option>
                                             {% endfor %}
                                             </select>
                                             

@@ -29,6 +29,13 @@ class Setting
     private $name;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="defined_yearly_sequence_number", type="integer", length=2, nullable=true)
+     */
+    private $definedYearlySequenceNumber;
+    
+    /**
      * @var dateTime
      *
      * @ORM\Column(name="councilDate", type="datetime", nullable=true)
@@ -64,6 +71,14 @@ class Setting
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function __toString() {
+        if(!$this->name){
+            return 'New Setting';
+        }else{
+            return $this->name;
+        };
     }
 
     /**
@@ -194,5 +209,29 @@ class Setting
     public function getCouncilDate()
     {
         return $this->councilDate;
+    }
+
+    /**
+     * Set definedYearlySequenceNumber
+     *
+     * @param integer $definedYearlySequenceNumber
+     *
+     * @return Setting
+     */
+    public function setDefinedYearlySequenceNumber($definedYearlySequenceNumber)
+    {
+        $this->definedYearlySequenceNumber = $definedYearlySequenceNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get definedYearlySequenceNumber
+     *
+     * @return integer
+     */
+    public function getDefinedYearlySequenceNumber()
+    {
+        return $this->definedYearlySequenceNumber;
     }
 }

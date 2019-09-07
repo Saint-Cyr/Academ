@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Sequence
  *
  * @ORM\Table(name="sequence")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SequenceRepository")
+ * @UniqueEntity("sequenceOrder", message="An other sequence already have this value")
  */
 class Sequence
 {
@@ -32,6 +34,13 @@ class Sequence
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sequence_order", type="integer", length=255)
+     */
+    private $sequenceOrder;
 
 
     /**
@@ -115,5 +124,49 @@ class Sequence
     public function getEvaluations()
     {
         return $this->evaluations;
+    }
+    
+    /*
+     * This method return only evaluation that belong to a particular programs
+     * for the current sequence.
+     */
+    public function getEvaluationsOfOneProgram(\AppBundle\Entity\Program $program)
+    {
+        $selected = array();
+        $programsEvaluations = $program->getEvaluations();
+        $sequenceEvaluations = $this->getEvaluations();
+        foreach ($sequenceEvaluations as $seqEval){
+            foreach ($programsEvaluations as $pgEval){
+                if($seqEval->getId() == $pgEval->getId()){
+                    $selected[] = $pgEval;
+                }
+            }
+        }
+        
+        return $selected;
+    }
+
+    /**
+     * Set sequenceOrder
+     *
+     * @param string $sequenceOrder
+     *
+     * @return Sequence
+     */
+    public function setSequenceOrder($sequenceOrder)
+    {
+        $this->sequenceOrder = $sequenceOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get sequenceOrder
+     *
+     * @return string
+     */
+    public function getSequenceOrder()
+    {
+        return $this->sequenceOrder;
     }
 }

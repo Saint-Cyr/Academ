@@ -97,29 +97,55 @@ class DefaultController extends Controller
         
     }
     
+    /*
+     * this method aims to Build mark table for all student belonging to one section
+     */
     public function markTableAction($section_id)
     {
+        //Make sure GenerateMarkTableSTDRequirement() return true
+        if($this->get('app.utilsSTD')->checkGenerateMarkTableSTDRequirements()){
+            //Continue (Do nothing)
+        }else{
+            //Return server message such as you should do x, y, ... before generating markTable (Stop)
+        }
+        //Get the buildMarkTableHandler Service
+        $buildMarkTableHandler = $this->get('app.build_marktable_handler');
         //Disable the profiler in order to see the printable template perfectly
         if ($this->container->has('profiler'))
         {
-            //$this->container->get('profiler')->disable();
+            $this->container->get('profiler')->disable();
         }
         //We will need DB connection
         $em = $this->getDoctrine()->getManager();
         $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
-        
-        $sequence = $setting->getSequence();
-        
         if(!$setting){
             throw $this->createNotFoundException('Setting not found');
         }
-        
         //Get the section from DB
         $section = $em->getRepository('AppBundle:Section')->find($section_id);
-        
-        //Get the service
-        $markTable = $this->get('app.build_marktableLTB_handler')->generateMarkTableLTB($section, $sequence);
-        return $this->render("@App/Default/mark_table_test.html.twig", array('markTables' => $markTable));
+        $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
+        //Make sure to generate the markTables according to the sequence
+        //1rs trimester
+        /*if($setting->getSequence()->getSequenceOrder() == 1){
+        $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
+        //2nd Trimester
+        }elseif($setting->getSequence()->getSequenceOrder() == 2){
+            //Get the marktable for sequence 1
+            $firstSequence = $em->getRepository('AppBundle:Sequence')->findOneBy(array('sequenceOrder' => 1));
+            $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
+            //In case of 3 sequences (trimester)
+            if($setting->getDefinedYearlySequenceNumber() == 3){
+                //I2
+                //In case of 2 sequence (semester)
+            }else{
+                //Close the academic year on this mark Table thus don't forget to compute and display (M1+M2)/2
+            }
+        //3rd Trimester
+        }else{
+            //I3
+        }
+        //Get the service for STD*/
+        return $this->render("@App/Default/mark_table_std2.html.twig", array('markTables' => $markTable));
     }
     
     public function markInputParametersAction(Request $request)
@@ -167,19 +193,21 @@ class DefaultController extends Controller
     public function markInputParameters3Action(Request $request, $program_id, $section_id)
     {
         $em = $this->getDoctrine()->getManager();
+        //We need the setting object in order to get the active sequence from it
+        $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
         $evaluationId = $request->get('_evaluation_id');
-        
         $program = $em->getRepository('AppBundle:Program')->find($program_id);
-        
         //In order to redirect to input_mark, we need the section id
         if($evaluationId){
             $section = $em->getRepository('AppBundle:Section')->find($section_id);
             return $this->redirectToRoute('mark_input', array('section_id' => $section->getId(), 'evaluation_id' => $evaluationId));
         }
-        //Get all the related evaluations and send it to the view
+        //Get all the sequences, section and program related evaluations and send it to the view
         $section = $em->getRepository('AppBundle:Section')->find($section_id);
-        $evaluations = $section->getEvaluations();
-        
+        //Get the active sequence from the parameter 
+        $sequence = $setting->getSequence();
+        //Make sure to select only the evaluations related to the current selected program and only for the selected sequence
+        $evaluations = $sequence->getEvaluationsOfOneProgram($program);
         return $this->render("@App/Default/mark_input_parameters3.html.twig", array('evaluations' => $evaluations,
                                                                                     'section' => $section,
                                                                                     'program' => $program));

@@ -31,28 +31,27 @@ class UtilsSTDTest extends WebTestCase
     }
     
     /*
-     * this is valid for fixture LTB1.yml
+     * this is valid for fixture STD1.yml
      */
-    public function testComputedMark()
+    public function testComputedMarkForDevoir()
     {
-        //Test the avarage of Angela as prepared in fixtures
-        $student = $this->em->getRepository('AppBundle:Student')->find(2);
+        //Test the avarage of Melvi as prepared in fixtures
+        $student = $this->em->getRepository('AppBundle:Student')->find(1);
         //Make sure student is GAZAMBETI
-        $this->assertEquals($student->getName(), 'GAZAMBETI');
+        $this->assertEquals($student->getName(), 'Melvi');
         //Make sure program is Info 1ere G3
         $program = $this->em->getRepository('AppBundle:Program')->find(1);
-        $this->assertEquals($program->getName(), 'Prog Info 1ere G3');
+        $this->assertEquals($program->getName(), 'Maths');
         //Get all the marks
         $marks = $student->getMarks();
-        //Make sure it is three as in the fixture
-        $this->assertEquals(count($marks), 3);
+        $sequence = $this->em->getRepository('AppBundle:Sequence')->find(1);
         //Make sure mark values are right as in fixture
-        $this->assertEquals($marks[0]->getValue(), 14.5);
-        $this->assertEquals($marks[1]->getValue(), 11);
-        $this->assertEquals($marks[2]->getValue(), 7.5);
+        $this->assertEquals($marks[0]->getValue(), 10);
+        $this->assertEquals($marks[1]->getValue(), 9.5);
+        $this->assertEquals($marks[2]->getValue(), 13);
         //test the avarage computing methode now
-        $avarage = $this->utils->getComputedMark($student, $program);
-        $this->assertEquals($avarage, 12.75);
+        $avarage = $this->utils->getComputedMarkForDevoir($student, $program, $sequence);
+        $this->assertEquals($avarage, 10.83);
         //Test the avarage of Student name_1 as prepared in fixtures
         $student2 = $this->em->getRepository('AppBundle:Student')->find(3);
         //Make sure student is Student name_1
@@ -63,81 +62,10 @@ class UtilsSTDTest extends WebTestCase
         $this->assertEquals($avarage2, 8);
     }
     
-    /*
-     * This is valid for fixture STD1.yml
-     * for this case there have to be discrimination between
-     * Devoir & Composition so Utils::getComputedMark(null, null, $allMark=false)
-     */
-    /*public function testComputedMark2()
+    public function testGenerateMarkTableSTDRequirements()
     {
-        //Test the avarage of YASSI as prepared in fixtures
-        $student = $this->em->getRepository('AppBundle:Student')->find(2);
-        //Make sure student is YASSI
-        $this->assertEquals($student->getName(), 'YASSI');
-        //Make sure program is Physique Chimie 3eme
-        $program = $this->em->getRepository('AppBundle:Program')->find(1);
-        $this->assertEquals($program->getName(), 'Prog Physique Chimie 3eme');
-        //Get all the marks
-        $marks = $student->getMarks();
-        //Make sure it is three as in the fixture
-        $this->assertEquals(count($marks), 5);
-        //Make sure mark values are right as in fixture
-        $this->assertEquals($marks[0]->getValue(), 14.5);
-        $this->assertEquals($marks[1]->getValue(), 11);
-        $this->assertEquals($marks[2]->getValue(), 13.5);
-        //test the avarage computing methode now
-        $avarage = $this->utils->getComputedMark($student, $program);
-        $this->assertEquals($avarage, 13.00);
-        
-        //Test the average of KOSSI
-        $student2 = $this->em->getRepository('AppBundle:Student')->find(1);
-        //Make sure student is KOSSI
-        $this->assertEquals($student2->getName(), 'KOSSI');
-        //Make sure program is Physique Chimie 3eme
-        $program = $this->em->getRepository('AppBundle:Program')->find(1);
-        $this->assertEquals($program->getName(), 'Prog Physique Chimie 3eme');
-        //Get all the marks
-        $marks = $student2->getMarks();
-        //Make sure it is three as in the fixture
-        $this->assertEquals(count($marks), 5);
-        //Make sure mark values are right as in fixture
-        $this->assertEquals($marks[0]->getValue(), 12.5);
-        $this->assertEquals($marks[1]->getValue(), 8.5);
-        $this->assertEquals($marks[2]->getValue(), 9.5);
-        //test the avarage computing methode now
-        $avarage = $this->utils->getComputedMark($student2, $program, false);
-        //Only Devoir is considered here.
-        $this->assertEquals($avarage, 10.5);
-    }*/
-    
-    /*public function testGetMarkComposition()
-    {
-        //Test the average of KOSSI (1ere trimestre)
-        $student2 = $this->em->getRepository('AppBundle:Student')->find(1);
-        //Make sure student is KOSSI
-        $this->assertEquals($student2->getName(), 'KOSSI');
-        //Make sure program is Physique Chimie 3eme
-        $program = $this->em->getRepository('AppBundle:Program')->find(1);
-        $this->assertEquals($program->getName(), 'Prog Physique Chimie 3eme');
-        //Make sure it's the right sequence
-        $sequence = $this->em->getRepository('AppBundle:Sequence')->find(1);
-        $this->assertEquals($sequence->getName(), '1er Trimestre');
-        $markForComposition = $this->utils->getMarkForComposition($student2, $program, $sequence);
-        $this->assertEquals($markForComposition, 19);
-        
-        //Test the average of KOSSI (2eme trimestre)
-        $student3 = $this->em->getRepository('AppBundle:Student')->find(1);
-        //Make sure student is KOSSI
-        $this->assertEquals($student3->getName(), 'KOSSI');
-        //Make sure program is Physique Chimie 3eme
-        $program = $this->em->getRepository('AppBundle:Program')->find(1);
-        $this->assertEquals($program->getName(), 'Prog Physique Chimie 3eme');
-        //Make sure it's the right sequence
-        $sequence2 = $this->em->getRepository('AppBundle:Sequence')->find(2);
-        $this->assertEquals($sequence2->getName(), '2em Trimestre');
-        $markForComposition = $this->utils->getMarkForComposition($student3, $program, $sequence2);
-        $this->assertEquals($markForComposition, null);
-    }*/
+        $this->assertTrue(true);
+    }
     
     public function testGetAppreciation()
     {

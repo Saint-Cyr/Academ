@@ -27,7 +27,7 @@ class EvaluationAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('sequence')
-            ->add('name', 'html')
+            ->add('name', 'html', array('editable' => true))
             ->add('evaluationType')
             ->add('program')
             ->add('section')

@@ -62,7 +62,7 @@ services:
         
     app.build_marktable_handler:
         class: AppBundle\Service\BuildMarkTableHandler
-        arguments: ["@doctrine.orm.entity_manager", "@app.utils"]
+        arguments: ["@doctrine.orm.entity_manager", "@app.utilsSTD"]
         
     app.build_marktableLTB_handler:
         class: AppBundle\Service\BuildMarkTableLTBHandler
