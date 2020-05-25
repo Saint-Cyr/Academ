@@ -7,7 +7,7 @@
 <tr align=center>
     {% for j in 1..5 %}
         <td width="25%">
-            <img src="data:image/png;base64, {{ student.barcode }}" width="120px"/>
+            <img src="{{ asset('images/logo.jpg') }}" width="30px"/>
             <b>{{ student.name|slice(0, 11) }}</b>
             <br>
             {% if student.section is not empty %}
@@ -15,7 +15,7 @@
             {% else %}
                     (No Section)
             {% endif %}
-            
+            <img src="data:image/png;base64, {{ student.barcode }}" width="120px"/>
         </td>
     {% endfor %}
 </tr>

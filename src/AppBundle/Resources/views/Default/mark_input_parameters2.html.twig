@@ -34,7 +34,13 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
+                        
 			<div class="wrap-login100 p-b-100">
+                                <div class="text-center">
+                                    <a href="{{ path('user_homepage') }}">
+                                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo Academ" class="rounded" width="80px"/>
+                                    </a>
+                                </div>
 				<form class="login100-form validate-form" action="{{ path("mark_input_parameters2", {'section_id':section_id}) }}" method="post">
 					<span class="">
                                             <div id="login-alert" class="alert alert-info col-sm-12">

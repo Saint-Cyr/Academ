@@ -44,8 +44,14 @@ class MainTeacher
         return $this->id;
     }
     
-    public function __toString() {       
-        return $this->teacher->getName();
+    public function __toString() {
+        
+        if($this->teacher)
+        {
+            return $this->teacher->getName();
+        }else{
+            return 'New Main Teacher';
+        }
     }
 
     

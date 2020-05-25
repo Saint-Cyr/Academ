@@ -139,7 +139,7 @@ AppBundle\Entity\Program:
         field: "@field_2"
         coefficient: "@coefficient_6"
     program_3:
-        name: Phys. Chimie 
+        name: Phys. Chimie 2nd C
         level: "@level_5"
         field: "@field_3"
         coefficient: "@coefficient_3"
@@ -165,7 +165,7 @@ AppBundle\Entity\Program:
         field: "@field_8"
         coefficient: "@coefficient_3"
     program_8:
-        name: Hist/Geo
+        name: Hist/Geo 2nd C
         level: "@level_5"
         field: "@field_9"
         coefficient: "@coefficient_2"

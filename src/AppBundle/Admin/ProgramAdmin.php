@@ -16,6 +16,7 @@ class ProgramAdmin extends AbstractAdmin
             ->add('name')
             ->add('coefficient')
             ->add('field')
+            ->add('level')
         ;
     }
 
@@ -26,6 +27,7 @@ class ProgramAdmin extends AbstractAdmin
             ->add('coefficient', null, array('editable' => true))
             ->add('teacher')
             ->add('field')
+            ->add('level')
                 
             ->add('_action', null, [
                 'actions' => [

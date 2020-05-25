@@ -89,7 +89,7 @@ class DefaultController extends Controller
             $em->persist($markObject);
             $em->flush();
             
-            return new JsonResponse('[ok] Sucessfull submission!');
+            return new JsonResponse('[ok] Sucessfull mark submission for '.$student->getName().' Mark: '.$markValue);
             
         }
                 
@@ -208,6 +208,7 @@ class DefaultController extends Controller
         $sequence = $setting->getSequence();
         //Make sure to select only the evaluations related to the current selected program and only for the selected sequence
         $evaluations = $sequence->getEvaluationsOfOneProgram($program);
+        
         return $this->render("@App/Default/mark_input_parameters3.html.twig", array('evaluations' => $evaluations,
                                                                                     'section' => $section,
                                                                                     'program' => $program));

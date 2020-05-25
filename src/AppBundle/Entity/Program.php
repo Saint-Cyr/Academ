@@ -79,7 +79,7 @@ class Program
     
     public function __toString() {
         if($this->name){
-            return $this->name;
+            return $this->name." #".$this->getLevel();
         };
         
         return 'New Program';

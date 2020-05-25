@@ -22,6 +22,7 @@ class LevelAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('name')
+            ->add('programs')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

@@ -27,7 +27,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('section')
             ->add('studentParent')
             ->add('barcodeValue')
-            ->add('barcode')
+            //->add('barcode')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -56,5 +56,14 @@ class StudentAdmin extends AbstractAdmin
             ->add('name')
             ->add('barcode')
         ;
+    }
+    
+    public function getExportFields() {
+        return array('#ID'=>'id', 'Name'=>'name', 'Bar Code' => 'barcodeValue');
+    }
+    
+    public function getExportFormats() {
+        parent::getExportFormats();
+        return ['xls', 'csv'];
     }
 }

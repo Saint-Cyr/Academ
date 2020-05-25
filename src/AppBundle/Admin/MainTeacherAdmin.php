@@ -22,6 +22,7 @@ class MainTeacherAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('teacher')
+            ->add('sections')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

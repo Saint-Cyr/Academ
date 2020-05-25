@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Edusol</title>
+  <title>Academ</title>
   <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
 <script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
@@ -13,14 +13,13 @@
         <div class="container">
             <div class="navbar navbar-fixed-top navbar-default">
             <div class="navbar-inner">
-                <div class="container">   
-                    <a class="brand" style="margin: 10px; float: none;" >
-                        <img src="{{ asset('images/logo.jpg') }}" width="100px" />
-                    </a>
-                    <a class="brand" style="margin: 900px; float: none;" >
-                        <img src="{{ asset('images/logo_ltb.png') }}" width="100px" />
+                <div class="container">
+                    <br>
+                    <a href="{{ path('user_homepage') }}" class="brand" style="margin: 30px; margin-top: 60px; float: none;" >
+                        <img src="{{ asset('images/school_logo.png') }}" width="100px" />
                     </a>
                 </div>
+                    <br>
             </div>
         </div>
                     </br></br></br></br></br>
@@ -29,14 +28,16 @@
                 background-color: #a09fa3 !important;
             }
         </style>
+        <br><br><br><br>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    {{ evaluation.program.name }} || {{ section.name }}
-</button>
+                {{ evaluation.program.name }} || {{ section.name }}
+            </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+        
       <div class="modal-header">
           <h3 class="modal-title" id="exampleModalLabel" style="color: red;"><b>{{ evaluation.program.name }} || {{ section.name }}</b></h3>
         <style>
@@ -58,13 +59,12 @@
             </style>
         <div class="panel-body" style="font-size: 23px">
             <div class="col-xs-12 col-sm-12" style="color: black;">
-                <p> <strong><u>Evaluation</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} ({{ evaluation.createdAt|date("d/m/y") }})</span></strong></p>
-                <p> <strong><u>Type d'Evaluation</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
-                <p> <strong><u>Prof</u>: <span id="class" style="color: #a09fa3;"> GOUNOUMOUNDJOU Sarko </span></strong></p>
-                <p> <strong><u>Sequence</u>: <span id="term" style="color: #a09fa3;"> <b>1<sup>er</sup> Trimestre</b> </span></strong></p>
-                <p> <strong><u>Effectif</u>: <span id="class_student_number" style="color: #a09fa3;"> 60 </span></strong></p>
-                <p> <strong><u>Recente Meilleur note</u>: <span id="hight_mark" style="color: #a09fa3;"> 15.5</span></strong></p>
-                <p> <strong><u>Recent(e) meilleur eleve</u>: <span id="average_mark" style="color: #a09fa3;">GAZAMBETI Angela </span></strong></p>
+                <p> <strong><u>Evaluation</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} </span></strong></p>
+                <p> <strong><u>Evaluation date</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.createdAt|date("d/m/y") }} </span></strong></p>
+                <p> <strong><u>Evaluation Type</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
+                <p> <strong><u>Teacher</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.program.teacher }} </span></strong></p>
+                <p> <strong><u>Sequence</u>: <span id="term" style="color: #a09fa3;"> <b> {{ evaluation.sequence }}</b> </span></strong></p>
+                <p> <strong><u>Total number of students from {{ section }}</u>: <span id="class_student_number" style="color: #a09fa3;"> {{ section.students|length }} </span></strong></p>
             </div>
         </div>
       </div>
@@ -99,9 +99,9 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="">
-                            <img id="student_image" src="{{ asset('images/next.png') }}" alt="Generic placeholder thumbnail---" 
-                                 class="img-circle" width="345px">
+                        <div class="col-lg-2">
+                            <img id="student_image" src="{{ asset('images/logo.jpg') }}" alt="Generic placeholder thumbnail---" 
+                                 class="" width="200px">
                         </div>
                     </div>
                     <div class = "col-sm-6 col-md-3">
@@ -153,7 +153,7 @@
                     alert(data);
                     $('#current_mark').attr('style', 'opacity: 0');
                     $('#student_performance').text('N/A');
-                    $('#student_image').attr('src', '{{ asset('images/next.png') }}');
+                    $('#student_image').attr('src', '{{ asset('images/logo.jpg') }}');
                     $('#current_mark').val('');
                     $('#last_transaction').text(data);
                 },
@@ -178,7 +178,7 @@
         
             students = [{% for std in students %}
                         { "id":{{std.id}}, "name":"{{std.name}}", "barcode":{{ std.barcodeValue }}, 
-                            "last_mark": null, "image":"2.jpg", "parent_phone":null, "last_position": null, "performance":null},
+                            "last_mark": null, "image":"11.jpg", "parent_phone":null, "last_position": null, "performance":null},
                     {% endfor %}
                             ];
                           

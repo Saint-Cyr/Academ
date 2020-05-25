@@ -37,17 +37,17 @@ class CsvImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         
         $io->writeln('File Processing...');
-        $io->title('==== <options=bold;fg=blue>Academ®</></> is a trademark of Saint-Cyr MAPOUKA. All rights reserved. || By iTech ( © 2018) ==============');
+        $io->title('==== <options=bold;fg=blue>Academ®</></> is a trademark of Saint-Cyr MAPOUKA. All rights reserved. || By iSTech ( © 2020) ==============');
         //Instatiate the csv reader library
-        $reader = \League\Csv\Reader::createFromPath('%kernel.root_dir%/../web/data/data1.csv');
+        $reader = \League\Csv\Reader::createFromPath('%kernel.root_dir%/../web/data/STUDENT.csv');
         $results = $reader->fetchAssoc();
-        $io->progressStart(count($results));
+        $io->progressStart(150);
         
         foreach ($results as $row){
             //create student object
             $student = new Student();
             $student->setName($row['name']);
-            $student->setBarcode($row['barcode']);
+            //$student->setBarcode($row['barcode']);
             
             //Check if #id for section exist both from csv and DB
             if($row['section']){

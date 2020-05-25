@@ -13,8 +13,10 @@ class TeacherAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
+            //->add('id')
             ->add('name')
+            ->add('programs')
+            ->add('mainTeachers')
         ;
     }
 
