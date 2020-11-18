@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Components of BeezyManager project
+ * This file is part of Components of Academ project
  * By contributor S@int-Cyr MAPOUKA
- * (c) StCyrLabs <mapoukacyr@yahoo.fr>
+ * (c) iSTech <med@itechcar.com>
  * For the full copyrght and license information, please view the LICENSE
  * file that was distributed with this source code
  */
