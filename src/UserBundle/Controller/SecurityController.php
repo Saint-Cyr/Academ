@@ -88,14 +88,14 @@ class SecurityController extends Controller
                 $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 
                 $user = $utils->getSecurityHandler()->getToken()->getUser();
-                $data = array('barcode' => $barcode, 'login' => true, 'redirect' => 'http://127.0.0.1/Academ/web/app_dev.php');
+                $data = array('barcode' => $barcode, 'login' => true, 'redirect' => 'http://192.168.8.100/Academ/web/app_dev.php');
                  
                 $response = new JsonResponse('[ok] Sucessfull login: '.$barcode);
                 $response->setData($data);
                 return $response;
                 
             }else{
-                $data = array('barcode' => $barcode, 'login' => false, 'redirect' => 'http://127.0.0.1/Academ/web/app_dev.php');
+                $data = array('barcode' => $barcode, 'login' => false, 'redirect' => 'http://192.168.8.100/Academ/web/app_dev.php');
                  
                 $response = new JsonResponse('[error] login faild: '.$barcode);
                 $response->setData($data);

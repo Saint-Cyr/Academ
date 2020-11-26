@@ -14,7 +14,7 @@ filename="$(date '+%Y-%m-%d_%H-%M-%S').sql"
 
 echo "Export $dbname database"
 
-mysqldump -B "$dbname" -u "$dbuser" --password="$dbpassword" > "$filename"
+mysql -B "$dbname" -u "$dbuser" --password="$dbpassword" > "$filename"
 
 echo "Output file :"
 

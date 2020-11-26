@@ -22,6 +22,11 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
+        //echo $request->getDefaultLocale();exit;
+        //$this->get('translator')->setlocale('en');
+        //$translatedMessage = $this->get('translator')->trans('hello');
+        //return new Response($translatedMessage.' '.$request->getLocale());
+        //$request->setlocale('en');
         return $this->render("@App/Default/front.html.twig");
     }
     
@@ -34,8 +39,7 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No object setting found');
         }
         
-        return $this->redirectToRoute('admin_app_setting_edit', array('id' => $setting->getId()));
-        
+        return $this->redirectToRoute('admin_app_setting_edit', array('id' => $setting->getId()));   
     }
     
     public function markInputAction($section_id, $evaluation_id)
@@ -164,7 +168,11 @@ class DefaultController extends Controller
                 return $this->redirectToRoute('mark_input_parameters2', array('section_id' => $sectionId));
             }
             
-            $message = 'No evaluation found for the section you have choosen: '.$section->getName();
+            $message = 'No evaluation found for the section you have choosen: ';
+
+            $feedBackMessage = $this->get('translator')->trans($message);
+            
+            $message = $feedBackMessage.' '.$section->getName();
         }
         //Get all the section and the field to send to the view
         $sections = $em->getRepository('AppBundle:Section')->findAll();

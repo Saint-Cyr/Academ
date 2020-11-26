@@ -7,13 +7,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 
 class SettingAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            //->add('id')
             ->add('name')
         ;
     }
@@ -21,9 +21,9 @@ class SettingAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            //->add('id')
             ->add('name')
             ->add('sequence')
+            ->add('language')
             ->add('definedYearlySequenceNumber', null, array('editable' => true))
             ->add('_action', null, [
                 'actions' => [
@@ -38,16 +38,17 @@ class SettingAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', array('class' => 'col-md-3'))
+            ->with('School Information', array('class' => 'col-md-3'))
                 ->add('schoolName')
                 ->add('academicYear')
             ->end()
-            ->with('Sequence', array('class' => 'col-md-3'))
+            ->with('Sequence parameters', array('class' => 'col-md-3'))
                 ->add('sequence')
                 ->add('definedYearlySequenceNumber')
             ->end()
-            ->with('Technical Info.', array('class' => 'col-md-3'))
+            ->with('More setting.', array('class' => 'col-md-3'))
                 ->add('name', null, array('disabled' => true))
+                ->add('language', 'choice', array('choices' => array('French'=>'fr', 'English'=>'en',),'expanded' => true))
             ->end()
             ;
     }

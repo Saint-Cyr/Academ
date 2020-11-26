@@ -39,14 +39,13 @@ sonata_admin:
             - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [admin]}}
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: en
 
 framework:
+    default_locale: en
+    translator: { fallbacks: [en] }
     templating:
         engine: ['twig']
     #esi: ~
-    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -55,7 +54,7 @@ framework:
     csrf_protection: ~
     validation: { enable_annotations: true }
     #serializer: { enable_annotations: true }
-    default_locale: '%locale%'
+    #default_locale: en
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
@@ -71,6 +70,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - '@SonataCore/Form/datepicker.html.twig'
 
 # Doctrine Configuration
 doctrine:

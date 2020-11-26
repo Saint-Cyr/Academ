@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Academ</title>
+  <title>Academ1</title>
   <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
 <script src="{{ asset('vendor/bootstrap.min.js') }}"></script>
@@ -59,17 +59,17 @@
             </style>
         <div class="panel-body" style="font-size: 23px">
             <div class="col-xs-12 col-sm-12" style="color: black;">
-                <p> <strong><u>Evaluation</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} </span></strong></p>
-                <p> <strong><u>Evaluation date</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.createdAt|date("d/m/y") }} </span></strong></p>
-                <p> <strong><u>Evaluation Type</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
-                <p> <strong><u>Teacher</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.program.teacher }} </span></strong></p>
-                <p> <strong><u>Sequence</u>: <span id="term" style="color: #a09fa3;"> <b> {{ evaluation.sequence }}</b> </span></strong></p>
-                <p> <strong><u>Total number of students from {{ section }}</u>: <span id="class_student_number" style="color: #a09fa3;"> {{ section.students|length }} </span></strong></p>
+                <p> <strong><u>{{ 'Evaluation'|trans }}</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} </span></strong></p>
+                <p> <strong><u>{{ 'Evaluation date'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.createdAt|date("d/m/y") }} </span></strong></p>
+                <p> <strong><u>{{ 'Evaluation Type'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
+                <p> <strong><u>{{ 'Teacher'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.program.teacher }} </span></strong></p>
+                <p> <strong><u>{{ 'Sequence'|trans }}</u>: <span id="term" style="color: #a09fa3;"> <b> {{ evaluation.sequence }}</b> </span></strong></p>
+                <p> <strong><u>{{ 'Total number of students from'|trans }} {{ section }}</u>: <span id="class_student_number" style="color: #a09fa3;"> {{ section.students|length }} </span></strong></p>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'Close'| trans }}</button>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@
                     <div class="col-lg-8" style="font-size: 23px;">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                               Current Student
+                               {{ 'Current Student'|trans }}
                             </div>
                             <div class="panel-body">
                                 <div class="col-xs-12 col-sm-12" style="color: black;">

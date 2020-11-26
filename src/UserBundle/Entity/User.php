@@ -31,6 +31,8 @@ class User extends BaseUser
     
     private $type;
 
+    public $sequence;
+
     /**
      * @var string
      *
