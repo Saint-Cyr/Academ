@@ -1,0 +1,435 @@
+UserBundle\Entity\User:
+    user1:
+        username: super-admin
+        email: super-admin@domain.com
+        plainPassword: test
+        enabled: true
+        name: SUPER-ADMIN
+        roles: [ROLE_SUPER_ADMIN]
+        
+    user2:
+        username: user_level1
+        email: user_level1@domain.com
+        plainPassword: test
+        enabled: true
+        name: USER LEVEL1
+        roles: [ROLE_LEVEL1]
+        
+AppBundle\Entity\Field:
+    field_1:
+        name: Informatique
+    field_2:
+        name: Mathematique
+    field_3:
+        name: Francais
+    field_4:
+        name: Stenographie
+    field_5:
+        name: Comptabilite
+
+AppBundle\Entity\Cycle:
+    cycle_1:
+        name: 2nd Cycle
+        
+AppBundle\Entity\Level:
+    level_1:
+        name: 1ere G3
+        cycle: "@cycle_1"
+    level_2:
+        name: 1ere G1
+        cycle: "@cycle_1"
+    level_3:
+        name: Tle G3
+        cycle: "@cycle_1"
+    level_4:
+        name: Tle G1
+        cycle: "@cycle_1"
+        
+AppBundle\Entity\Coefficient:
+    coefficient_1:
+        value: 2
+    coefficient_2:
+        value: 3
+    coefficient_3:
+        value: 0
+        
+AppBundle\Entity\Teacher:
+    teacher_1:
+        name: MAPOUKA Saint-Cyr
+    teacher_2:
+        name: SARKO
+        
+AppBundle\Entity\Program:
+    program_1:
+        name: Prog Info 1ere G3
+        level: "@level_1"
+        field: "@field_1"
+        coefficient: "@coefficient_1"
+        teacher: "@teacher_1"
+    program_2:
+        name: Prog Info 1ere G1
+        level: "@level_2"
+        field: "@field_1"
+        coefficient: "@coefficient_1"
+    program_3:
+        name: Prog Info Tle G3
+        level: "@level_3"
+        field: "@field_1"
+        coefficient: "@coefficient_1"
+    program_4:
+        name: Prog Info Tle G1
+        level: "@level_4"
+        field: "@field_1"
+        coefficient: "@coefficient_1"
+    program_5:
+        name: Prog Maths 1ere G3
+        level: "@level_1"
+        coefficient: "@coefficient_2"
+        field: "@field_2"
+        teacher: "@teacher_2"
+    program_6:
+        name: Maths Tle G1
+        level: "@level_4"
+        field: "@field_2"
+        coefficient: "@coefficient_2"
+    program_7:
+        name: Prog. Francais 1erG3
+        level: "@level_1"
+        field: "@field_3"
+        coefficient: "@coefficient_3"
+    program_8:
+        name: Prog. Stenographie 1erG3
+        level: "@level_1"
+        field: "@field_4"
+    program_9:
+        name: Prog. Comptabilite Tle G1
+        level: "@level_4"
+        field: "@field_5"
+        
+AppBundle\Entity\Sequence:
+    sequence_1:
+        name: 1er Trimestre
+    sequence_2:
+        name: 2em Trimestre
+    sequence_3:
+        name: 3em Trimestre
+    
+AppBundle\Entity\Section:
+    section_1:
+        name: Sec 1ere G3A
+        level: "@level_1"
+    section_2:
+        name: Sec 1ere G3B
+        level: "@level_1"
+    section_3:
+        name: Sec 1ere G3C
+        level: "@level_1"
+    section_4:
+        name: Sec 1ere G1A
+        level: "@level_1"
+    section_5:
+        name: Sec Tle G3A
+        level: "@level_1"
+    section_6:
+        name: Sec Tle G3B
+        level: "@level_1"
+    section_7:
+        name: Sec Tle G3C
+        level: "@level_1"
+    section_8:
+        name: Sec Tle G1A
+        level: "@level_1"
+    section_9:
+        name: Sec Tle G1B
+        level: "@level_1"
+    section_10:
+        name: Sec Tle G1C
+        level: "@level_1"
+    
+AppBundle\Entity\EvaluationType:
+    evaluation_type_1:
+        name: Devoire
+        
+AppBundle\Entity\Evaluation:
+    evaluation_1:
+        createdAt: <(new \DateTime('01-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_1"
+        section: "@section_2"
+        name: Devoire N<sup>o</sup>1
+    evaluation_2:
+        createdAt: <(new \DateTime('15-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_1"
+        section: "@section_2"
+    evaluation_3:
+        createdAt: <(new \DateTime('01-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_5"
+        section: "@section_2"
+    evaluation_4:
+        createdAt: <(new \DateTime('01-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_5:
+        createdAt: <(new \DateTime('15-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_6:
+        createdAt: <(new \DateTime('01-09-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        program: "@program_6"
+        section: "@section_8"
+    evaluation_7:
+        createdAt: <(new \DateTime('01-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_1"
+        section: "@section_2"
+    evaluation_8:
+        createdAt: <(new \DateTime('15-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_1"
+        section: "@section_2"
+    evaluation_9:
+        createdAt: <(new \DateTime('01-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_5"
+        section: "@section_2"
+    evaluation_10:
+        createdAt: <(new \DateTime('01-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_11:
+        createdAt: <(new \DateTime('15-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_12:
+        createdAt: <(new \DateTime('01-12-2017'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        program: "@program_6"
+        section: "@section_8"
+    evaluation_13:
+        createdAt: <(new \DateTime('01-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_1"
+        section: "@section_2"
+    evaluation_14:
+        createdAt: <(new \DateTime('15-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_1"
+        section: "@section_2"
+    evaluation_15:
+        createdAt: <(new \DateTime('01-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_5"
+        section: "@section_2"
+    evaluation_16:
+        createdAt: <(new \DateTime('01-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_17:
+        createdAt: <(new \DateTime('15-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_9"
+        section: "@section_8"
+    evaluation_18:
+        createdAt: <(new \DateTime('01-03-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_3"
+        program: "@program_6"
+        section: "@section_8"
+    
+        
+AppBundle\Entity\Student:
+    #student_{1..2000}:
+     #   name: <name()>
+      #  barcode(unique): <numberBetween(1, 3000)>
+        
+    student_1:
+        name: Eleve_1_1ereG3B
+        section: "@section_2"
+    student_2:
+        name: Eleve_2_1ereG3B
+        section: "@section_2"
+    student_3:
+        name: Eleve_1_TleG1A
+        section: "@section_8"
+    student_4:
+        name: Eleve_2_TleG1A
+        section: "@section_8"
+    student_5:
+        name: Eleve_3_1ereG3B
+        section: "@section_2"
+        
+AppBundle\Entity\Mark:
+    mark_1:
+        value: 12.5
+        evaluation: "@evaluation_1"
+        student: "@student_1"
+    mark_2:
+        value: 14.5
+        evaluation: "@evaluation_1"
+        student: "@student_2"
+    mark_3:
+        value: 8.5
+        evaluation: "@evaluation_2"
+        student: "@student_1"
+    mark_4:
+        value: 11
+        evaluation: "@evaluation_2"
+        student: "@student_2"
+    mark_5:
+        value: 6.5
+        evaluation: "@evaluation_3"
+        student: "@student_1"
+    mark_6:
+        value: 7.5
+        evaluation: "@evaluation_3"
+        student: "@student_2"
+    mark_7:
+        value: 12.5
+        evaluation: "@evaluation_4"
+        student: "@student_3"
+    mark_8:
+        value: 14.5
+        evaluation: "@evaluation_4"
+        student: "@student_4"
+    mark_9:
+        value: 8.5
+        evaluation: "@evaluation_5"
+        student: "@student_3"
+    mark_10:
+        value: 11
+        evaluation: "@evaluation_5"
+        student: "@student_4"
+    mark_11:
+        value: 6.5
+        evaluation: "@evaluation_6"
+        student: "@student_3"
+    mark_12:
+        value: 7.5
+        evaluation: "@evaluation_6"
+        student: "@student_4"
+    mark_13:
+        value: 12.5
+        evaluation: "@evaluation_7"
+        student: "@student_1"
+    mark_14:
+        value: 17
+        evaluation: "@evaluation_7"
+        student: "@student_2"
+    mark_15:
+        value: 8.5
+        evaluation: "@evaluation_8"
+        student: "@student_1"
+    mark_16:
+        value: 11
+        evaluation: "@evaluation_8"
+        student: "@student_2"
+    mark_17:
+        value: 6.5
+        evaluation: "@evaluation_9"
+        student: "@student_1"
+    mark_18:
+        value: 7.5
+        evaluation: "@evaluation_9"
+        student: "@student_2"
+    mark_19:
+        value: 12.5
+        evaluation: "@evaluation_10"
+        student: "@student_3"
+    mark_20:
+        value: 14.5
+        evaluation: "@evaluation_10"
+        student: "@student_4"
+    mark_21:
+        value: 8.5
+        evaluation: "@evaluation_11"
+        student: "@student_3"
+    mark_22:
+        value: 11
+        evaluation: "@evaluation_11"
+        student: "@student_4"
+    mark_23:
+        value: 6.5
+        evaluation: "@evaluation_12"
+        student: "@student_3"
+    mark_24:
+        value: 7.5
+        evaluation: "@evaluation_12"
+        student: "@student_4"
+    mark_25:
+        value: 12.5
+        evaluation: "@evaluation_13"
+        student: "@student_1"
+    mark_26:
+        value: 14.5
+        evaluation: "@evaluation_13"
+        student: "@student_2"
+    mark_27:
+        value: 8.5
+        evaluation: "@evaluation_14"
+        student: "@student_1"
+    mark_28:
+        value: 11
+        evaluation: "@evaluation_14"
+        student: "@student_2"
+    mark_29:
+        value: 6.5
+        evaluation: "@evaluation_15"
+        student: "@student_1"
+    mark_30:
+        value: 7.5
+        evaluation: "@evaluation_15"
+        student: "@student_2"
+    mark_31:
+        value: 12.5
+        evaluation: "@evaluation_16"
+        student: "@student_3"
+    mark_32:
+        value: 14.5
+        evaluation: "@evaluation_16"
+        student: "@student_4"
+    mark_33:
+        value: 8.5
+        evaluation: "@evaluation_17"
+        student: "@student_3"
+    mark_34:
+        value: 11
+        evaluation: "@evaluation_17"
+        student: "@student_4"
+    mark_35:
+        value: 6.5
+        evaluation: "@evaluation_18"
+        student: "@student_3"
+    mark_36:
+        value: 7.5
+        evaluation: "@evaluation_18"
+        student: "@student_4"
+
+AppBundle\Entity\Setting:
+    setting_1:
+        name: setting
+        sequence: "@sequence_1"
