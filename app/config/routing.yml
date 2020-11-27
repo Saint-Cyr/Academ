@@ -23,6 +23,6 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
-coresphere_console:
-    resource: .
-    type: extra
+#coresphere_console:
+ #   resource: .
+  #  type: extra
