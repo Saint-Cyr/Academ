@@ -1,11 +1,5 @@
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
-
-fos_user_security_login:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix: /login
-
+fos_user:
+        resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /
@@ -22,6 +16,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
 
 coresphere_console:
     resource: .
