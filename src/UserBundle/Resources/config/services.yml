@@ -1,7 +1,6 @@
 services:
-#    user.example:
-#        class: UserBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    fos_user.security.controller:
+      class: UserBundle\Controller\SecurityController
     user.admin.user:
         class: UserBundle\Admin\UserAdmin
         arguments: [~, UserBundle\Entity\User, UserBundle:UserAdmin, "@fos_user.user_manager"]

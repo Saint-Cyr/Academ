@@ -96,7 +96,7 @@ class Evaluation
             return $this->name;
         }
         
-        return 'Null';
+        return 'Undefined Name';
     }
 
     /**

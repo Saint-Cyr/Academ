@@ -29,8 +29,8 @@ sonata_admin:
         layout: AppBundle::standard_layout.html.twig
     title: Academ
     title_logo: images/logo.jpg
- #   security:
-  #      handler: sonata.admin.security.handler.role
+    security:
+       handler: sonata.admin.security.handler.role
             
     dashboard:
         blocks:

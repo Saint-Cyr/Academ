@@ -23,10 +23,10 @@ class StudentAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('name')
+            ->add('name', null, array('editable' => true))
             ->add('section')
             ->add('studentParent')
-            ->add('barcodeValue')
+            ->add('barcodeValue', null, array('editable' => true))
             //->add('barcode')
             ->add('_action', null, [
                 'actions' => [

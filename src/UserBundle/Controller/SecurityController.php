@@ -17,12 +17,13 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\UserBundle\Controller\SecurityController as FOSController;
 
-class SecurityController extends Controller
+
+class SecurityController extends FOSController
 {
     public function loginAction(Request $request)
     {
-        
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -88,14 +89,14 @@ class SecurityController extends Controller
                 $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 
                 $user = $utils->getSecurityHandler()->getToken()->getUser();
-                $data = array('barcode' => $barcode, 'login' => true, 'redirect' => 'http://192.168.8.100/Academ/web/app_dev.php');
+                $data = array('barcode' => $barcode, 'login' => true, 'redirect' => 'http://'.$request->server->get('SERVER_ADDR').$this->generateUrl('user_homepage'));
                  
                 $response = new JsonResponse('[ok] Sucessfull login: '.$barcode);
                 $response->setData($data);
                 return $response;
                 
             }else{
-                $data = array('barcode' => $barcode, 'login' => false, 'redirect' => 'http://192.168.8.100/Academ/web/app_dev.php');
+                $data = array('barcode' => $barcode, 'login' => false, 'redirect' => 'http://'.$request->server->get('SERVER_ADDR').$this->generateUrl('user_homepage'));
                  
                 $response = new JsonResponse('[error] login faild: '.$barcode);
                 $response->setData($data);
@@ -120,7 +121,7 @@ class SecurityController extends Controller
      */
     protected function renderLogin(array $data)
     {
-        return $this->render('FOSUserBundle:Security:login.html.twig', $data);
+        return $this->render('FOSUserBundle:Security:login_keyboard.html.twig', $data);
     }
 
     public function checkAction()

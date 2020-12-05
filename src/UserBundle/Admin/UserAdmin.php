@@ -21,22 +21,36 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-            ->add('image', null, array('template' => 'UserBundle:Default:list.html.twig'))
-            ->add('name')
-            ->add('email')
-            ->add('barcode')
-            ->add('enabled', null, array('editable' => true))
-            ->add('lastLogin')
-            ->add('roles')
-            ->add('_action', null, array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                )
-            ))
-        ;
+        if($this->isGranted('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+                ->add('name')
+                ->add('email')
+                ->add('barcode')
+                ->add('enabled', null, array('editable' => true))
+                ->add('lastLogin')
+                ->add('roles')
+                ->add('_action', null, array(
+                    'actions' => array(
+                        'show' => array(),
+                        'edit' => array(),
+                        'delete' => array(),
+                    )
+                ))
+            ;
+        }elseif($this->isGranted('VIEW')){
+            $listMapper
+                ->add('name')
+                ->add('email')
+                ->add('roles')
+                ->add('_action', null, array(
+                    'actions' => array(
+                        'show' => array(),
+                    )
+                ))
+            ;
+        }
+        
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -71,7 +85,7 @@ class UserAdmin extends AbstractAdmin
 
                 ->add('name', null, array('label' => 'Name (length must be more than 5)'))
                 ->add('phoneNumber')
-                ->add('barcode')
+                ->add('barcode', null, array('required' => true))
                 ->add('file', 'file', array('required' => false))
             ;
         

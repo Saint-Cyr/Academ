@@ -149,7 +149,7 @@ class DefaultController extends Controller
             //I3
         }
         //Get the service for STD*/
-        return $this->render("@App/Default/mark_table_std2.html.twig", array('markTables' => $markTable));
+        return $this->render("@App/Default/mark_table_std3.html.twig", array('markTables' => $markTable));
     }
     
     public function markInputParametersAction(Request $request)

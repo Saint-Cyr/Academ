@@ -25,8 +25,7 @@ class MarkAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            //->add('')
-            ->add('value', null, array('editable' => true))
+            ->add('value', 'number', array('editable' => true))
             ->add('student')
             ->add('evaluation', 'html')
             ->add('evaluation.program')
@@ -45,8 +44,11 @@ class MarkAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
             ->add('value')
+            ->add('student', null, array('disabled' => true))
+            ->add('evaluation', null, array('disabled' => true))
+            ->add('evaluation.program', null, array('disabled' => true))
+            ->add('evaluation.sequence', null, array('disabled' => true))
         ;
     }
 
