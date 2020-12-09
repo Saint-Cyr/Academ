@@ -3,7 +3,7 @@
 /*
  * This file is part of Components of Academ project
  * By contributor S@int-Cyr MAPOUKA
- * (c) iSTech <mapoukacyr@yahoo.fr>
+ * (c) iSTech <med@itechcar.com>
  * For the full copyrght and license information, please view the LICENSE
  * file that was distributed with this source code
  */
@@ -27,7 +27,9 @@ class BuildMarkTableHandlerTest extends WebTestCase
         $this->buildMarkTableHandler = $this->application->getKernel()->getContainer()->get('app.build_marktable_handler');
     }
     
-    /*This is the main intrance of the algorithm that suppose to generate 
+    /*
+     * Supported fixture: STD1.yml
+     * This is the main intrance of the algorithm that suppose to generate 
      * markTable for standard as design on physical Doc.
      * return a Matrix (array()) of markTables that suppose to be printed as pdf later
     */
@@ -51,7 +53,6 @@ class BuildMarkTableHandlerTest extends WebTestCase
         $this->assertEquals($outPut['parameters']['main_teacher'], 'TANG');
         $this->assertEquals($outPut['parameters']['sequence'], 1);
         $this->assertEquals($outPut['parameters']['total_coefficient'], 28);
-        //Make sure the total mark the first semester has been populated and the one for the
     }
     
     public function testBuildMarkTableOneStudent()
@@ -61,12 +62,12 @@ class BuildMarkTableHandlerTest extends WebTestCase
         $this->assertEquals($sequence->getName(), '1er Trimestre');
         $student2 = $this->em->getRepository('AppBundle:Student')->find(2);
         $student1 = $this->em->getRepository('AppBundle:Student')->find(1);
-        //Make sure student is Melvi
+        //Make sure student 1 is Melvi
         $this->assertEquals($student1->getName(), 'Melvi');
         $section = $student1->getSection();
         //Make sure section is for Melvi (2nd C1)
         $this->assertEquals($section->getName(), '2nd C1');
-        //Check fixture 
+        //Check fixture setup (STD1.yml)
         $this->assertEquals(count($student1->getMarks()), 78);
         $this->assertEquals($student1->getMarks()[0]->getValue(), 10);
         $this->assertEquals($student1->getMarks()[1]->getValue(), 9.5);

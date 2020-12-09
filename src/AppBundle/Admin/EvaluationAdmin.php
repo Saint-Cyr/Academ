@@ -50,14 +50,14 @@ class EvaluationAdmin extends AbstractAdmin
         $formMapper
             ->with('Information', array('class' => 'col-md-4'))
                 ->add('createdAt', DateTimePickerType::class)
-                ->add('name')
-                ->add('sequence', null, array('attr' => array('style' => 'width: 455px')))
+                ->add('name', 'html')
+                ->add('sequence', null, array('attr' => array('style' => 'width: 450px')))
                 ->add('name')
                 ->add('evaluationType', null, array('attr' => array('style' => 'width: 455px')))
-                ->add('program', null, array('attr' => array('style' => 'width: 455px')))
+                ->add('program', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
             ->with('Second section', array('class' => 'col-md-4'))
-                ->add('section', null, array('attr' => array('style' => 'width: 455px')))
+                ->add('section', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
         ;
     }
@@ -67,7 +67,7 @@ class EvaluationAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('createdAt')
-            ->add('name')
+            ->add('name', 'html')
         ;
     }
 }

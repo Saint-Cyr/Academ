@@ -43,7 +43,7 @@ class BuildMarkTableHandler
     
     public function buildMarkTableOneStudent(Student $student, Sequence $sequence)
     {
-        //Anyway we'd need the setting
+        //Anyway we'll need the setting
         $setting = $this->em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
         $programs = $student->getSection()->getLevel()->getPrograms();
         //Prepare the variable that can content the markTable for one student

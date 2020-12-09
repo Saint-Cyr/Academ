@@ -44,11 +44,17 @@ class MarkAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('value')
-            ->add('student', null, array('disabled' => true))
-            ->add('evaluation', null, array('disabled' => true))
-            ->add('evaluation.program', null, array('disabled' => true))
-            ->add('evaluation.sequence', null, array('disabled' => true))
+        ->with('Student Mark Information', array('class'=>'col-md-4'))
+            ->add('value', null, array('attr' => array('style' => 'width: 455px'),
+                                         'disabled' => true))
+            ->add('student', null, array('attr' => array('style' => 'width: 455px'),
+                                         'disabled' => true))
+            ->add('evaluation', null, array('attr' => array('style' => 'width: 455px'),
+                                         'disabled' => true))
+            ->add('student.section', null, array('attr' => array('style' => 'width: 455px'),
+                                         'disabled' => true))
+        ->end()
+            
         ;
     }
 
