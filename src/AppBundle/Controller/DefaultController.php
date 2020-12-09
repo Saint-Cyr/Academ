@@ -16,6 +16,7 @@ use Ddeboer\DataImport\Reader\CsvReader;
 use Ddeboer\DataImport\Workflow;
 use Ddeboer\DataImport\Writer\DoctrineWriter;
 use Ddeboer\DataImport\Workflow\StepAggregator;
+use dompdf\dompdf;
 
 
 class DefaultController extends Controller
@@ -121,34 +122,17 @@ class DefaultController extends Controller
         }
         //We will need DB connection
         $em = $this->getDoctrine()->getManager();
+        //We will need the setting in order to set the school name, ...
         $setting = $em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
         if(!$setting){
             throw $this->createNotFoundException('Setting not found');
         }
         //Get the section from DB
         $section = $em->getRepository('AppBundle:Section')->find($section_id);
+        //Generate the markTables of the given section
         $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
-        //Make sure to generate the markTables according to the sequence
-        //1rs trimester
-        /*if($setting->getSequence()->getSequenceOrder() == 1){
-        $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
-        //2nd Trimester
-        }elseif($setting->getSequence()->getSequenceOrder() == 2){
-            //Get the marktable for sequence 1
-            $firstSequence = $em->getRepository('AppBundle:Sequence')->findOneBy(array('sequenceOrder' => 1));
-            $markTable = $buildMarkTableHandler->generateMarkTable($section, $setting);
-            //In case of 3 sequences (trimester)
-            if($setting->getDefinedYearlySequenceNumber() == 3){
-                //I2
-                //In case of 2 sequence (semester)
-            }else{
-                //Close the academic year on this mark Table thus don't forget to compute and display (M1+M2)/2
-            }
-        //3rd Trimester
-        }else{
-            //I3
-        }
-        //Get the service for STD*/
+        //Get the service for STD
+        
         return $this->render("@App/Default/mark_table_std2.html.twig", array('markTables' => $markTable));
     }
     

@@ -42,6 +42,11 @@ class Mark
      */
     private $value;
 
+    public function __toString()
+    {
+        return 'Mark';
+    }
+
 
     /**
      * Get id

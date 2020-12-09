@@ -14,8 +14,7 @@ class StudentAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('section')
-            ->add('name')
-            
+            ->add('name')       
         ;
     }
 
@@ -23,10 +22,10 @@ class StudentAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('name')
+            ->add('name', null, array('editable' => true))
             ->add('section')
             ->add('studentParent')
-            ->add('barcodeValue')
+            ->add('barcodeValue', null, array('editable' => true))
             //->add('barcode')
             ->add('_action', null, [
                 'actions' => [
@@ -41,20 +40,24 @@ class StudentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
+        ->with('Student Information', array('class' => 'col-md-4'))
             ->add('name')
-            ->add('section')
-            
-            ->add('studentParent')
-        ;
+            ->add('section', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('studentParent', null, array('attr' => array('style' => 'width: 450px')))
+        ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
-            ->add('name')
-            ->add('barcode')
+            ->with('Student Information', array('class' => 'col-md-4'))
+                ->add('id')
+                ->add('name')
+                ->add('barcode')
+            ->end()
+            ->with('Student Parent Information', array('class' => 'col-md-4'))
+                ->add('student.studentParent', null, array('label' => 'Parent full Name'))
+            ->end()
         ;
     }
     

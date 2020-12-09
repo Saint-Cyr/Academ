@@ -67,6 +67,12 @@ class StudentParent
     {
         return $this->name;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+    
     /**
      * Constructor
      */

@@ -34,11 +34,13 @@
 			<div class="wrap-login100 p-t-85 p-b-20">
 				<form class="login100-form validate-form" action="{{ path("fos_user_security_check") }}" method="post">
 					<span class="login100-form-avatar">
-						<img src="{{ asset('images/logo.png') }}" alt="AVATAR">
+						<img src="{{ asset('images/logo.jpg') }}" alt="logo">
 					</span>
 					
-                                                {% if  error is defined %}
-                                            <div id="login-alert" class="alert alert-danger col-sm-12">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% if  error is not null %}
+                                            <div id="login-alert" class="alert alert-danger col-sm-12">
+												{{ error.messageKey|trans(error.messageData, 'security') }}
+											</div>
                                         {% endif %}
                                         <input type="hidden" name="_csrf_token" value="{% if csrf_token is defined %}{{ csrf_token }}{% endif %}" />
 

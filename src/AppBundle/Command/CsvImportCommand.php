@@ -42,7 +42,8 @@ class CsvImportCommand extends Command
         $reader = \League\Csv\Reader::createFromPath('%kernel.root_dir%/../web/data/STUDENT.csv');
         $results = $reader->fetchAssoc();
         $io->progressStart(150);
-        
+        //Count the number of the recorded student
+        $recordedStudent = 0;
         foreach ($results as $row){
             //create student object
             $student = new Student();
@@ -61,6 +62,7 @@ class CsvImportCommand extends Command
             }
             
             $this->em->persist($student);
+            $recordedStudent++;
             $io->progressAdvance();
         }
         
@@ -68,6 +70,6 @@ class CsvImportCommand extends Command
         
         $this->em->flush();
         
-        $io->success('Everything went well!');
+        $io->success($recordedStudent.' student(s) have been recorded successfully.');
     }
 }
