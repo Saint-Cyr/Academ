@@ -34,7 +34,7 @@ class EvaluationAdmin extends AbstractAdmin
             ->add('program')
             ->add('section')
             //->add('average')
-            ->add('createdAt')
+            ->add('createdAt', null, array('label' => 'Evaluation Date'))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

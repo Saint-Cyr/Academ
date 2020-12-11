@@ -42,11 +42,13 @@ class ProgramAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->with('Program Information', array('class' => 'col-md-4'))
             ->add('name')
-            ->add('teacher')
-            ->add('coefficient')
-            ->add('level')
-            ->add('field')
+            ->add('teacher', null, array('attr' => array('style' => 'width:450px')))
+            ->add('coefficient', null, array('attr' => array('style' => 'width:450px')))
+            ->add('level', null, array('attr' => array('style' => 'width:450px')))
+            ->add('field', null, array('attr' => array('style' => 'width: 450px')))
+        ->end()
         ;
     }
 

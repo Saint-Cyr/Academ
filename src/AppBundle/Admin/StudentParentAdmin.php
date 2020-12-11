@@ -13,7 +13,6 @@ class StudentParentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
             ->add('name')
         ;
     }
@@ -22,7 +21,7 @@ class StudentParentAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('name')
+            ->add('name', null, array('editable' => true))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -36,7 +35,6 @@ class StudentParentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('name')
         ;
     }

@@ -35,7 +35,9 @@ class CycleAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->with('Cycle Information', array('class' => 'col-md-4'))
             ->add('name')
+        ->end()
         ;
     }
 

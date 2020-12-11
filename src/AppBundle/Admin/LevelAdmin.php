@@ -36,8 +36,10 @@ class LevelAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('cycle')
+        ->with('Level Information', array('class' => 'col-md-4'))
+            ->add('name', null, array('attr' => array('style' => 'width:450px')))
+            ->add('cycle', null, array('attr' => array('style' => 'width:450px')))
+        ->end()
         ;
     }
 

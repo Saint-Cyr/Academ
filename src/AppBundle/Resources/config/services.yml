@@ -7,28 +7,28 @@ services:
         class: AppBundle\Admin\StudentAdmin
         arguments: [~, AppBundle\Entity\Student, AppBundle:StudentAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Student }
+            - { name: sonata.admin, manager_type: orm, group: Student Information, label: Student }
         public: true
 
     app.admin.evaluation:
         class: AppBundle\Admin\EvaluationAdmin
         arguments: [~, AppBundle\Entity\Evaluation, AppBundle:EvaluationAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Evaluation }
+            - { name: sonata.admin, manager_type: orm, group: Evaluation Task, label: Evaluation }
         public: true
         
     app.admin.mark:
         class: AppBundle\Admin\MarkAdmin
         arguments: [~, AppBundle\Entity\Mark, AppBundle:MarkAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Mark }
+            - { name: sonata.admin, manager_type: orm, group: Evaluation Task, label: Mark }
         public: true
 
     app.admin.evaluation_type:
         class: AppBundle\Admin\EvaluationTypeAdmin
         arguments: [~, AppBundle\Entity\EvaluationType, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: EvaluationType }
+            - { name: sonata.admin, manager_type: orm, group: Evaluation Task, label: EvaluationType }
         public: true
 
     app.admin.section:
@@ -42,7 +42,7 @@ services:
         class: AppBundle\Admin\SettingAdmin
         arguments: [~, AppBundle\Entity\Setting, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Setting }
+            - { name: sonata.admin, manager_type: orm, group: Setting Information, label: Setting }
         public: true
             
     console_command.csv_import:
@@ -76,7 +76,7 @@ services:
         class: AppBundle\Admin\StudentParentAdmin
         arguments: [~, AppBundle\Entity\StudentParent, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: StudentParent }
+            - { name: sonata.admin, manager_type: orm, group: Student Information, label: StudentParent }
         public: true
 
     app.admin.main_teacher:
@@ -97,43 +97,43 @@ services:
         class: AppBundle\Admin\SequenceAdmin
         arguments: [~, AppBundle\Entity\Sequence, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Sequence }
+            - { name: sonata.admin, manager_type: orm, group: Teaching System, label: Sequence }
         public: true
 
     app.admin.level:
         class: AppBundle\Admin\LevelAdmin
         arguments: [~, AppBundle\Entity\Level, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Level }
+            - { name: sonata.admin, manager_type: orm, group: Teaching System, label: Level }
         public: true
 
     app.admin.coefficient:
         class: AppBundle\Admin\CoefficientAdmin
         arguments: [~, AppBundle\Entity\Coefficient, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Coefficient }
+            - { name: sonata.admin, manager_type: orm, group: Teaching System, label: Coefficient }
         public: true
 
     app.admin.program:
         class: AppBundle\Admin\ProgramAdmin
         arguments: [~, AppBundle\Entity\Program, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Program, pager_type: simple }
+            - { name: sonata.admin, manager_type: orm, group: Teaching System, label: Program, pager_type: simple }
         public: true
 
     app.admin.field:
         class: AppBundle\Admin\FieldAdmin
         arguments: [~, AppBundle\Entity\Field, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Field }
+            - { name: sonata.admin, manager_type: orm, group: Teaching system, label: Field }
         public: true
 
-    app.admin.absence_compter:
-        class: AppBundle\Admin\AbsenceCompterAdmin
-        arguments: [~, AppBundle\Entity\AbsenceCompter, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: AbsenceCompter }
-        public: true
+    #app.admin.absence_compter:
+     #   class: AppBundle\Admin\AbsenceCompterAdmin
+      #  arguments: [~, AppBundle\Entity\AbsenceCompter, SonataAdminBundle:CRUD]
+       # tags:
+        #    - { name: sonata.admin, manager_type: orm, group: admin, label: AbsenceCompter }
+        #public: true
 
     app.admin.cycle:
         class: AppBundle\Admin\CycleAdmin

@@ -35,8 +35,11 @@ sonata_admin:
     dashboard:
         blocks:
             # display a dashboard block
-            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]} }
             - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [admin]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Evaluation Task]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Setting Information]}}
+            - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [Teaching System]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]}}
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 

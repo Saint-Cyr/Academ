@@ -36,7 +36,9 @@ class MainTeacherAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('teacher')
+        ->with('Main teacher information', array('class' => 'col-md-4'))
+            ->add('teacher', null, array('attr' => array('style' => 'width: 450px')))
+        ->end()
         ;
     }
 

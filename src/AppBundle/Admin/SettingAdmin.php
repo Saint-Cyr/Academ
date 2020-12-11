@@ -43,7 +43,7 @@ class SettingAdmin extends AbstractAdmin
                 ->add('academicYear')
             ->end()
             ->with('Sequence parameters', array('class' => 'col-md-3'))
-                ->add('sequence')
+                ->add('sequence', null, array('attr' => array('style' => 'width: 330px')))
                 ->add('definedYearlySequenceNumber')
             ->end()
             ->with('More setting.', array('class' => 'col-md-3'))

@@ -13,7 +13,6 @@ class SectionAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            //->add('id')
             ->add('name')
         ;
     }
@@ -39,10 +38,11 @@ class SectionAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
-            ->add('name')
-            ->add('mainTeacher')
-            ->add('level')
+        ->with('Section Information', array('class' => 'col-md-4'))
+            ->add('name', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('mainTeacher', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('level', null, array('attr' => array('style' => 'width: 450px')))
+        ->end()
         ;
     }
 
