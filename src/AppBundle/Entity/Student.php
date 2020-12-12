@@ -83,7 +83,7 @@ class Student
     
     public function getBarcodeValue()
     {
-        return str_pad($this->getId(),5,"0",STR_PAD_LEFT);
+        return str_pad($this->getId(),6,"0",STR_PAD_LEFT);
     }
     
     public function __toString() {

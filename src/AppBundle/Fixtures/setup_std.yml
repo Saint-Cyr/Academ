@@ -6,15 +6,6 @@ UserBundle\Entity\User:
         enabled: true
         name: SUPER-ADMIN
         roles: [ROLE_SUPER_ADMIN]
-        
-    user2:
-        username: user_level1
-        email: user_level1@domain.com
-        plainPassword: test
-        enabled: true
-        name: USER LEVEL1
-        roles: [ROLE_LEVEL1]
-        barcode: 8692641040365
 
 AppBundle\Entity\Field:
     field_1:

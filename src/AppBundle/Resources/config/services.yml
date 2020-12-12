@@ -125,7 +125,7 @@ services:
         class: AppBundle\Admin\FieldAdmin
         arguments: [~, AppBundle\Entity\Field, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Teaching system, label: Field }
+            - { name: sonata.admin, manager_type: orm, group: Teaching System, label: Field }
         public: true
 
     #app.admin.absence_compter:
