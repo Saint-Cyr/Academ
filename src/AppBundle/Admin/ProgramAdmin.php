@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class ProgramAdmin extends AbstractAdmin
 {
@@ -14,9 +15,10 @@ class ProgramAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
-            ->add('coefficient')
-            ->add('field')
-            ->add('level')
+            ->add('teacher', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('coefficient', ModelAutocompleteFilter::class, [], null, ['property' => 'value'])
+            ->add('field', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
 
@@ -24,11 +26,10 @@ class ProgramAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name', null, array('editable' => true))
+            ->add('level')
             ->add('coefficient', null, array('editable' => true))
             ->add('teacher')
-            ->add('field')
-            ->add('level')
-                
+            ->add('field')   
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -45,7 +46,7 @@ class ProgramAdmin extends AbstractAdmin
         ->with('Program Information', array('class' => 'col-md-4'))
             ->add('name')
             ->add('teacher', null, array('attr' => array('style' => 'width:450px')))
-            ->add('coefficient', null, array('attr' => array('style' => 'width:450px')))
+            ->add('coefficient', null, ['attr' => ['style' => 'width:450px'], 'required' => true])
             ->add('level', null, array('attr' => array('style' => 'width:450px')))
             ->add('field', null, array('attr' => array('style' => 'width: 450px')))
         ->end()

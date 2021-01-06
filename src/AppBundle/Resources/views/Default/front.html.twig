@@ -1,5 +1,21 @@
-<html>
+<html id = "page">
+<form method="post" action="javascript:onSubmission()">
+        <input style="opacity:0; width:1px" name="username" type="text" id="inputId" autofocus/>
+    </form>
+    <script>
+    function onSubmission(){
+        //fetch the barcode 
+        var scannedBarcode = document.getElementById('inputId').value;
+        //redirect to the input mark url
+        location.href = 'http://localhost/Academ/web/app_dev.php/mark_input/'+scannedBarcode;
+    }
 
+    const element = document.querySelector('#page');
+    element.addEventListener("click", event => {
+        document.getElementById('inputId').focus();
+    })
+
+    </script>
 <head>
   <title>Academ1.0</title>
   <script data-require="jquery@*" data-semver="2.0.3" src="{{ asset('vendor/jquery-3.1.0.min.js') }}"></script>
@@ -18,10 +34,13 @@
              <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-            <img src="{{ asset('images/mark1.png') }}" width="230px" alt="...">
+            <img src="{{ asset('images/mark1.png') }}" width="230px" alt="..." onClick="setFocus()"/>
         
       <div class="caption">
-          <p> <a href="{{ path('mark_input_parameters') }}" class="btn btn-default" role="button">{{ 'MARK INPUT'|trans }}</a></p>
+        <p> 
+            <a href="{{ path('mark_input_parameters') }}" class="btn btn-default" role="button">{{ 'MARK INPUT'|trans }}</a>
+            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default" role="button">{{ 'Sign Out'|trans }}</a>
+        </p>
       </div>
     </div>
     
@@ -32,7 +51,11 @@
             <img src="{{ asset('images/admin1.png') }}" width="230px" alt="...">
         
       <div class="caption">
-          <p> <a href="{{ path('sonata_admin_dashboard') }}" class="btn btn-default" role="button">ADMINISTRATION</a></p>
+          <p> 
+            <a href="{{ path('sonata_admin_dashboard') }}" class="btn btn-default" role="button">ADMINISTRATION</a>
+            <a href="#" class="btn btn-default" role="button">{{ app.user }}</a>
+
+          </p>
       </div>
     </div>  
   </div>
@@ -44,14 +67,14 @@
       <div class="caption">
           <p> 
             <a href="{{ path('setting') }}" class="btn btn-default" role="button">CONFIGURATION</a>
-            <a href="{{ path('console') }}" class="btn btn-default" role="button">RECORD STUDENTS</a
+            <a href="{{ path('console') }}" class="btn btn-default" role="button">{{'RECORD STUDENTS'|trans}}</a>
           </p>
       </div>
     </div>  
   </div>
   
 </div>
-            
+    
     </body>
     
 </html>

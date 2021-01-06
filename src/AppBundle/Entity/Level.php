@@ -55,6 +55,11 @@ class Level
         return $this->id;
     }
 
+    public function getSectionNamingConvention()
+    {
+        return $type = null;
+    }
+
     /**
      * Set name
      *

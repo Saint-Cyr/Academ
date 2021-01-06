@@ -8,24 +8,28 @@ UserBundle\Entity\User:
         roles: [ROLE_SUPER_ADMIN]
 
 AppBundle\Entity\Field:
-    field_1:
+    field_maths:
         name: Maths
-    field_2:
+    field_svt:
         name: SVT
-    field_3:
+    field_pc:
         name: Physique Chimie
-    field_4:
+    field_fr:
         name: Francais
-    field_5:
+    field_ang:
         name: Anglais
-    field_6:
+    field_philosophy:
         name: Philosophie
-    field_7:
+    field_ecofa:
         name: ECOFA
-    field_8:
+    field_eps:
         name: EPS
-    field_9:
+    field_hg:
         name: Hist/Geo
+    field_economie:
+        name: Economie
+    field_bio:
+        name: Biologie
 
 AppBundle\Entity\Cycle:
     cycle_1:
@@ -34,47 +38,60 @@ AppBundle\Entity\Cycle:
         name: 1er Cycle
         
 AppBundle\Entity\Level:
-    level_1:
+    level_6em:
         name: 6em
         cycle: "@cycle_1"
-    level_2:
+    level_5em:
         name: 5em
         cycle: "@cycle_1"
-    level_3:
+    level_4em:
         name: 4em
         cycle: "@cycle_1"
-    level_4:
+    level_3em:
         name: 3em
         cycle: "@cycle_1"
-    level_5:
+    level_2ndA:
         name: 2nd A
         cycle: "@cycle_2"
-    level_6:
+    level_2ndB:
         name: 2nd B
         cycle: "@cycle_2"
-    level_7:
+    level_2ndC:
         name: 2nd C
         cycle: "@cycle_2"
-    level_8:
+    level_2ndS:
+        name: 2nd S
+        cycle: "@cycle_2"
+    level_1ereA:
         name: 1ere A
         cycle: "@cycle_2"
-    level_9:
+    level_1ereB:
         name: 1ere B
         cycle: "@cycle_2"
-    level_10:
+    level_1ereC:
         name: 1ere C
         cycle: "@cycle_2"
-    level_11:
+    level_1ereD:
+        name: 1ere D
+        cycle: "@cycle_2"
+    level_1ereS:
+        name: 1ere S
+        cycle: "@cycle_2"
+    level_tleA:
         name: Tle A
         cycle: "@cycle_2"
-    level_12:
+    level_tleB:
         name: Tle B
         cycle: "@cycle_2"
-    level_13:
+    level_tleC:
         name: Tle C
         cycle: "@cycle_2"
-    
-    
+    level_tleD:
+        name: Tle D
+        cycle: "@cycle_2"
+    level_tleS:
+        name: Tle S
+        cycle: "@cycle_2"
         
 AppBundle\Entity\Coefficient:
     coefficient_1:
@@ -89,131 +106,733 @@ AppBundle\Entity\Coefficient:
         value: 5
     coefficient_6:
         value: 6
-        
-#AppBundle\Entity\Teacher:
-    #Teacher of 2nd C1
-    
-        
+                
 AppBundle\Entity\Program:
-    program_1:
-        name: Maths
-        level: "@level_4"
-        field: "@field_1"
-        coefficient: "@coefficient_5"
-        #teacher: "@teacher_1"
-    program_2:
-        name: SVT
-        level: "@level_4"
-        field: "@field_2"
+##### PROGRAM FOR LEVEL 6EM #######
+    program_fr_6em:
+        name: Français
+        level: "@level_6em"
+        field: "@field_fr"
         coefficient: "@coefficient_6"
-    program_3:
-        name: Phys. Chimie 
-        level: "@level_4"
-        field: "@field_3"
-        coefficient: "@coefficient_3"
-    program_4:
-        name: Francais 
-        level: "@level_4"
-        field: "@field_4"
-        coefficient: "@coefficient_4"
-    program_5:
+    program_ang_6em:
         name: Anglais
-        level: "@level_4"
+        level: "@level_6em"
+        field: "@field_ang"
         coefficient: "@coefficient_3"
-        field: "@field_5"
-        #teacher: "@teacher_2"
-    program_6:
+    program_ecofa_6em:
         name: ECOFA
-        level: "@level_4"
-        field: "@field_7"
+        level: "@level_6em"
+        field: "@field_ecofa"
         coefficient: "@coefficient_2"
-    program_7:
-        name: EPS
-        level: "@level_4"
-        field: "@field_8"
+    program_hg_6em:
+        name: Hist/Géo
+        level: "@level_6em"
+        field: "@field_hg"
         coefficient: "@coefficient_3"
-    program_8:
-        name: Hist/Geo
-        level: "@level_4"
-        field: "@field_9"
+    program_eps_6em:
+        name: EPS
+        level: "@level_6em"
+        field: "@field_eps"
         coefficient: "@coefficient_2"
-    program_9:
-        name: Maths
-        level: "@level_9"
-        field: "@field_1"
+    program_maths_6em:
+        name: Mathématiques
+        level: "@level_6em"
+        field: "@field_maths"
         coefficient: "@coefficient_5"
-    program_10:
+    program_svt_6em:
         name: SVT
-        level: "@level_9"
-        field: "@field_2"
+        level: "@level_6em"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+##### PROGRAM FOR LEVEL 5EM #######
+    program_fr_5em:
+        name: Français
+        level: "@level_5em"
+        field: "@field_fr"
         coefficient: "@coefficient_6"
-    program_11:
+    program_ang_5em:
+        name: Anglais
+        level: "@level_5em"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_5em:
+        name: ECOFA
+        level: "@level_5em"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_5em:
+        name: Hist/Géo
+        level: "@level_5em"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_5em:
+        name: EPS
+        level: "@level_5em"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_5em:
+        name: Mathématiques
+        level: "@level_5em"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_svt_5em:
+        name: SVT
+        level: "@level_5em"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+##### PROGRAM FOR LEVEL 4EM #######
+    program_fr_4em:
+        name: Français
+        level: "@level_4em"
+        field: "@field_fr"
+        coefficient: "@coefficient_6"
+    program_ang_4em:
+        name: Anglais
+        level: "@level_4em"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_4em:
+        name: ECOFA
+        level: "@level_4em"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_4em:
+        name: Hist/Géo
+        level: "@level_4em"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_4em:
+        name: EPS
+        level: "@level_4em"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_4em:
+        name: Mathématiques
+        level: "@level_4em"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_svt_4em:
+        name: SVT
+        level: "@level_4em"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_pc_4em:
+        name: Physique / Chimie
+        level: "@level_4em"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    ##### PROGRAM FOR LEVEL 3EM #######
+    program_fr_3em:
+        name: Français
+        level: "@level_3em"
+        field: "@field_fr"
+        coefficient: "@coefficient_6"
+    program_ang_3em:
+        name: Anglais
+        level: "@level_3em"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_3em:
+        name: ECOFA
+        level: "@level_3em"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_3em:
+        name: Hist/Géo
+        level: "@level_3em"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_3em:
+        name: EPS
+        level: "@level_3em"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_3em:
+        name: Mathématiques
+        level: "@level_3em"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_3em:
+        name: SVT
+        level: "@level_3em"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_pc_3em:
+        name: Physique / Chimie
+        level: "@level_3em"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+##### PROGRAM FOR LEVEL 2ND A #######
+    program_fr_2ndA:
+        name: Français
+        level: "@level_2ndA"
+        field: "@field_fr"
+        coefficient: "@coefficient_6"
+    program_ang_2ndA:
+        name: Anglais
+        level: "@level_2ndA"
+        field: "@field_ang"
+        coefficient: "@coefficient_5"
+    program_ecofa_2ndA:
+        name: ECOFA
+        level: "@level_2ndA"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_2ndA:
+        name: Hist/Géo
+        level: "@level_2ndA"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_2ndA:
+        name: EPS
+        level: "@level_2ndA"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_2ndA:
+        name: Mathématiques
+        level: "@level_2ndA"
+        field: "@field_maths"
+        coefficient: "@coefficient_2"
+    program_svt_2ndA:
+        name: SVT
+        level: "@level_2ndA"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+##### PROGRAM FOR LEVEL 2ND B #######
+    program_fr_2ndB:
+        name: Français
+        level: "@level_2ndB"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_2ndB:
+        name: Anglais
+        level: "@level_2ndB"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_2ndB:
+        name: ECOFA
+        level: "@level_2ndB"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_2ndB:
+        name: Hist/Géo
+        level: "@level_2ndB"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_2ndB:
+        name: EPS
+        level: "@level_2ndB"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_2ndB:
+        name: Mathématiques
+        level: "@level_2ndB"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_svt_2ndB:
+        name: SVT
+        level: "@level_2ndB"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+    program_economie_2ndB:
+        name: Economie
+        level: "@level_2ndB"
+        field: "@field_economie"
+        coefficient: "@coefficient_6"
+##### PROGRAM FOR LEVEL 2ND S #######
+    program_fr_2ndS:
+        name: Français
+        level: "@level_2ndS"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_2ndS:
+        name: Anglais
+        level: "@level_2ndS"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_2ndS:
+        name: Hist/Géo
+        level: "@level_2ndS"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_2ndS:
+        name: EPS
+        level: "@level_2ndS"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_2ndS:
+        name: Mathématiques
+        level: "@level_2ndS"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_2ndS:
+        name: SVT
+        level: "@level_2ndS"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_economie_2ndS:
+        name: Economie
+        level: "@level_2ndS"
+        field: "@field_economie"
+        coefficient: "@coefficient_3"
+    program_pc_2ndS:
         name: Physique Chimie
-        level: "@level_9"
-        field: "@field_3"
+        level: "@level_2ndS"
+        field: "@field_pc"
         coefficient: "@coefficient_5"
-        #teacher: "@teacher_10"
-    program_12:
-        name: Francais
-        level: "@level_9"
-        field: "@field_4"
+    program_philo_2ndS:
+        name: Physique Chimie
+        level: "@level_2ndS"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+    ##### PROGRAM FOR LEVEL 2ND C #######
+    program_fr_2ndC:
+        name: Français
+        level: "@level_2ndC"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_2ndC:
+        name: Anglais
+        level: "@level_2ndC"
+        field: "@field_ang"
         coefficient: "@coefficient_4"
-    program_13:
-        name: Anglais
-        level: "@level_9"
-        field: "@field_5"
+    program_hg_2ndC:
+        name: Hist/Géo
+        level: "@level_2ndC"
+        field: "@field_hg"
         coefficient: "@coefficient_3"
-    program_14:
-        name: Philosophie
-        level: "@level_9"
-        field: "@field_6"
-        coefficient: "@coefficient_2"
-    program_15:
-        name: Hist/Geo
-        level: "@level_9"
-        coefficient: "@coefficient_3"
-        field: "@field_9"
-        #teacher: "@teacher_2"
-    program_16:
+    program_eps_2ndC:
         name: EPS
-        level: "@level_9"
-        field: "@field_8"
+        level: "@level_2ndC"
+        field: "@field_eps"
         coefficient: "@coefficient_2"
-    program_17:
-        name: Maths
-        level: "@level_2"
-        field: "@field_1"
+    program_maths_2ndC:
+        name: Mathématiques
+        level: "@level_2ndC"
+        field: "@field_maths"
         coefficient: "@coefficient_5"
-    program_18:
-        name: SVT 
-        level: "@level_2"
-        field: "@field_2"
-        coefficient: "@coefficient_3"
-    program_19:
-        name: Francais
-        level: "@level_2"
-        field: "@field_4"
+    program_svt_2ndC:
+        name: SVT
+        level: "@level_2ndC"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_pc_2ndC:
+        name: Physique Chimie
+        level: "@level_2ndC"
+        field: "@field_pc"
         coefficient: "@coefficient_6"
-    program_20:
+##### PROGRAM FOR LEVEL 1ERE A #######
+    program_fr_1ereA:
+        name: Français
+        level: "@level_1ereA"
+        field: "@field_fr"
+        coefficient: "@coefficient_6"
+    program_ang_1ereA:
         name: Anglais
-        level: "@level_2"
-        field: "@field_5"
-        coefficient: "@coefficient_3"
-    program_21:
-        name: Hist/Geo
-        level: "@level_2"
-        field: "@field_9"
-        coefficient: "@coefficient_3"
-    program_22:
+        level: "@level_1ereA"
+        field: "@field_ang"
+        coefficient: "@coefficient_5"
+    program_ecofa_1ereA:
         name: ECOFA
-        level: "@level_2"
-        field: "@field_7"
+        level: "@level_1ereA"
+        field: "@field_ecofa"
         coefficient: "@coefficient_2"
-    program_23:
+    program_hg_1ereA:
+        name: Hist/Géo
+        level: "@level_1ereA"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_1ereA:
         name: EPS
-        level: "@level_2"
-        field: "@field_8"
+        level: "@level_1ereA"
+        field: "@field_eps"
         coefficient: "@coefficient_2"
+    program_maths_1ereA:
+        name: Mathématiques
+        level: "@level_1ereA"
+        field: "@field_maths"
+        coefficient: "@coefficient_2"
+    program_svt_1ereA:
+        name: SVT
+        level: "@level_1ereA"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+
+##### PROGRAM FOR LEVEL 1ERE B #######
+    program_fr_1ereB:
+        name: Français
+        level: "@level_1ereB"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_1ereB:
+        name: Anglais
+        level: "@level_1ereB"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_1ereB:
+        name: ECOFA
+        level: "@level_1ereB"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_1ereB:
+        name: Hist/Géo
+        level: "@level_1ereB"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_1ereB:
+        name: EPS
+        level: "@level_1ereB"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_1ereB:
+        name: Mathématiques
+        level: "@level_1ereB"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_svt_1ereB:
+        name: SVT
+        level: "@level_1ereB"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+    program_economie_1ereB:
+        name: Economie
+        level: "@level_1ereB"
+        field: "@field_economie"
+        coefficient: "@coefficient_6"
+##### PROGRAM FOR LEVEL 1ERE S #######
+    program_fr_1ereS:
+        name: Français
+        level: "@level_1ereS"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_1ereS:
+        name: Anglais
+        level: "@level_1ereS"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_1ereS:
+        name: Hist/Géo
+        level: "@level_1ereS"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_1ereS:
+        name: EPS
+        level: "@level_1ereS"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_1ereS:
+        name: Mathématiques
+        level: "@level_1ereS"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_1ereS:
+        name: SVT
+        level: "@level_1ereS"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_economie_1ereS:
+        name: Economie
+        level: "@level_1ereS"
+        field: "@field_economie"
+        coefficient: "@coefficient_3"
+    program_pc_1ereS:
+        name: Physique Chimie
+        level: "@level_1ereS"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_1ereS:
+        name: Philosophie
+        level: "@level_1ereS"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+##### PROGRAM FOR LEVEL 1ERE C #######
+    program_fr_1ereC:
+        name: Français
+        level: "@level_1ereC"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_1ereC:
+        name: Anglais
+        level: "@level_1ereC"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_1ereC:
+        name: Hist/Géo
+        level: "@level_1ereC"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_1ereC:
+        name: EPS
+        level: "@level_1ereC"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_1ereC:
+        name: Mathématiques
+        level: "@level_1ereC"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_1ereC:
+        name: SVT
+        level: "@level_1ereC"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_pc_1ereC:
+        name: Physique Chimie
+        level: "@level_1ereC"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_1ereC:
+        name: Philosophie
+        level: "@level_1ereC"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+    ##### PROGRAM FOR LEVEL 1ERE D #######
+    program_fr_1ereD:
+        name: Français
+        level: "@level_1ereD"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_1ereD:
+        name: Anglais
+        level: "@level_1ereD"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_1ereD:
+        name: Hist/Géo
+        level: "@level_1ereD"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_1ereD:
+        name: EPS
+        level: "@level_1ereD"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_1ereD:
+        name: Mathématiques
+        level: "@level_1ereD"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_bio_1ereD:
+        name: Biologie
+        level: "@level_1ereD"
+        field: "@field_bio"
+        coefficient: "@coefficient_5"
+    program_pc_1ereD:
+        name: Physique Chimie
+        level: "@level_1ereD"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_1ereD:
+        name: Philosophie
+        level: "@level_1ereD"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+##### PROGRAM FOR LEVEL TLE A #######
+    program_fr_tleA:
+        name: Français
+        level: "@level_tleA"
+        field: "@field_fr"
+        coefficient: "@coefficient_6"
+    program_ang_tleA:
+        name: Anglais
+        level: "@level_tleA"
+        field: "@field_ang"
+        coefficient: "@coefficient_5"
+    program_ecofa_tleA:
+        name: ECOFA
+        level: "@level_tleA"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_tleA:
+        name: Hist/Géo
+        level: "@level_tleA"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_tleA:
+        name: EPS
+        level: "@level_tleA"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_tleA:
+        name: Mathématiques
+        level: "@level_tleA"
+        field: "@field_maths"
+        coefficient: "@coefficient_2"
+    program_svt_tleA:
+        name: SVT
+        level: "@level_tleA"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+
+##### PROGRAM FOR LEVEL Tle B #######
+    program_fr_tleB:
+        name: Français
+        level: "@level_tleB"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_tleB:
+        name: Anglais
+        level: "@level_tleB"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_tleB:
+        name: ECOFA
+        level: "@level_tleB"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_tleB:
+        name: Hist/Géo
+        level: "@level_tleB"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_tleB:
+        name: EPS
+        level: "@level_tleB"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_tleB:
+        name: Mathématiques
+        level: "@level_tleB"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_svt_tleB:
+        name: SVT
+        level: "@level_tleB"
+        field: "@field_svt"
+        coefficient: "@coefficient_2"
+    program_economie_tleB:
+        name: Economie
+        level: "@level_tleB"
+        field: "@field_economie"
+        coefficient: "@coefficient_6"
+##### PROGRAM FOR LEVEL TLE S #######
+    program_fr_tleS:
+        name: Français
+        level: "@level_tleS"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_tleS:
+        name: Anglais
+        level: "@level_tleS"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_tleS:
+        name: Hist/Géo
+        level: "@level_tleS"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_tleS:
+        name: EPS
+        level: "@level_tleS"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_tleS:
+        name: Mathématiques
+        level: "@level_tleS"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_tleS:
+        name: SVT
+        level: "@level_tleS"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_economie_tleS:
+        name: Economie
+        level: "@level_tleS"
+        field: "@field_economie"
+        coefficient: "@coefficient_3"
+    program_pc_tleS:
+        name: Physique Chimie
+        level: "@level_tleS"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_tleS:
+        name: Philosophie
+        level: "@level_tleS"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+##### PROGRAM FOR LEVEL TLE C #######
+    program_fr_tleC:
+        name: Français
+        level: "@level_tleC"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_tleC:
+        name: Anglais
+        level: "@level_tleC"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_tleC:
+        name: Hist/Géo
+        level: "@level_tleC"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_tleC:
+        name: EPS
+        level: "@level_tleC"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_tleC:
+        name: Mathématiques
+        level: "@level_tleC"
+        field: "@field_maths"
+        coefficient: "@coefficient_6"
+    program_svt_tleC:
+        name: SVT
+        level: "@level_tleC"
+        field: "@field_svt"
+        coefficient: "@coefficient_5"
+    program_pc_tleC:
+        name: Physique Chimie
+        level: "@level_tleC"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_tleC:
+        name: Philosophie
+        level: "@level_tleC"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"
+    ##### PROGRAM FOR LEVEL TLE D #######
+    program_fr_tleD:
+        name: Français
+        level: "@level_tleD"
+        field: "@field_fr"
+        coefficient: "@coefficient_5"
+    program_ang_tleD:
+        name: Anglais
+        level: "@level_tleD"
+        field: "@field_ang"
+        coefficient: "@coefficient_4"
+    program_hg_tleD:
+        name: Hist/Géo
+        level: "@level_tleD"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_eps_tleD:
+        name: EPS
+        level: "@level_tleD"
+        field: "@field_eps"
+        coefficient: "@coefficient_2"
+    program_maths_tleD:
+        name: Mathématiques
+        level: "@level_tleD"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_bio_tleD:
+        name: Biologie
+        level: "@level_tleD"
+        field: "@field_bio"
+        coefficient: "@coefficient_5"
+    program_pc_tleD:
+        name: Physique Chimie
+        level: "@level_tleD"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
+    program_philo_tleD:
+        name: Philosophie
+        level: "@level_tleD"
+        field: "@field_philosophy"
+        coefficient: "@coefficient_2"    
 
 AppBundle\Entity\Sequence:
     sequence_1:
@@ -227,131 +846,1104 @@ AppBundle\Entity\Sequence:
         sequenceOrder: 3
     
 AppBundle\Entity\Section:
-    section_1:
+    #First cycle sections
+    section_6em_1:
         name: 6em 1
-        level: "@level_1"
-    section_2:
+        level: "@level_6em"
+    section_6em_2:
         name: 6em 2
-        level: "@level_1"
-    section_3:
+        level: "@level_6em"
+    section_6em_3:
         name: 6em 3
-        level: "@level_1"
-    section_4:
+        level: "@level_6em"
+    section_6em_4:
+        name: 6em 4
+        level: "@level_6em"
+    section_6em_5:
+        name: 6em 5
+        level: "@level_6em"
+    section_6em_6:
+        name: 6em 6
+        level: "@level_6em"
+    section_6em_7:
+        name: 6em 7
+        level: "@level_6em"
+    section_6em_8:
+        name: 6em 8
+        level: "@level_6em"
+    section_6em_9:
+        name: 6em 9
+        level: "@level_6em"
+    section_6em_10:
+        name: 6em 10
+        level: "@level_6em"
+    section_6em_11:
+        name: 6em 11
+        level: "@level_6em"
+    section_6em_12:
+        name: 6em 12
+        level: "@level_6em"
+    section_6em_13:
+        name: 6em 13
+        level: "@level_6em"
+    section_6em_14:
+        name: 6em 14
+        level: "@level_6em"
+    section_6em_15:
+        name: 6em 15
+        level: "@level_6em"
+    section_6em_16:
+        name: 6em 16
+        level: "@level_6em"
+    section_6em_17:
+        name: 6em 17
+        level: "@level_6em"
+    section_6em_18:
+        name: 6em 18
+        level: "@level_6em"
+    section_6em_19:
+        name: 6em 19
+        level: "@level_6em"
+    section_6em_20:
+        name: 6em 20
+        level: "@level_6em"
+    #########   SECTION 5EM   ##########
+    section_5em_1:
         name: 5em 1
-        level: "@level_2"
-    section_5:
+        level: "@level_5em"
+    section_5em_2:
         name: 5em 2
-        level: "@level_2"
-    section_6:
+        level: "@level_5em"
+    section_5em_3:
         name: 5em 3
-        level: "@level_2"
-    section_7:
+        level: "@level_5em"
+    section_5em_4:
+        name: 5em 4
+        level: "@level_5em"
+    section_5em_5:
+        name: 5em 5
+        level: "@level_5em"
+    section_5em_6:
+        name: 5em 6
+        level: "@level_5em"
+    section_5em_7:
+        name: 5em 7
+        level: "@level_5em"
+    section_5em_8:
+        name: 5em 8
+        level: "@level_5em"
+    section_5em_9:
+        name: 5em 9
+        level: "@level_5em"
+    section_5em_10:
+        name: 5em 10
+        level: "@level_5em"
+    section_5em_11:
+        name: 5em 11
+        level: "@level_5em"
+    section_5em_12:
+        name: 5em 12
+        level: "@level_5em"
+    section_5em_13:
+        name: 5em 13
+        level: "@level_5em"
+    section_5em_14:
+        name: 5em 14
+        level: "@level_5em"
+    section_5em_15:
+        name: 5em 15
+        level: "@level_5em"
+    section_5em_16:
+        name: 5em 16
+        level: "@level_5em"
+    section_5em_17:
+        name: 5em 17
+        level: "@level_5em"
+    section_5em_18:
+        name: 5em 18
+        level: "@level_5em"
+    section_5em_19:
+        name: 5em 19
+        level: "@level_5em"
+    section_5em_20:
+        name: 5em 20
+        level: "@level_5em"
+######## SECTION 4EM ######
+    section_4em_1:
         name: 4em 1
-        level: "@level_3"
-    section_8:
+        level: "@level_4em"
+    section_4em_2:
         name: 4em 2
-        level: "@level_3"
-    section_9:
+        level: "@level_4em"
+    section_4em_3:
         name: 4em 3
-        level: "@level_3"
-    section_10:
+        level: "@level_4em"
+    section_4em_4:
+        name: 4em 4
+        level: "@level_4em"
+    section_4em_5:
+        name: 4em 5
+        level: "@level_4em"
+    section_4em_6:
+        name: 4em 6
+        level: "@level_4em"
+    section_4em_7:
+        name: 4em 7
+        level: "@level_4em"
+    section_4em_8:
+        name: 4em 8
+        level: "@level_4em"
+    section_4em_9:
+        name: 4em 9
+        level: "@level_4em"
+    section_4em_10:
+        name: 4em 10
+        level: "@level_4em"
+    section_4em_11:
+        name: 4em 11
+        level: "@level_4em"
+    section_4em_12:
+        name: 4em 12
+        level: "@level_4em"
+    section_4em_13:
+        name: 4em 13
+        level: "@level_4em"
+    section_4em_14:
+        name: 4em 14
+        level: "@level_4em"
+    section_4em_15:
+        name: 4em 15
+        level: "@level_4em"
+    section_4em_16:
+        name: 4em 16
+        level: "@level_4em"
+    section_4em_17:
+        name: 4em 17
+        level: "@level_4em"
+    section_4em_18:
+        name: 4em 18
+        level: "@level_4em"
+    section_4em_19:
+        name: 4em 19
+        level: "@level_4em"
+    section_4em_20:
+        name: 4em 20
+        level: "@level_4em"
+######## SECTION 3EM ######
+    section_3em_1:
         name: 3em 1
-        level: "@level_4"
-    section_11:
+        level: "@level_3em"
+    section_3em_2:
         name: 3em 2
-        level: "@level_4"
-    section_12:
+        level: "@level_3em"
+    section_3em_3:
         name: 3em 3
-        level: "@level_4"
-    section_13:
+        level: "@level_3em"
+    section_3em_4:
+        name: 3em 4
+        level: "@level_3em"
+    section_3em_5:
+        name: 3em 5
+        level: "@level_3em"
+    section_3em_6:
+        name: 3em 6
+        level: "@level_3em"
+    section_3em_7:
+        name: 3em 7
+        level: "@level_3em"
+    section_3em_8:
+        name: 3em 8
+        level: "@level_3em"
+    section_3em_9:
+        name: 3em 9
+        level: "@level_3em"
+    section_3em_10:
+        name: 3em 10
+        level: "@level_3em"
+    section_3em_11:
+        name: 3em 11
+        level: "@level_3em"
+    section_3em_12:
+        name: 3em 12
+        level: "@level_3em"
+    section_3em_13:
+        name: 3em 13
+        level: "@level_3em"
+    section_3em_14:
+        name: 3em 14
+        level: "@level_3em"
+    section_3em_15:
+        name: 3em 15
+        level: "@level_3em"
+    section_3em_16:
+        name: 3em 16
+        level: "@level_3em"
+    section_3em_17:
+        name: 3em 17
+        level: "@level_3em"
+    section_3em_18:
+        name: 3em 18
+        level: "@level_3em"
+    section_3em_19:
+        name: 3em 19
+        level: "@level_3em"
+    section_3em_20:
+        name: 3em 20
+        level: "@level_3em"
+    ######## SECTION 2ND A ######
+    section_2ndA_1:
         name: 2nd A1
-        level: "@level_5"
-    section_14:
+        level: "@level_2ndA"
+    section_2ndA_2:
         name: 2nd A2
-        level: "@level_5"
-    section_15:
+        level: "@level_2ndA"
+    section_2ndA_3:
         name: 2nd A3
-        level: "@level_5"
-    section_16:
+        level: "@level_2ndA"
+    section_2ndA_4:
+        name: 2nd A4
+        level: "@level_2ndA"
+    section_2ndA_5:
+        name: 2nd A5
+        level: "@level_2ndA"
+    section_2ndA_6:
+        name: 2nd A6
+        level: "@level_2ndA"
+    section_2ndA_7:
+        name: 2nd A7
+        level: "@level_2ndA"
+    section_2ndA_8:
+        name: 2nd A8
+        level: "@level_2ndA"
+    section_2ndA_9:
+        name: 2nd A9
+        level: "@level_2ndA"
+    section_2ndA_10:
+        name: 2nd A10
+        level: "@level_2ndA"
+    section_2ndA_11:
+        name: 2nd A11
+        level: "@level_2ndA"
+    section_2ndA_12:
+        name: 2nd A12
+        level: "@level_2ndA"
+    section_2ndA_13:
+        name: 2nd A13
+        level: "@level_2ndA"
+    section_2ndA_14:
+        name: 2nd A14
+        level: "@level_2ndA"
+    section_2ndA_15:
+        name: 2nd A15
+        level: "@level_2ndA"
+    section_2ndA_16:
+        name: 2nd A16
+        level: "@level_2ndA"
+    section_2ndA_17:
+        name: 2nd A17
+        level: "@level_2ndA"
+    section_2ndA_18:
+        name: 2nd A18
+        level: "@level_2ndA"
+    section_2ndA_19:
+        name: 2nd A19
+        level: "@level_2ndA"
+    section_2ndA_20:
+        name: 2nd A20
+        level: "@level_2ndA"
+    ######## SECTION 2ND B ######
+    section_2ndB_1:
         name: 2nd B1
-        level: "@level_6"
-    section_17:
+        level: "@level_2ndB"
+    section_2ndB_2:
         name: 2nd B2
-        level: "@level_6"
-    section_18:
+        level: "@level_2ndB"
+    section_2ndB_3:
         name: 2nd B3
-        level: "@level_6"
-    section_19:
+        level: "@level_2ndB"
+    section_2ndB_4:
+        name: 2nd B4
+        level: "@level_2ndB"
+    section_2ndB_5:
+        name: 2nd B5
+        level: "@level_2ndB"
+    section_2ndB_6:
+        name: 2nd B6
+        level: "@level_2ndB"
+    section_2ndB_7:
+        name: 2nd B7
+        level: "@level_2ndB"
+    section_2ndB_8:
+        name: 2nd B8
+        level: "@level_2ndB"
+    section_2ndB_9:
+        name: 2nd B9
+        level: "@level_2ndB"
+    section_2ndB_10:
+        name: 2nd B10
+        level: "@level_2ndB"
+    section_2ndB_11:
+        name: 2nd B11
+        level: "@level_2ndB"
+    section_2ndB_12:
+        name: 2nd B12
+        level: "@level_2ndB"
+    section_2ndB_13:
+        name: 2nd B13
+        level: "@level_2ndB"
+    section_2ndB_14:
+        name: 2nd B14
+        level: "@level_2ndB"
+    section_2ndB_15:
+        name: 2nd B15
+        level: "@level_2ndB"
+    section_2ndB_16:
+        name: 2nd B16
+        level: "@level_2ndB"
+    section_2ndB_17:
+        name: 2nd B17
+        level: "@level_2ndB"
+    section_2ndB_18:
+        name: 2nd B18
+        level: "@level_2ndB"
+    section_2ndB_19:
+        name: 2nd B19
+        level: "@level_2ndB"
+    section_2ndB_20:
+        name: 2nd B20
+        level: "@level_2ndB"
+    ######## SECTION 2ND C ######
+    section_2ndC_1:
         name: 2nd C1
-        level: "@level_7"
-    section_20:
+        level: "@level_2ndC"
+    section_2ndC_2:
         name: 2nd C2
-        level: "@level_7"
-    section_21:
+        level: "@level_2ndC"
+    section_2ndC_3:
         name: 2nd C3
-        level: "@level_7"
-    section_22:
-        name: 1er A1
-        level: "@level_8"
-    section_23:
+        level: "@level_2ndC"
+    section_2ndC_4:
+        name: 2nd C4
+        level: "@level_2ndC"
+    section_2ndC_5:
+        name: 2nd C5
+        level: "@level_2ndC"
+    section_2ndC_6:
+        name: 2nd C6
+        level: "@level_2ndC"
+    section_2ndC_7:
+        name: 2nd C7
+        level: "@level_2ndC"
+    section_2ndC_8:
+        name: 2nd C8
+        level: "@level_2ndC"
+    section_2ndC_9:
+        name: 2nd C9
+        level: "@level_2ndC"
+    section_2ndC_10:
+        name: 2nd C10
+        level: "@level_2ndC"
+    section_2ndC_11:
+        name: 2nd C11
+        level: "@level_2ndC"
+    section_2ndC_12:
+        name: 2nd C12
+        level: "@level_2ndC"
+    section_2ndC_13:
+        name: 2nd C13
+        level: "@level_2ndC"
+    section_2ndC_14:
+        name: 2nd C14
+        level: "@level_2ndC"
+    section_2ndC_15:
+        name: 2nd C15
+        level: "@level_2ndC"
+    section_2ndC_16:
+        name: 2nd C16
+        level: "@level_2ndC"
+    section_2ndC_17:
+        name: 2nd C17
+        level: "@level_2ndC"
+    section_2ndC_18:
+        name: 2nd C18
+        level: "@level_2ndC"
+    section_2ndC_19:
+        name: 2nd C19
+        level: "@level_2ndC"
+    section_2ndC_20:
+        name: 2nd C20
+        level: "@level_2ndC"
+    ######## SECTION 2ND S ######
+    section_2ndS_1:
+        name: 2nd S1
+        level: "@level_2ndS"
+    section_2ndS_2:
+        name: 2nd S2
+        level: "@level_2ndS"
+    section_2ndS_3:
+        name: 2nd S3
+        level: "@level_2ndS"
+    section_2ndS_4:
+        name: 2nd S4
+        level: "@level_2ndS"
+    section_2ndS_5:
+        name: 2nd S5
+        level: "@level_2ndS"
+    section_2ndS_6:
+        name: 2nd S6
+        level: "@level_2ndS"
+    section_2ndS_7:
+        name: 2nd S7
+        level: "@level_2ndS"
+    section_2ndS_8:
+        name: 2nd S8
+        level: "@level_2ndS"
+    section_2ndS_9:
+        name: 2nd S9
+        level: "@level_2ndS"
+    section_2ndS_10:
+        name: 2nd S10
+        level: "@level_2ndS"
+    section_2ndS_11:
+        name: 2nd S11
+        level: "@level_2ndS"
+    section_2ndS_12:
+        name: 2nd S12
+        level: "@level_2ndS"
+    section_2ndS_13:
+        name: 2nd S13
+        level: "@level_2ndS"
+    section_2ndS_14:
+        name: 2nd S14
+        level: "@level_2ndS"
+    section_2ndS_15:
+        name: 2nd S15
+        level: "@level_2ndS"
+    section_2ndS_16:
+        name: 2nd S16
+        level: "@level_2ndS"
+    section_2ndS_17:
+        name: 2nd S17
+        level: "@level_2ndS"
+    section_2ndS_18:
+        name: 2nd S18
+        level: "@level_2ndS"
+    section_2ndS_19:
+        name: 2nd S19
+        level: "@level_2ndS"
+    section_2ndS_20:
+        name: 2nd S20
+        level: "@level_2ndS"
+    ######## SECTION 1ERE A ######
+    section_1ereA_1:
+        name: 1ere A1
+        level: "@level_1ereA"
+    section_1ereA_2:
         name: 1ere A2
-        level: "@level_8"
-    section_24:
+        level: "@level_1ereA"
+    section_1ereA_3:
         name: 1ere A3
-        level: "@level_8"
-    section_25:
+        level: "@level_1ereA"
+    section_1ereA_4:
+        name: 1ere A4
+        level: "@level_1ereA"
+    section_1ereA_5:
+        name: 1ere A5
+        level: "@level_1ereA"
+    section_1ereA_6:
+        name: 1ere A6
+        level: "@level_1ereA"
+    section_1ereA_7:
+        name: 1ere A7
+        level: "@level_1ereA"
+    section_1ereA_8:
+        name: 1ere A8
+        level: "@level_1ereA"
+    section_1ereA_9:
+        name: 1ere A9
+        level: "@level_1ereA"
+    section_1ereA_10:
+        name: 1ere A10
+        level: "@level_1ereA"
+    section_1ereA_11:
+        name: 1ere A11
+        level: "@level_1ereA"
+    section_1ereA_12:
+        name: 1ere A12
+        level: "@level_1ereA"
+    section_1ereA_13:
+        name: 1ere A13
+        level: "@level_1ereA"
+    section_1ereA_14:
+        name: 1ere A14
+        level: "@level_1ereA"
+    section_1ereA_15:
+        name: 1ere A15
+        level: "@level_1ereA"
+    section_1ereA_16:
+        name: 1ere A16
+        level: "@level_1ereA"
+    section_1ereA_17:
+        name: 1ere A17
+        level: "@level_1ereA"
+    section_1ereA_18:
+        name: 1ere A18
+        level: "@level_1ereA"
+    section_1ereA_19:
+        name: 1ere A19
+        level: "@level_1ereA"
+    section_1ereA_20:
+        name: 1ere A20
+        level: "@level_1ereA"
+    ######## SECTION 1ERE B ######
+    section_1ereB_1:
         name: 1ere B1
-        level: "@level_9"
-    section_26:
+        level: "@level_1ereB"
+    section_1ereB_2:
         name: 1ere B2
-        level: "@level_9"
-    section_27:
+        level: "@level_1ereB"
+    section_1ereB_3:
         name: 1ere B3
-        level: "@level_9"
-    section_28:
+        level: "@level_1ereB"
+    section_1ereB_4:
+        name: 1ere B4
+        level: "@level_1ereB"
+    section_1ereB_5:
+        name: 1ere B5
+        level: "@level_1ereB"
+    section_1ereB_6:
+        name: 1ere B6
+        level: "@level_1ereB"
+    section_1ereB_7:
+        name: 1ere B7
+        level: "@level_1ereB"
+    section_1ereB_8:
+        name: 1ere B8
+        level: "@level_1ereB"
+    section_1ereB_9:
+        name: 1ere B9
+        level: "@level_1ereB"
+    section_1ereB_10:
+        name: 1ere B10
+        level: "@level_1ereB"
+    section_1ereB_11:
+        name: 1ere B11
+        level: "@level_1ereB"
+    section_1ereB_12:
+        name: 1ere B12
+        level: "@level_1ereB"
+    section_1ereB_13:
+        name: 1ere B13
+        level: "@level_1ereB"
+    section_1ereB_14:
+        name: 1ere B14
+        level: "@level_1ereB"
+    section_1ereB_15:
+        name: 1ere B15
+        level: "@level_1ereB"
+    section_1ereB_16:
+        name: 1ere B16
+        level: "@level_1ereB"
+    section_1ereB_17:
+        name: 1ere B17
+        level: "@level_1ereB"
+    section_1ereB_18:
+        name: 1ere B18
+        level: "@level_1ereB"
+    section_1ereB_19:
+        name: 1ere B19
+        level: "@level_1ereB"
+    section_1ereB_20:
+        name: 1ere B20
+        level: "@level_1ereB"
+    ######## SECTION 1ERE C ######
+    section_1ereC_1:
         name: 1ere C1
-        level: "@level_10"
-    section_29:
+        level: "@level_1ereC"
+    section_1ereC_2:
         name: 1ere C2
-        level: "@level_10"
-    section_30:
+        level: "@level_1ereC"
+    section_1ereC_3:
         name: 1ere C3
-        level: "@level_10"
-    section_31:
+        level: "@level_1ereC"
+    section_1ereC_4:
+        name: 1ere C4
+        level: "@level_1ereC"
+    section_1ereC_5:
+        name: 1ere C5
+        level: "@level_1ereC"
+    section_1ereC_6:
+        name: 1ere C6
+        level: "@level_1ereC"
+    section_1ereC_7:
+        name: 1ere C7
+        level: "@level_1ereC"
+    section_1ereC_8:
+        name: 1ere C8
+        level: "@level_1ereC"
+    section_1ereC_9:
+        name: 1ere C9
+        level: "@level_1ereC"
+    section_1ereC_10:
+        name: 1ere C10
+        level: "@level_1ereC"
+    section_1ereC_11:
+        name: 1ere C11
+        level: "@level_1ereC"
+    section_1ereC_12:
+        name: 1ere C12
+        level: "@level_1ereC"
+    section_1ereC_13:
+        name: 1ere C13
+        level: "@level_1ereC"
+    section_1ereC_14:
+        name: 1ere C14
+        level: "@level_1ereC"
+    section_1ereC_15:
+        name: 1ere C15
+        level: "@level_1ereC"
+    section_1ereC_16:
+        name: 1ere C16
+        level: "@level_1ereC"
+    section_1ereC_17:
+        name: 1ere C17
+        level: "@level_1ereC"
+    section_1ereC_18:
+        name: 1ere C18
+        level: "@level_1ereC"
+    section_1ereC_19:
+        name: 1ere C19
+        level: "@level_1ereC"
+    section_1ereC_20:
+        name: 1ere C20
+        level: "@level_1ereC"
+    ######## SECTION 1ERE D ######
+    section_1ereD_1:
+        name: 1ere D1
+        level: "@level_1ereD"
+    section_1ereD_2:
+        name: 1ere D2
+        level: "@level_1ereD"
+    section_1ereD_3:
+        name: 1ere D3
+        level: "@level_1ereD"
+    section_1ereD_4:
+        name: 1ere D4
+        level: "@level_1ereD"
+    section_1ereD_5:
+        name: 1ere D5
+        level: "@level_1ereD"
+    section_1ereD_6:
+        name: 1ere D6
+        level: "@level_1ereD"
+    section_1ereD_7:
+        name: 1ere D7
+        level: "@level_1ereD"
+    section_1ereD_8:
+        name: 1ere D8
+        level: "@level_1ereD"
+    section_1ereD_9:
+        name: 1ere D9
+        level: "@level_1ereD"
+    section_1ereD_10:
+        name: 1ere D10
+        level: "@level_1ereD"
+    section_1ereD_11:
+        name: 1ere D11
+        level: "@level_1ereD"
+    section_1ereD_12:
+        name: 1ere D12
+        level: "@level_1ereD"
+    section_1ereD_13:
+        name: 1ere D13
+        level: "@level_1ereD"
+    section_1ereD_14:
+        name: 1ere D14
+        level: "@level_1ereD"
+    section_1ereD_15:
+        name: 1ere D15
+        level: "@level_1ereD"
+    section_1ereD_16:
+        name: 1ere D16
+        level: "@level_1ereD"
+    section_1ereD_17:
+        name: 1ere D17
+        level: "@level_1ereD"
+    section_1ereD_18:
+        name: 1ere D18
+        level: "@level_1ereD"
+    section_1ereD_19:
+        name: 1ere D19
+        level: "@level_1ereD"
+    section_1ereD_20:
+        name: 1ere D20
+        level: "@level_1ereD"
+    ######## SECTION 1ERE S ######
+    section_1ereS_1:
+        name: 1ere S1
+        level: "@level_1ereS"
+    section_1ereS_2:
+        name: 1ere S2
+        level: "@level_1ereS"
+    section_1ereS_3:
+        name: 1ere S3
+        level: "@level_1ereS"
+    section_1ereS_4:
+        name: 1ere S4
+        level: "@level_1ereS"
+    section_1ereS_5:
+        name: 1ere S5
+        level: "@level_1ereS"
+    section_1ereS_6:
+        name: 1ere S6
+        level: "@level_1ereS"
+    section_1ereS_7:
+        name: 1ere S7
+        level: "@level_1ereS"
+    section_1ereS_8:
+        name: 1ere S8
+        level: "@level_1ereS"
+    section_1ereS_9:
+        name: 1ere S9
+        level: "@level_1ereS"
+    section_1ereS_10:
+        name: 1ere S10
+        level: "@level_1ereS"
+    section_1ereS_11:
+        name: 1ere S11
+        level: "@level_1ereS"
+    section_1ereS_12:
+        name: 1ere S12
+        level: "@level_1ereS"
+    section_1ereS_13:
+        name: 1ere S13
+        level: "@level_1ereS"
+    section_1ereS_14:
+        name: 1ere S14
+        level: "@level_1ereS"
+    section_1ereS_15:
+        name: 1ere S15
+        level: "@level_1ereS"
+    section_1ereS_16:
+        name: 1ere S16
+        level: "@level_1ereS"
+    section_1ereS_17:
+        name: 1ere S17
+        level: "@level_1ereS"
+    section_1ereS_18:
+        name: 1ere S18
+        level: "@level_1ereS"
+    section_1ereS_19:
+        name: 1ere S19
+        level: "@level_1ereS"
+    section_1ereS_20:
+        name: 1ere S20
+        level: "@level_1ereS"
+    ######## SECTION TLE A ######
+    section_tleA_1:
         name: Tle A1
-        level: "@level_11"
-    section_32:
+        level: "@level_tleA"
+    section_tleA_2:
         name: Tle A2
-        level: "@level_11"
-    section_33:
+        level: "@level_tleA"
+    section_tleA_3:
         name: Tle A3
-        level: "@level_11"
-    section_34:
+        level: "@level_tleA"
+    section_tleA_4:
+        name: Tle A4
+        level: "@level_tleA"
+    section_tleA_5:
+        name: Tle A5
+        level: "@level_tleA"
+    section_tleA_6:
+        name: Tle A6
+        level: "@level_tleA"
+    section_tleA_7:
+        name: Tle A7
+        level: "@level_tleA"
+    section_tleA_8:
+        name: Tle A8
+        level: "@level_tleA"
+    section_tleA_9:
+        name: Tle A9
+        level: "@level_tleA"
+    section_tleA_10:
+        name: Tle A10
+        level: "@level_tleA"
+    section_tleA_11:
+        name: Tle A11
+        level: "@level_tleA"
+    section_tleA_12:
+        name: Tle A12
+        level: "@level_tleA"
+    section_tleA_13:
+        name: Tle A13
+        level: "@level_tleA"
+    section_tleA_14:
+        name: Tle A14
+        level: "@level_tleA"
+    section_tleA_15:
+        name: Tle A15
+        level: "@level_tleA"
+    section_tleA_16:
+        name: Tle A16
+        level: "@level_tleA"
+    section_tleA_17:
+        name: Tle A17
+        level: "@level_tleA"
+    section_tleA_18:
+        name: Tle A18
+        level: "@level_tleA"
+    section_tleA_19:
+        name: Tle A19
+        level: "@level_tleA"
+    section_tleA_20:
+        name: Tle A20
+        level: "@level_tleA"
+    ######## SECTION TLE B ######
+    section_tleB_1:
         name: Tle B1
-        level: "@level_12"
-    section_35:
+        level: "@level_tleB"
+    section_tleB_2:
         name: Tle B2
-        level: "@level_12"
-    section_36:
+        level: "@level_tleB"
+    section_tleB_3:
         name: Tle B3
-        level: "@level_12"
-    section_37:
+        level: "@level_tleB"
+    section_tleB_4:
+        name: Tle B4
+        level: "@level_tleB"
+    section_tleB_5:
+        name: Tle B5
+        level: "@level_tleB"
+    section_tleB_6:
+        name: Tle B6
+        level: "@level_tleB"
+    section_tleB_7:
+        name: Tle B7
+        level: "@level_tleB"
+    section_tleB_8:
+        name: Tle B8
+        level: "@level_tleB"
+    section_tleB_9:
+        name: Tle B9
+        level: "@level_tleB"
+    section_tleB_10:
+        name: Tle B10
+        level: "@level_tleB"
+    section_tleB_11:
+        name: Tle B11
+        level: "@level_tleB"
+    section_tleB_12:
+        name: Tle B12
+        level: "@level_tleB"
+    section_tleB_13:
+        name: Tle B13
+        level: "@level_tleB"
+    section_tleB_14:
+        name: Tle B14
+        level: "@level_tleB"
+    section_tleB_15:
+        name: Tle B15
+        level: "@level_tleB"
+    section_tleB_16:
+        name: Tle B16
+        level: "@level_tleB"
+    section_tleB_17:
+        name: Tle B17
+        level: "@level_tleB"
+    section_tleB_18:
+        name: Tle B18
+        level: "@level_tleB"
+    section_tleB_19:
+        name: Tle B19
+        level: "@level_tleB"
+    section_tleB_20:
+        name: Tle B20
+        level: "@level_tleB"
+    ######## SECTION TLE C ######
+    section_tleC_1:
         name: Tle C1
-        level: "@level_13"
-    section_38:
+        level: "@level_tleC"
+    section_tleC_2:
         name: Tle C2
-        level: "@level_13"
-    section_39:
+        level: "@level_tleC"
+    section_tleC_3:
         name: Tle C3
-        level: "@level_13"
-        
-#AppBundle\Entity\MainTeacher:
- #   main_teacher_1:
-  #      teacher: "@teacher_3"
-   # main_teacher_2:
-    #    teacher: "@teacher_1"
-    #main_teacher_3:
-     #   teacher: "@teacher_16"
+        level: "@level_tleC"
+    section_tleC_4:
+        name: Tle C4
+        level: "@level_tleC"
+    section_tleC_5:
+        name: Tle C5
+        level: "@level_tleC"
+    section_tleC_6:
+        name: Tle C6
+        level: "@level_tleC"
+    section_tleC_7:
+        name: Tle C7
+        level: "@level_tleC"
+    section_tleC_8:
+        name: Tle C8
+        level: "@level_tleC"
+    section_tleC_9:
+        name: Tle C9
+        level: "@level_tleC"
+    section_tleC_10:
+        name: Tle C10
+        level: "@level_tleC"
+    section_tleC_11:
+        name: Tle C11
+        level: "@level_tleC"
+    section_tleC_12:
+        name: Tle C12
+        level: "@level_tleC"
+    section_tleC_13:
+        name: Tle C13
+        level: "@level_tleC"
+    section_tleC_14:
+        name: Tle C14
+        level: "@level_tleC"
+    section_tleC_15:
+        name: Tle C15
+        level: "@level_tleC"
+    section_tleC_16:
+        name: Tle C16
+        level: "@level_tleC"
+    section_tleC_17:
+        name: Tle C17
+        level: "@level_tleC"
+    section_tleC_18:
+        name: Tle C18
+        level: "@level_tleC"
+    section_tleC_19:
+        name: Tle C19
+        level: "@level_tleC"
+    section_tleC_20:
+        name: Tle C20
+        level: "@level_tleC"
+    ######## SECTION TLE D ######
+    section_tleD_1:
+        name: Tle D1
+        level: "@level_tleD"
+    section_tleD_2:
+        name: Tle D2
+        level: "@level_tleD"
+    section_tleD_3:
+        name: Tle D3
+        level: "@level_tleD"
+    section_tleD_4:
+        name: Tle D4
+        level: "@level_tleD"
+    section_tleD_5:
+        name: Tle D5
+        level: "@level_tleD"
+    section_tleD_6:
+        name: Tle D6
+        level: "@level_tleD"
+    section_tleD_7:
+        name: Tle D7
+        level: "@level_tleD"
+    section_tleD_8:
+        name: Tle D8
+        level: "@level_tleD"
+    section_tleD_9:
+        name: Tle D9
+        level: "@level_tleD"
+    section_tleD_10:
+        name: Tle D10
+        level: "@level_tleD"
+    section_tleD_11:
+        name: Tle D11
+        level: "@level_tleD"
+    section_tleD_12:
+        name: Tle D12
+        level: "@level_tleD"
+    section_tleD_13:
+        name: Tle D13
+        level: "@level_tleD"
+    section_tleD_14:
+        name: Tle D14
+        level: "@level_tleD"
+    section_tleD_15:
+        name: Tle D15
+        level: "@level_tleD"
+    section_tleD_16:
+        name: Tle D16
+        level: "@level_tleD"
+    section_tleD_17:
+        name: Tle D17
+        level: "@level_tleD"
+    section_tleD_18:
+        name: Tle D18
+        level: "@level_tleD"
+    section_tleD_19:
+        name: Tle D19
+        level: "@level_tleD"
+    section_tleD_20:
+        name: Tle D20
+        level: "@level_tleD"
+    ######## SECTION TLE S ######
+    section_tleS_1:
+        name: Tle S1
+        level: "@level_tleS"
+    section_tleS_2:
+        name: Tle S2
+        level: "@level_tleS"
+    section_tleS_3:
+        name: Tle S3
+        level: "@level_tleS"
+    section_tleS_4:
+        name: Tle S4
+        level: "@level_tleS"
+    section_tleS_5:
+        name: Tle S5
+        level: "@level_tleS"
+    section_tleS_6:
+        name: Tle S6
+        level: "@level_tleS"
+    section_tleS_7:
+        name: Tle S7
+        level: "@level_tleS"
+    section_tleS_8:
+        name: Tle S8
+        level: "@level_tleS"
+    section_tleS_9:
+        name: Tle S9
+        level: "@level_tleS"
+    section_tleS_10:
+        name: Tle S10
+        level: "@level_tleS"
+    section_tleS_11:
+        name: Tle S11
+        level: "@level_tleS"
+    section_tleS_12:
+        name: Tle S12
+        level: "@level_tleS"
+    section_tleS_13:
+        name: Tle S13
+        level: "@level_tleS"
+    section_tleS_14:
+        name: Tle S14
+        level: "@level_tleS"
+    section_tleS_15:
+        name: Tle S15
+        level: "@level_tleS"
+    section_tleS_16:
+        name: Tle S16
+        level: "@level_tleS"
+    section_tleS_17:
+        name: Tle S17
+        level: "@level_tleS"
+    section_tleS_18:
+        name: Tle S18
+        level: "@level_tleS"
+    section_tleS_19:
+        name: Tle S19
+        level: "@level_tleS"
+    section_tleS_20:
+        name: Tle S20
+        level: "@level_tleS"
         
 AppBundle\Entity\EvaluationType:
     evaluation_type_1:
@@ -366,571 +1958,7 @@ AppBundle\Entity\EvaluationType:
 #        sequence: "@sequence_1"
 #        program: "@program_1"
 #        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_2:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_3:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_4:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_5:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_6:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_7:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_8:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_9:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_10:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_11:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_12:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_13:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_14:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_15:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_16:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_17:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_18:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_19:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_20:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_21:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_22:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    evaluation_23:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_24:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_25:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_1"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_26:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_1"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Composition 1er Tr.
-#    #Evaluation of 2nd Sequence
-#    evaluation_27:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_28:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_29:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    #evaluation_30:
-#     #   createdAt: <(new \DateTime('03-09-2018'))>
-#      #  evaluationType: "@evaluation_type_1"
-#       # sequence: "@sequence_2"
-#        #program: "@program_1"
-#        #section: "@section_1"
-#        #name: Devoire N<sup>o</sup>3
-#    evaluation_31:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_32:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_33:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_34:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_35:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_36:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_37:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_38:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_39:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_40:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_41:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_42:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_43:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_44:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_45:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_46:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_47:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_48:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_49:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    evaluation_50:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_51:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_52:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_2"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_53:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_2"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Composition 2em Tr.
-#    #3rd Sequence
-#    evaluation_54:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_55:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_56:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_57:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_1"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_58:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_59:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_60:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_61:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_2"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_62:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_63:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_3"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_64:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_65:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_66:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_67:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_4"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_68:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_69:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_70:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_71:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_5"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_72:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_73:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_74:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_75:
-#        createdAt: <(new \DateTime('02-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_6"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-#    evaluation_76:
-#        createdAt: <(new \DateTime('03-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>1
-#    evaluation_77:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>2
-#    evaluation_78:
-#        createdAt: <(new \DateTime('04-09-2018'))>
-#        evaluationType: "@evaluation_type_1"
-#        sequence: "@sequence_3"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Devoire N<sup>o</sup>3
-#    evaluation_79:
-#        createdAt: <(new \DateTime('01-09-2018'))>
-#        evaluationType: "@evaluation_type_2"
-#        sequence: "@sequence_3"
-#        program: "@program_7"
-#        section: "@section_1"
-#        name: Composition 3em Tr.
-    
-    
-        
-#AppBundle\Entity\Student:
-    #student_1:
-     #   name: Melvi
-      #  barcode(unique): <numberBetween(1, 3000)>
-
-    
-        
-#AppBundle\Entity\Mark:
-    #mark_1:
- #       value: 10
-  #      evaluation: "@evaluation_1"
-   #     student: "@student_1"
-    
+#        name: Devoire N<sup>o</sup>1    
     
 AppBundle\Entity\Setting:
     setting_1:

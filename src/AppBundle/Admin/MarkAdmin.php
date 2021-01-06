@@ -7,18 +7,19 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class MarkAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('student')
+            ->add('student', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('value')
-            ->add('evaluation.evaluationType')
-            ->add('evaluation.section')
-            ->add('evaluation.program')
-            ->add('evaluation.sequence')
+            ->add('evaluation', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('evaluation.section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('evaluation.program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('evaluation.sequence', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
 
@@ -50,8 +51,6 @@ class MarkAdmin extends AbstractAdmin
             ->add('student', null, array('attr' => array('style' => 'width: 455px'),
                                          'disabled' => true))
             ->add('evaluation', null, array('attr' => array('style' => 'width: 455px'),
-                                         'disabled' => true))
-            ->add('student.section', null, array('attr' => array('style' => 'width: 455px'),
                                          'disabled' => true))
         ->end()
             

@@ -22,7 +22,7 @@ services:
         arguments: [~, AppBundle\Entity\Mark, AppBundle:MarkAdmin]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Evaluation Task, label: Mark }
-        public: true
+        public: truse
 
     app.admin.evaluation_type:
         class: AppBundle\Admin\EvaluationTypeAdmin
@@ -33,9 +33,9 @@ services:
 
     app.admin.section:
         class: AppBundle\Admin\SectionAdmin
-        arguments: [~, AppBundle\Entity\Section, SonataAdminBundle:CRUD]
+        arguments: [~, AppBundle\Entity\Section, AppBundle:SectionAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Section }
+            - { name: sonata.admin, manager_type: orm, group: Admin, label: Section }
         public: true
 
     app.admin.setting:
@@ -83,14 +83,14 @@ services:
         class: AppBundle\Admin\MainTeacherAdmin
         arguments: [~, AppBundle\Entity\MainTeacher, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: MainTeacher }
+            - { name: sonata.admin, manager_type: orm, group: Admin, label: MainTeacher }
         public: true
 
     app.admin.teacher:
         class: AppBundle\Admin\TeacherAdmin
         arguments: [~, AppBundle\Entity\Teacher, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Teacher }
+            - { name: sonata.admin, manager_type: orm, group: Admin, label: Teacher }
         public: true
 
     app.admin.sequence:
@@ -139,5 +139,5 @@ services:
         class: AppBundle\Admin\CycleAdmin
         arguments: [~, AppBundle\Entity\Cycle, AppBundle:CycleAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Cycle }
+            - { name: sonata.admin, manager_type: orm, group: Admin, label: Cycle }
         public: true

@@ -36,7 +36,7 @@ class SectionTest extends WebTestCase
     {
         //Get the section from the fixture
         $section = $this->em->getRepository('AppBundle:Section')->find(1);
-        $this->assertEquals($section->getName(), 'Sec 3eme 1');
+        $this->assertEquals($section->getName(), '2nd C1');
         //Test the methode
         $this->assertEquals($section->getStudentNumber(), 2);
     }
@@ -46,7 +46,7 @@ class SectionTest extends WebTestCase
     {
         //Get the section from the fixture
         $section = $this->em->getRepository('AppBundle:Section')->find(1);
-        $this->assertEquals($section->getName(), 'Sec 3eme 1');
+        $this->assertEquals($section->getName(), '2nd C1');
         //Test the methode
         $this->assertEquals($section->getTotalCoefficient(), 6);
         

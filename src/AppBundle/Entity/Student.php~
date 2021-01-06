@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Program as Program;
+use AppBundle\Entity\Sequence;
 
 /**
  * Student
@@ -39,7 +41,7 @@ class Student
     private $absenceCompters;
     
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="student")
+     * @ORM\OneToMany(targetEntity="Mark", mappedBy="student", cascade="remove")
      */
     private $marks;
 
@@ -49,12 +51,49 @@ class Student
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="barcode", type="string", length=255)
+     * @ORM\Column(name="frist_name", type="string", length=255, nullable=true)
      */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255, nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_school_institution", type="string", length=255, nullable=true)
+     */
+    private $lastSchoolInstitution;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="leader", type="boolean", unique=true, nullable=true)
+     */
+    private $leader;
+    
     private $barcode;
 
 
@@ -66,6 +105,36 @@ class Student
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getMarksBySequence(Sequence $sequence)
+    {
+        //Collect all the marks for the current $sequence
+        $sequenceMarks = array();
+        foreach ($sequence->getEvaluations() as $evaluations){
+            foreach ($evaluations as $eval){
+                //Make sure the marks is for the current student
+                //if($this->getMar)
+                $sequenceMarks[] = $eval->getMark();
+            }
+        }
+        
+        
+        return $marks;
+    }
+    
+    public function getBarcodeValue()
+    {
+        return $this->getId()+10000;
+    }
+    
+    public function __toString() {
+        
+        if($this->name){
+            return $this->name;
+        }
+        
+        return 'New Student';
     }
 
     /**
@@ -213,5 +282,79 @@ class Student
     public function getMarks()
     {
         return $this->marks;
+    }
+
+   
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+    
+    /*
+     * @deprecated since 0.5.1
+     * This method suppose to return the average of marks
+     *  for the current student that are related to a given
+     * Sequence and a given program
+     * 
+     */
+    public function getDevoirMarksBySequenceByProgram(Sequence $sequence, Program $program)
+    {
+        $nb = 0;
+        //Prepare a tab to store filtered marks
+        $marksTab = array();
+        //Filter marks by theire sequence: going firstly by Evaluation
+        //and then by sequence
+        foreach ($this->getMarks() as $mark){
+            //Make sure the current mark is related to $sequence
+            if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
+                    && 
+                $mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir'
+                    &&
+                $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
+                
+                $marksTab[] = $mark->getvalue();
+                //Count the number of the values
+                $nb++;
+            }
+        }
+        
+        if($nb == 0){
+            return null;
+        }else{
+            return number_format((array_sum($marksTab)/$nb), 2);
+        }
+        
+    }
+
+    /**
+     * Set leader.
+     *
+     * @param bool $leader
+     *
+     * @return Student
+     */
+    public function setLeader($leader)
+    {
+        $this->leader = $leader;
+
+        return $this;
+    }
+
+    /**
+     * Get leader.
+     *
+     * @return bool
+     */
+    public function isLeader()
+    {
+        return $this->leader;
     }
 }

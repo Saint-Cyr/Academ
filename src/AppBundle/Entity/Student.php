@@ -51,6 +51,48 @@ class Student
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="frist_name", type="string", length=255, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255, nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_school_institution", type="string", length=255, nullable=true)
+     */
+    private $lastSchoolInstitution;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="leader", type="boolean", nullable=true)
+     */
+    private $leader;
     
     private $barcode;
 
@@ -83,7 +125,7 @@ class Student
     
     public function getBarcodeValue()
     {
-        return str_pad($this->getId(),6,"0",STR_PAD_LEFT);
+        return $this->getId()+10000;
     }
     
     public function __toString() {
@@ -290,5 +332,159 @@ class Student
             return number_format((array_sum($marksTab)/$nb), 2);
         }
         
+    }
+
+    /**
+     * Set leader.
+     *
+     * @param bool $leader
+     *
+     * @return Student
+     */
+    public function setLeader($leader)
+    {
+        $this->leader = $leader;
+
+        return $this;
+    }
+
+    /**
+     * Get leader.
+     *
+     * @return bool
+     */
+    public function isLeader()
+    {
+        return $this->leader;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string|null $firstName
+     *
+     * @return Student
+     */
+    public function setFirstName($firstName = null)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName.
+     *
+     * @return string|null
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set phoneNumber.
+     *
+     * @param string|null $phoneNumber
+     *
+     * @return Student
+     */
+    public function setPhoneNumber($phoneNumber = null)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber.
+     *
+     * @return string|null
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * Set adress.
+     *
+     * @param string|null $adress
+     *
+     * @return Student
+     */
+    public function setAdress($adress = null)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress.
+     *
+     * @return string|null
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string|null $email
+     *
+     * @return Student
+     */
+    public function setEmail($email = null)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set lastSchoolInstitution.
+     *
+     * @param string|null $lastSchoolInstitution
+     *
+     * @return Student
+     */
+    public function setLastSchoolInstitution($lastSchoolInstitution = null)
+    {
+        $this->lastSchoolInstitution = $lastSchoolInstitution;
+
+        return $this;
+    }
+
+    /**
+     * Get lastSchoolInstitution.
+     *
+     * @return string|null
+     */
+    public function getLastSchoolInstitution()
+    {
+        return $this->lastSchoolInstitution;
+    }
+
+    /**
+     * Get leader.
+     *
+     * @return bool|null
+     */
+    public function getLeader()
+    {
+        return $this->leader;
     }
 }

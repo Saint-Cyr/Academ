@@ -3,9 +3,15 @@
 
 {% block field %}
     <div>
-        <a href="{{path('mark_table', {'section_id': object.id}) }}" target="_blank">
-            <img src="{{ asset('images/mark_table3.jpg') }}" alt="{{ object.name }}" style="width: 85px; height: 65px;"/>
-        </a>
+        {% if object.mainTeacher is not empty %}
+            <a href="{{path('mark_table', {'section_id': object.id}) }}" target="_blank">
+                <img src="{{ asset('images/mark_table3.jpg') }}" alt="{{ object.name }}" style="width: 85px; height: 65px;"/>
+            </a>
+        {% else %}
+            <a href="#">
+                <img src="{{ asset('images/mark_table_false.jpeg') }}" alt="{{ object.name }}" style="width: 85px; height: 65px;"/>
+            </a>
+        {% endif %}
         <br/>
     </div>
 {% endblock %}

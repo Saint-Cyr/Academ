@@ -7,13 +7,16 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class StudentAdmin extends AbstractAdmin
 {
+    
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('section')
+            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('name')       
         ;
     }
@@ -21,12 +24,13 @@ class StudentAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('name', null, array('editable' => true))
             ->add('section')
+            ->add('leader', null, ['editable' => true])
             ->add('studentParent')
             ->add('barcodeValue', null, array('editable' => true))
-            //->add('barcode')
+            ->add('barcode')
+            ->add('image')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -42,23 +46,37 @@ class StudentAdmin extends AbstractAdmin
         $formMapper
         ->with('Student Information', array('class' => 'col-md-4'))
             ->add('name')
-            ->add('section', null, array('attr' => array('style' => 'width: 450px')))
-            ->add('studentParent', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('firstName')
+            ->add('phoneNumber')
+            ->add('adress')
+            ->add('email', 'email', ['required' => false])
+        ->end();
+        $formMapper
+        ->with('Academic status', array('class' => 'col-md-4'))
+            ->add('section', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Current Section'])
+            ->add('lastSchoolInstitution')
+            ->add('leader')
+            ->add('studentParent', ModelListType::class)
         ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->with('Student Information', array('class' => 'col-md-4'))
-                ->add('id')
-                ->add('name')
-                ->add('barcode')
-            ->end()
-            ->with('Student Parent Information', array('class' => 'col-md-4'))
-                ->add('student.studentParent', null, array('label' => 'Parent full Name'))
-            ->end()
-        ;
+        ->with('Student Information', array('class' => 'col-md-4'))
+            ->add('name')
+            ->add('firstName')
+            ->add('phoneNumber')
+            ->add('adress')
+            ->add('email', 'email', ['required' => false])
+        ->end();
+        $showMapper
+        ->with('Academic status', array('class' => 'col-md-4'))
+            ->add('section', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Current Section'])
+            ->add('lastSchoolInstitution')
+            ->add('leader')
+            ->add('studentParent', ModelListType::class)
+        ->end();
     }
     
     public function getExportFields() {

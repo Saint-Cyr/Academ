@@ -1,4 +1,22 @@
 'MARK INPUT': 'ENREGISTRER NOTES'
 Academ1.0: __Academ1.0
-'Choose the right section': 'Section concernees'
-'No evaluation found for the section you have choosen: ': 'Aucune evaluation trouvee pour cette section:'
+'Choose the right section': 'Selectionner la section concernèe par l''évaluation'
+'No evaluation found for the section you have choosen: ': 'Aucune évaluation trouvée pour cette section:'
+Evaluation: Evaluation
+'Evaluation date': 'Date de l''évaluation'
+'Evaluation Type': 'Type de l''évaluation'
+Teacher: Professeur
+MainTeacher: 'Professeur Principale'
+Sequence: Séquence
+Feild: Matière
+'Total number of students from': 'Effectif total des élèves de'
+'Current Student': 'Information détaillèe sur l''élève'
+Close: Fermer
+'Import student list from Excel (.xls)': 'Importer une Base de données Excel'
+'Full Name': 'Nom de l''élève'
+'Student #ID': 'Identifiant de l''élève'
+'Student Parent': 'Parent de l''élève'
+'Last transaction': 'Récente transaction'
+'RECORD STUDENTS': 'ENREGISTRER ELEVES'
+'Choose the right program. for the section': 'Choisissez le programme concerné par l''évaluation'
+'Choose the right evaluation': 'Choisissez l''évaluation concerné'

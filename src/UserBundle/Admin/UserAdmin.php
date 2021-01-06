@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\BooleanFilter;
 
 class UserAdmin extends AbstractAdmin
 {
@@ -15,7 +16,7 @@ class UserAdmin extends AbstractAdmin
         $datagridMapper
             ->add('username')
             ->add('email')
-            ->add('enabled')
+            ->add('enabled', BooleanFilter::class)
         ;
     }
 
@@ -26,7 +27,7 @@ class UserAdmin extends AbstractAdmin
             $listMapper
                 ->add('name')
                 ->add('email')
-                ->add('barcode')
+                //->add('barcode')
                 ->add('enabled', null, array('editable' => true))
                 ->add('lastLogin')
                 ->add('roles')
@@ -85,7 +86,7 @@ class UserAdmin extends AbstractAdmin
 
                 ->add('name', null, array('label' => 'Name (length must be more than 5)'))
                 ->add('phoneNumber')
-                ->add('barcode', null, array('required' => true))
+                //->add('barcode', null, array('required' => true))
                 ->add('file', 'file', array('required' => false))
             ;
         

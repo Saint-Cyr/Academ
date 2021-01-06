@@ -75,7 +75,6 @@ class DefaultController extends Controller
             $inputData = $request->request->get('data');
             $markValue = $inputData['mark'];
             $student = $em->getRepository('AppBundle:Student')->find($inputData['student_id']);
-            //$section = $em->getRepository('AppBundle:Section')->find($inputData['section_id']);
             $evaluation = $em->getRepository('AppBundle:Evaluation')->find($inputData['evaluation_id']);
             if(!$student || !$evaluation){
                 throw $this->createNotFoundException('User of #ID '.$inputData['student_id'].' or Evaluation not found in DB');
@@ -83,7 +82,24 @@ class DefaultController extends Controller
             //check whether this student all ready have a mark for the current evaluation
             foreach ($evaluation->getMarks() as $mark){
                 if($mark->getStudent()->getId() == $student->getId()){
-                    return new JsonResponse('[Error] This student all ready have a mark:'.$mark->getValue());
+                    if($this->isGranted('ROLE_LEVEL2')){
+                        //keep the old mark value
+                        $oldMark = $mark->getValue();
+                        //update the mark
+                        $mark->setValue($markValue);
+                        $em->persist($mark);
+                        $em->flush();
+                        //Set the feed back message and translate it
+                        $translator = $this->get('translator');
+                        $msg1 = 'Mark updated from';
+                        $msg2 = 'to';
+                        $translator->trans($msg1); 
+                        $translator->trans($msg2);
+                        return new JsonResponse($msg1.' '.$oldMark.' '.$msg2.' '.$mark->getValue());
+                    }else{
+                        return new JsonResponse('[Error] This student all ready have a mark:'.$mark->getValue());
+                    }
+                    
                 }
             }
             //create new Mark object

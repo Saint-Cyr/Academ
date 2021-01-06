@@ -22,7 +22,7 @@ class Teacher
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher", cascade={"persist"}, orphanRemoval=true)
      */
     private $programs;
     
@@ -38,6 +38,57 @@ class Teacher
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fristName", type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255)
+     */
+    private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sex", type="boolean")
+     */
+    private $sex;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contractualized", type="boolean")
+     */
+    private $contractualized;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age", type="integer", length=3)
+     */
+    private $age;
+    
+    private $barcode;
+
 
     /**
      * Get id
@@ -47,6 +98,34 @@ class Teacher
     public function getId()
     {
         return $this->id;
+    }
+
+    public function isMainTeacher()
+    {
+        if(count($this->getMainTeachers()) !== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        }else{
+            return 'New Teacher';
+        };
+    }
+    
+    public function setPrograms($programs)
+    {
+        if (count($programs) > 0) {
+            foreach ($programs as $p) {
+                $this->addProgram($p);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -72,6 +151,32 @@ class Teacher
     {
         return $this->name;
     }
+    
+    /**
+     * Set barcode
+     *
+     * @param string $barcode
+     *
+     * @return Teacher
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    /**
+     * Get barcode
+     *
+     * @return string
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+   
+    
     /**
      * Constructor
      */
@@ -90,9 +195,12 @@ class Teacher
      */
     public function addProgram(\AppBundle\Entity\Program $program)
     {
-        $this->programs[] = $program;
+        $program->setTeacher($this);
+        $this->programs->add($program);
+    
+        //$this->programs[] = $program;
 
-        return $this;
+        //return $this;
     }
 
     /**
@@ -147,5 +255,29 @@ class Teacher
     public function getMainTeachers()
     {
         return $this->mainTeachers;
+    }
+
+    /**
+     * Set phoneNumber.
+     *
+     * @param string $phoneNumber
+     *
+     * @return Teacher
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber.
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
     }
 }

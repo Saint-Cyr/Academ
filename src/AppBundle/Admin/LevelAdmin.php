@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class LevelAdmin extends AbstractAdmin
 {
@@ -14,6 +15,7 @@ class LevelAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
+            ->add('cycle', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
 

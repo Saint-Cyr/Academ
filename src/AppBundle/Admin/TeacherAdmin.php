@@ -13,19 +13,22 @@ class TeacherAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            //->add('id')
             ->add('name')
             ->add('programs')
-            ->add('mainTeachers')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('name')
-            ->add('programs')
+            ->add('firstname', null, ['editable' => true])
+            ->add('name', null, ['editable' => true])
+            ->add('programs', null, ['editable' => true])
+            ->add('sections', null, ['editable' => true])
+            ->add('phoneNumber', null, ['editable' => true])
+            ->add('adress', null, ['editable' => true])
+            ->add('email', null, ['editable' => true])
+            ->add('mainTeacher')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -41,6 +44,9 @@ class TeacherAdmin extends AbstractAdmin
         $formMapper
         ->with('Teacher Information', array('class' => 'col-md-4'))
             ->add('name', null, array('attr' => array('style' => 'width:450px')))
+            ->add('firstName', null, array('attr' => array('style' => 'width:450px')))
+            ->add('phoneNumber', null, array('attr' => array('style' => 'width:450px')))
+            ->add('adress', null, array('attr' => array('style' => 'width:450px')))
             ->add('programs', null, array('attr' => array('style' => 'width:450px')))
         ->end()
         ;

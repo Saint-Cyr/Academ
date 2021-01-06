@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 
 class StudentParentAdmin extends AbstractAdmin
 {
@@ -20,8 +21,13 @@ class StudentParentAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('name', null, array('editable' => true))
+            ->add('firstname', null, ['editable' => true])
+            ->add('name', null, ['editable' => true])
+            ->add('profession', null, ['editable' => true])
+            ->add('phoneNumber', null, ['editable' => true])
+            ->add('adress', null, ['editable' => true])
+            ->add('email', 'email', ['editable' => true])
+            ->add('students')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -35,8 +41,14 @@ class StudentParentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->with('Student Parent Information', array('class' => 'col-md-4'))
+            ->add('firstName')
             ->add('name')
-        ;
+            ->add('students', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Students'])
+            ->add('profession')
+            ->add('adress')
+            ->add('email', 'email', ['required' => false])
+        ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
