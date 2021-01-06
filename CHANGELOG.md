@@ -1,0 +1,30 @@
+-correction from first Acceptance test by Saint-Cyr & Remy
+-releasing alpha1.1
+-release alpha1.0
+-alpha1.0 released
+-releasing alpha1.0
+-update
+-adding multilanguage support and trying to fix /login 404 in prod
+-fix sonata form_helper issue
+-commmit composer.lock file
+-update
+-working in order to release beta1.0
+-update
+-update mark table template
+-update
+-update logo.png -> logo.jpg
+-update
+-make template of teacher card perfect
+-barcode for student teacher & templates
+-working on 0.4 to release 0.5
+-working to relase 0.5
+-add csv import completed
+-improve 0.4
+-realesing 0.4
+-finish rows for markTableLTB
+-install necessary bundles
+-Integration with SF3.4.4
+-update algo for search
+-clean template input mark
+-setup barcode read by even
+-init
