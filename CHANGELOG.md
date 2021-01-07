@@ -1,3 +1,5 @@
+#### 1.0.0 (2021-01-07)
+
 -correction from first Acceptance test by Saint-Cyr & Remy
 -releasing alpha1.1
 -release alpha1.0
