@@ -31,12 +31,45 @@ sonata_admin:
     title_logo: images/logo.jpg
     security:
        handler: sonata.admin.security.handler.role
-            
     dashboard:
+        groups:
+            Admin:
+                label: Admin
+                label_catalogue: SonataAdminBundle
+                icon:   '<i class="fa fa-institution"></i>'
+                items:
+                    - app.admin.section
+                    - app.admin.level
+                    - app.admin.field
+                    - app.admin.program
+                    - app.admin.coefficient
+                    - app.admin.cycle
+                    - app.admin.sequence
+                    - app.admin.student
+                    - app.admin.student_parent
+            Teaching System:
+                label: Teaching System
+                icon: '<i class="fa fa-folder"></i>'
+                items:
+                    - app.admin.evaluation
+                    - app.admin.mark
+                    - app.admin.teacher
+                    - app.admin.main_teacher
+            Security:
+                label: Security
+                icon: '<i class="fa fa-key"></i>'
+                items:
+                    - user.admin.user
+
+
+            
+
         blocks:
             # display a dashboard block
-            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]} }
-            - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [admin]}}
+            - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [Admin]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Setting Information]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Teaching System]}}
+            - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]}}
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 

@@ -42,9 +42,12 @@
                             <form class="login100-form validate-form" action="{{ path("mark_input_parameters3", {'section_id':section.id, 'program_id': program.id}) }}" method="post">
                                     <span class="">
                                         <div id="login-alert" class="alert alert-info col-sm-12">
-                                            Section:<b> {{ section.name }}</b><br>
-                                            Program:<b> {{ program.name }}</b><br>
-                                            Evaluation:<b> Choose the right evaluation.</b>
+                                                {{'Choose the right evaluation'|trans}}
+                                            </div>
+                                        <div id="login-alert" class="alert alert-info col-sm-12">
+                                            Section:<b style="color:red"> {{ section.name }}</b><br>
+                                            Program:<b style="color:red"> {{ program.name }}</b><br>
+                                            Evaluation:<b style="color:red"> ??</b>
                                         </div>
                                     </span>
                                     {#% if message is not empty %}

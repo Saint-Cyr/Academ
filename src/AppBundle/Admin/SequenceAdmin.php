@@ -35,9 +35,10 @@ class SequenceAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            
+        ->with('Sequence Information', array('class' => 'col-md-4'))
             ->add('name')
             ->add('sequenceOrder')
+        ->end()
         ;
     }
 

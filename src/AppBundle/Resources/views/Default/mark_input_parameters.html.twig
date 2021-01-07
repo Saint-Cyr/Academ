@@ -43,9 +43,16 @@
                                 </div>
 				<form class="login100-form validate-form" action="{{ path("mark_input_parameters") }}" method="post">
 					<span class="login10-form-avatar">
-                                            <div id="login-alert" class="alert alert-info col-sm-12">
+                                    <div id="login-alert" class="alert alert-info col-sm-12">
                                                 {{ 'Choose the right section'|trans }}.
-                                            </div>
+									</div>
+												<span class="">
+                                        <div id="login-alert" class="alert alert-info col-sm-12">
+                                            Section:<b style="color:red"> ??</b><br>
+                                            Program:<b> __</b><br>
+                                            Evaluation:<b>__</b>
+                                        </div>
+                                    	</span>
 					</span>
                                         {% if message is not empty %}
                                             <div id="login-alert" class="alert alert-warning col-sm-12">{{ message }}</div>
@@ -69,6 +76,7 @@
 	
 
 	<div id="dropDownSelect1"></div>
+
 	
 <!--===============================================================================================-->
 	<script src="{{ asset('login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
@@ -91,7 +99,8 @@
             $(document).ready(function() {
     $('.input100').select2();
 });
-        </script>
+</script>
+
 
 </body>
 </html>

@@ -16,7 +16,7 @@
                 <div class="container">
                     <br>
                     <a href="{{ path('user_homepage') }}" class="brand" style="margin: 30px; margin-top: 60px; float: none;" >
-                        <img src="{{ asset('images/school_logo.png') }}" width="100px" />
+                        <img src="{{ asset('images/logo_academ_transparent_bg.png') }}" width="70px" />
                     </a>
                 </div>
                     <br>
@@ -88,12 +88,10 @@
                             </div>
                             <div class="panel-body">
                                 <div class="col-xs-12 col-sm-12" style="color: black;">
-                                    <p> <strong>Full Name: <span id="student_name" style="color: blue;">  </span></strong></p>
-                                    <p> <strong>Last Mark: <span id="student_last_mark" style="color: red;">  </span></strong></p>
-                                    <p> <strong>Last Position: <span id="student_last_position" style="color: red;"> </span></strong></p>
-                                    <p> <strong>Student #ID: <span id="student_id" style="color: blue;"> </span></strong></p>
-                                    <p> <strong>Last Performance: <span id="student_performance" style="color: red;"> </span></strong></p>
-                                    <p> <strong>Last transaction: <span id="last_transaction" style="color: red;">  </span></strong></p>
+                                    <p> <strong>{{'Full Name'|trans }}: <span id="student_name" style="color: blue;">  </span></strong></p>
+                                    <p> <strong>{{'Student #ID'|trans}}: <span id="student_id" style="color: blue;"> </span></strong></p>
+                                    <p> <strong>{{'Student Parent'|trans}}: <span id="student_parent" style="color: blue;"> </span></strong></p>
+                                    <p> <strong>{{'Last transaction'|trans }}: <span id="last_transaction" style="color: red;">  </span></strong></p>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +125,7 @@
     <script type="text/javascript">
         
         function submission(e){
-            $('#student_image').attr('src', '{{ asset('images/animated2.gif') }}');
+            $('#student_image').attr('src', '{{ asset('images/1.gif') }}');
             //Prepare all variables that need to be sent to server
             var sectionId = {{ section.id }};
             var evaluationId = {{ evaluation.id }};
@@ -178,19 +176,19 @@
         
             students = [{% for std in students %}
                         { "id":{{std.id}}, "name":"{{std.name}}", "barcode":{{ std.barcodeValue }}, 
-                            "last_mark": null, "image":"11.jpg", "parent_phone":null, "last_position": null, "performance":null},
+                            "last_mark": null, "image":"next.png", "student_parent": "{{ std.studentParent }}", "last_position": null, "performance":null},
                     {% endfor %}
                             ];
-                          
+            //students = [{"id":1, "barcode":10001, "name":"Some Name"}];       
             var std = students.find(obj => {
                 return obj.barcode === parseInt(scannedBarcode, 10);
             });
 
 	    if(!(typeof std == 'undefined')){
 		$('#student_name').text(std.name);
-		$('#student_id').text(std.id);
+		$('#student_id').text(std.barcode);
                 $('#student_last_mark').text('N/A');
-                $('#student_parent_phone').text('N/A');
+                $('#student_parent').text(std.student_parent);
                 $('#student_last_position').text('N/A');
                 $('#student_performance').text('N/A');
                 $('#student_image').attr('src', '{{ asset('images/') }}'+std.image);
@@ -206,7 +204,7 @@
                 audioElement.play();
                 $('#student_image').attr('src', '{{ asset('images/11.jpg') }}');
                 //audioElement.pause();
-                alert('Student not registered.'+barcode);
+                alert('Student not registered.');
 	    }	    
 
 
@@ -276,7 +274,7 @@
 
     #alertBox {
         position:relative;
-        width:300px;
+        width:600px;
         min-height:100px;
         margin-top:50px;
         border:1px solid #666;

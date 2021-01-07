@@ -34,7 +34,9 @@ class FieldAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->with('Field Information', array('class' => 'col-md-4'))
             ->add('name')
+        ->end()
         ;
     }
 

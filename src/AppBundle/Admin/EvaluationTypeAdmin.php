@@ -37,7 +37,7 @@ class EvaluationTypeAdmin extends AbstractAdmin
     {
         $formMapper
             //->add('id')
-            ->add('name')
+            ->add('name', null, ['disabled' => true])
         ;
     }
 

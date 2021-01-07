@@ -9,18 +9,19 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class EvaluationAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('sequence')
+            ->add('sequence', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('createdAt')
             ->add('name')
-            ->add('evaluationType')
-            ->add('program')
-            ->add('section')
+            ->add('evaluationType', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
 
@@ -34,7 +35,7 @@ class EvaluationAdmin extends AbstractAdmin
             ->add('program')
             ->add('section')
             //->add('average')
-            ->add('createdAt')
+            ->add('createdAt', null, array('label' => 'Evaluation Date'))
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -49,7 +50,7 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Information', array('class' => 'col-md-4'))
-                ->add('createdAt', DateTimePickerType::class)
+                ->add('createdAt', DateTimePickerType::class, ['required' => false])
                 ->add('name', 'html')
                 ->add('sequence', null, array('attr' => array('style' => 'width: 450px')))
                 ->add('name')
@@ -69,5 +70,14 @@ class EvaluationAdmin extends AbstractAdmin
             ->add('createdAt')
             ->add('name', 'html')
         ;
+    }
+
+    public function getExportFields() {
+        return array('Barcode'=>'code', 'Sequence'=>'sequence', 'Type Evaluation'=>'evaluationType', 'Program'=>'program', 'Section'=>'section');
+    }
+    
+    public function getExportFormats() {
+        parent::getExportFormats();
+        return ['xls', 'csv'];
     }
 }

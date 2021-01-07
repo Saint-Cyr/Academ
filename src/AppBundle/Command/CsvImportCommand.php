@@ -37,7 +37,7 @@ class CsvImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         
         $io->writeln('File Processing...');
-        $io->title('==== <options=bold;fg=blue>Academ®</></> is a trademark of Saint-Cyr MAPOUKA. All rights reserved. || By iSTech ( © 2020) ==============');
+        $io->title('==== <options=bold;fg=blue>Academ®</></> is a trademark of iSTech. All rights reserved. || © 2020 ==============');
         //Instatiate the csv reader library
         $reader = \League\Csv\Reader::createFromPath('%kernel.root_dir%/../web/data/STUDENT.csv');
         $results = $reader->fetchAssoc();

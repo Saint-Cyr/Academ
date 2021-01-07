@@ -29,7 +29,7 @@ class Evaluation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      */
     private $createdAt;
     
@@ -77,6 +77,15 @@ class Evaluation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Return the Evaluation code which is a string
+     * that can be used to generate a uniq codebar
+     */
+    public function getCode()
+    {
+        return $this->getSection()->getId().'/'.$this->getId();
     }
     
     public function getAverage()

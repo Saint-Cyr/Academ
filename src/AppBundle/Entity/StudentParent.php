@@ -33,6 +33,48 @@ class StudentParent
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profession", type="string", length=255, nullable=true)
+     */
+    private $profession;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255, nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fristName", type="string", length=255, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sex", type="boolean", nullable=true)
+     */
+    private $sex;
+
 
     /**
      * Get id
@@ -113,5 +155,149 @@ class StudentParent
     public function getStudents()
     {
         return $this->students;
+    }
+
+    /**
+     * Set profession.
+     *
+     * @param string $profession
+     *
+     * @return StudentParent
+     */
+    public function setProfession($profession)
+    {
+        $this->profession = $profession;
+
+        return $this;
+    }
+
+    /**
+     * Get profession.
+     *
+     * @return string
+     */
+    public function getProfession()
+    {
+        return $this->profession;
+    }
+
+    /**
+     * Set phoneNumber.
+     *
+     * @param string $phoneNumber
+     *
+     * @return StudentParent
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber.
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string $email
+     *
+     * @return StudentParent
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string|null $firstName
+     *
+     * @return StudentParent
+     */
+    public function setFirstName($firstName = null)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName.
+     *
+     * @return string|null
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set adress.
+     *
+     * @param string|null $adress
+     *
+     * @return StudentParent
+     */
+    public function setAdress($adress = null)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress.
+     *
+     * @return string|null
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set sex.
+     *
+     * @param bool|null $sex
+     *
+     * @return StudentParent
+     */
+    public function setSex($sex = null)
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * Get sex.
+     *
+     * @return bool|null
+     */
+    public function getSex()
+    {
+        return $this->sex;
     }
 }

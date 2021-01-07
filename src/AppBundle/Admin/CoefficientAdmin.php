@@ -38,8 +38,10 @@ class CoefficientAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->with('Coefficient Information', array('class' => 'col-md-4'))
             ->add('value')
-            ->add('programs')
+            ->add('programs', null, array('attr' => array('style' => 'width:450px')))
+        ->end()
         ;
     }
 

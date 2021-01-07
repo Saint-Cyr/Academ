@@ -7,24 +7,28 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class SectionAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            //->add('id')
             ->add('name')
+            ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
+            ->add('name', null, ['editable' => true])
+            ->add('level')
+            ->add('studentNumber')
+            ->add('studentLeader')
             ->add('evaluations')
-            ->add('name')
             ->add('mainTeacher')
             ->add('_action', null, [
                 'actions' => [
@@ -39,11 +43,19 @@ class SectionAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
-            ->add('name')
-            ->add('mainTeacher')
-            ->add('level')
-        ;
+        ->with('Section Information', array('class' => 'col-md-4'))
+            ->add('name', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('level', null, array('attr' => array('style' => 'width: 450px')))
+        ->end();
+        $formMapper
+        ->with('Student (.xls)', array('class' => 'col-md-4'))
+            //->add('collectedImage')
+            ->add('file', 'file', array('required' => false))
+        ->end();
+        $formMapper
+        ->with('Main teacher Information', array('class' => 'col-md-4'))
+            ->add('mainTeacher', ModelListType::class)
+        ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -52,5 +64,22 @@ class SectionAdmin extends AbstractAdmin
             ->add('id')
             ->add('name')
         ;
+    }
+
+    public function prePersist($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    public function preUpdate($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    private function manageFileUpload($image)
+    {
+        if ($image->getFile()) {
+            $image->refreshUpdated();
+        }
     }
 }
