@@ -55,6 +55,11 @@ class Level
         return $this->id;
     }
 
+    public function getSectionNamingConvention()
+    {
+        return $type = null;
+    }
+
     /**
      * Set name
      *
@@ -78,6 +83,15 @@ class Level
     {
         return $this->name;
     }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        }else{
+            return 'New Level';
+        };
+    }
+    
     /**
      * Constructor
      */
@@ -142,5 +156,39 @@ class Level
     public function getCycle()
     {
         return $this->cycle;
+    }
+
+    /**
+     * Add section
+     *
+     * @param \AppBundle\Entity\Section $section
+     *
+     * @return Level
+     */
+    public function addSection(\AppBundle\Entity\Section $section)
+    {
+        $this->sections[] = $section;
+
+        return $this;
+    }
+
+    /**
+     * Remove section
+     *
+     * @param \AppBundle\Entity\Section $section
+     */
+    public function removeSection(\AppBundle\Entity\Section $section)
+    {
+        $this->sections->removeElement($section);
+    }
+
+    /**
+     * Get sections
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSections()
+    {
+        return $this->sections;
     }
 }

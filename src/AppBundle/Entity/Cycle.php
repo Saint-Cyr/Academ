@@ -22,11 +22,6 @@ class Cycle
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Level", mappedBy="cycle")
-     */
-    private $levels;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -76,47 +71,5 @@ class Cycle
         }else{
             return 'New Level';
         };
-    }
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->levels = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add level
-     *
-     * @param \AppBundle\Entity\Level $level
-     *
-     * @return Cycle
-     */
-    public function addLevel(\AppBundle\Entity\Level $level)
-    {
-        $this->levels[] = $level;
-
-        return $this;
-    }
-
-    /**
-     * Remove level
-     *
-     * @param \AppBundle\Entity\Level $level
-     */
-    public function removeLevel(\AppBundle\Entity\Level $level)
-    {
-        $this->levels->removeElement($level);
-    }
-
-    /**
-     * Get levels
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLevels()
-    {
-        return $this->levels;
     }
 }

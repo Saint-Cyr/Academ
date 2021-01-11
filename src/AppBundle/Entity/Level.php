@@ -32,7 +32,7 @@ class Level
     private $sections;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="levels")
+     * @ORM\ManyToOne(targetEntity="Cycle")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cycle;

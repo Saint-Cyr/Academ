@@ -22,7 +22,7 @@ class Mark
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Student")
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="marks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $student;
@@ -41,6 +41,11 @@ class Mark
      * @ORM\Column(name="value", type="float")
      */
     private $value;
+
+    public function __toString()
+    {
+        return 'Mark';
+    }
 
 
     /**

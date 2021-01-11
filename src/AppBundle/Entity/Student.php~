@@ -36,11 +36,6 @@ class Student
     private $section;
     
     /**
-     * @ORM\OneToMany(targetEntity="AbsenceCompter", mappedBy="student")
-     */
-    private $absenceCompters;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Mark", mappedBy="student", cascade="remove")
      */
     private $marks;
@@ -90,7 +85,7 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="leader", type="boolean", unique=true, nullable=true)
+     * @ORM\Column(name="leader", type="boolean", nullable=true)
      */
     private $leader;
     
@@ -190,40 +185,6 @@ class Student
     public function getStudentParent()
     {
         return $this->studentParent;
-    }
-
-    /**
-     * Add absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     *
-     * @return Student
-     */
-    public function addAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters[] = $absenceCompter;
-
-        return $this;
-    }
-
-    /**
-     * Remove absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     */
-    public function removeAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters->removeElement($absenceCompter);
-    }
-
-    /**
-     * Get absenceCompters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbsenceCompters()
-    {
-        return $this->absenceCompters;
     }
 
     /**
@@ -354,6 +315,136 @@ class Student
      * @return bool
      */
     public function isLeader()
+    {
+        return $this->leader;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string|null $firstName
+     *
+     * @return Student
+     */
+    public function setFirstName($firstName = null)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName.
+     *
+     * @return string|null
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set phoneNumber.
+     *
+     * @param string|null $phoneNumber
+     *
+     * @return Student
+     */
+    public function setPhoneNumber($phoneNumber = null)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber.
+     *
+     * @return string|null
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * Set adress.
+     *
+     * @param string|null $adress
+     *
+     * @return Student
+     */
+    public function setAdress($adress = null)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress.
+     *
+     * @return string|null
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string|null $email
+     *
+     * @return Student
+     */
+    public function setEmail($email = null)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set lastSchoolInstitution.
+     *
+     * @param string|null $lastSchoolInstitution
+     *
+     * @return Student
+     */
+    public function setLastSchoolInstitution($lastSchoolInstitution = null)
+    {
+        $this->lastSchoolInstitution = $lastSchoolInstitution;
+
+        return $this;
+    }
+
+    /**
+     * Get lastSchoolInstitution.
+     *
+     * @return string|null
+     */
+    public function getLastSchoolInstitution()
+    {
+        return $this->lastSchoolInstitution;
+    }
+
+    /**
+     * Get leader.
+     *
+     * @return bool|null
+     */
+    public function getLeader()
     {
         return $this->leader;
     }

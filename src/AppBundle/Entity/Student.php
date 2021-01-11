@@ -36,14 +36,14 @@ class Student
     private $section;
     
     /**
-     * @ORM\OneToMany(targetEntity="AbsenceCompter", mappedBy="student")
-     */
-    private $absenceCompters;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Mark", mappedBy="student", cascade="remove")
      */
     private $marks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Absence", mappedBy="student", cascade="remove")
+     */
+    private $absences;
 
     /**
      * @var string
@@ -192,39 +192,6 @@ class Student
         return $this->studentParent;
     }
 
-    /**
-     * Add absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     *
-     * @return Student
-     */
-    public function addAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters[] = $absenceCompter;
-
-        return $this;
-    }
-
-    /**
-     * Remove absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     */
-    public function removeAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters->removeElement($absenceCompter);
-    }
-
-    /**
-     * Get absenceCompters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbsenceCompters()
-    {
-        return $this->absenceCompters;
-    }
 
     /**
      * Set section
@@ -298,41 +265,6 @@ class Student
         return $this->barcode;
     }
     
-    /*
-     * @deprecated since 0.5.1
-     * This method suppose to return the average of marks
-     *  for the current student that are related to a given
-     * Sequence and a given program
-     * 
-     */
-    public function getDevoirMarksBySequenceByProgram(Sequence $sequence, Program $program)
-    {
-        $nb = 0;
-        //Prepare a tab to store filtered marks
-        $marksTab = array();
-        //Filter marks by theire sequence: going firstly by Evaluation
-        //and then by sequence
-        foreach ($this->getMarks() as $mark){
-            //Make sure the current mark is related to $sequence
-            if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
-                    && 
-                $mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir'
-                    &&
-                $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
-                
-                $marksTab[] = $mark->getvalue();
-                //Count the number of the values
-                $nb++;
-            }
-        }
-        
-        if($nb == 0){
-            return null;
-        }else{
-            return number_format((array_sum($marksTab)/$nb), 2);
-        }
-        
-    }
 
     /**
      * Set leader.

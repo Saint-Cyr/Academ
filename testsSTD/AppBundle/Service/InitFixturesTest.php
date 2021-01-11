@@ -81,7 +81,7 @@ class InitFixturesTest extends WebTestCase
         $executor->execute( 
                             $this->em,
                             $loaderGenerator->generate($loader, $fixtureLoader, $kernel->getBundles(), 'test'),
-                            $fixtureFinder->resolveFixtures($kernel, array('@AppBundle/Fixtures/setup_std.yml')),
+                            $fixtureFinder->resolveFixtures($kernel, array('@AppBundle/Fixtures/LTB1.yml')),
                             false,
                             false
                           );

@@ -43,6 +43,8 @@ class Cycle
     {
         return $this->id;
     }
+    
+    
 
     /**
      * Set name
@@ -67,6 +69,15 @@ class Cycle
     {
         return $this->name;
     }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name;
+        }else{
+            return 'New Level';
+        };
+    }
+    
     /**
      * Constructor
      */

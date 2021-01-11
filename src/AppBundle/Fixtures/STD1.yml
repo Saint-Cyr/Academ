@@ -94,45 +94,40 @@ AppBundle\Entity\Coefficient:
         value: 6
         
 AppBundle\Entity\Teacher:
-    #Teacher of 2nd C1
+    #Teacher of 3em 8
     teacher_1:
-        name: HAMINOU
+        name: TEACHER_1
     teacher_2:
-        name: PANGO
+        name: TEACHER_2
     teacher_3:
-        name: TANG
+        name: TEACHER_3
     teacher_4:
-        name: BARBET
+        name: TEACHER_4
     teacher_5:
-        name: NIGAS
+        name: TEACHER_5
     teacher_6:
-        name: DIPOU
+        name: TEACHER_6
     teacher_7:
-        name: YASSINDELE
+        name: TEACHER_7
     teacher_8:
-        name: KOULET
-    #Teacher of Tle D1
+        name: TEACHER_8
+    #Teacher of 2nd C1
     teacher_9:
-        name: YAO
+        name: TEACHER_9
     teacher_10:
-        name: YANGBA
+        name: TEACHER_10
     teacher_11:
-        name: NDOKO
+        name: TEACHER_11
     teacher_12:
-        name: YEMO
+        name: TEACHER_12
     teacher_13:
-        name: ZIMAKO
+        name: TEACHER_13
     teacher_14:
-        name: PRIVA
+        name: TEACHER_14
     teacher_15:
-        name: ZANIBOY
+        name: TEACHER_15
     teacher_16:
-        name: ZAMBEGO
-    #Teacher of 5em1
-    teacher_17:
-        name: NARBET
-    teacher_18:
-        name: YASSINDELE
+        name: TEACHER_16
         
 AppBundle\Entity\Program:
     program_1:
@@ -140,7 +135,6 @@ AppBundle\Entity\Program:
         level: "@level_5"
         field: "@field_1"
         coefficient: "@coefficient_5"
-        teacher: "@teacher_1"
     program_2:
         name: SVT
         level: "@level_5"
@@ -161,7 +155,6 @@ AppBundle\Entity\Program:
         level: "@level_5"
         coefficient: "@coefficient_3"
         field: "@field_5"
-        #teacher: "@teacher_2"
     program_6:
         name: ECOFA
         level: "@level_5"
@@ -192,7 +185,6 @@ AppBundle\Entity\Program:
         level: "@level_9"
         field: "@field_3"
         coefficient: "@coefficient_5"
-        teacher: "@teacher_10"
     program_2:
         name: Francais
         level: "@level_9"
@@ -202,7 +194,6 @@ AppBundle\Entity\Program:
         name: Anglais
         level: "@level_9"
         field: "@field_5"
-        coefficient: "@coefficient_3"
     program_4:
         name: Philosophie
         level: "@level_9"
@@ -213,7 +204,6 @@ AppBundle\Entity\Program:
         level: "@level_9"
         coefficient: "@coefficient_3"
         field: "@field_9"
-        #teacher: "@teacher_2"
     program_6:
         name: EPS
         level: "@level_9"
@@ -268,25 +258,21 @@ AppBundle\Entity\Sequence:
     
 AppBundle\Entity\Section:
     section_1:
-        name: 2nd C1
-        level: "@level_5"
+        name: 3em 8
+        level: "@level_4"
         mainTeacher: "@main_teacher_1"
     section_2:
-        name: Tle D1
-        level: "@level_9"
+        name: 2nd C1
+        level: "@level_6"
         mainTeacher: "@main_teacher_2"
-    section_3:
-        name: 5em 1
-        level: "@level_2"
-        mainTeacher: "@main_teacher_3"
         
 AppBundle\Entity\MainTeacher:
     main_teacher_1:
-        teacher: "@teacher_3"
-    main_teacher_2:
         teacher: "@teacher_1"
+    main_teacher_2:
+        teacher: "@teacher_2"
     main_teacher_3:
-        teacher: "@teacher_16"
+        teacher: "@teacher_3"
         
 AppBundle\Entity\EvaluationType:
     evaluation_type_1:
@@ -299,577 +285,19 @@ AppBundle\Entity\Evaluation:
         createdAt: <(new \DateTime('01-09-2018'))>
         evaluationType: "@evaluation_type_1"
         sequence: "@sequence_1"
-        program: "@program_1"
+        program: "@afected_program_fr"
         section: "@section_1"
         name: Devoire N<sup>o</sup>1
-    evaluation_2:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_3:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_4:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_1"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_5:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_6:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_7:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_8:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_2"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_9:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_3"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_10:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_3"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_11:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_12:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_13:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_14:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_4"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_15:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_16:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_17:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_18:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_5"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_19:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_20:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_21:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_22:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_6"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    evaluation_23:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_24:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_25:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_1"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_26:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_1"
-        program: "@program_7"
-        section: "@section_1"
-        name: Composition 1er Tr.
-    #Evaluation of 2nd Sequence
-    evaluation_27:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_28:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_29:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    #evaluation_30:
-     #   createdAt: <(new \DateTime('03-09-2018'))>
-      #  evaluationType: "@evaluation_type_1"
-       # sequence: "@sequence_2"
-        #program: "@program_1"
-        #section: "@section_1"
-        #name: Devoire N<sup>o</sup>3
-    evaluation_31:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_1"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_32:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_33:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_34:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_35:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_2"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_36:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_3"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_37:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_3"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_38:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_39:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_40:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_41:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_4"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_42:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_43:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_44:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_45:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_5"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_46:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_47:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_48:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_49:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_6"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    evaluation_50:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_51:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_52:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_2"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_53:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_2"
-        program: "@program_7"
-        section: "@section_1"
-        name: Composition 2em Tr.
-    #3rd Sequence
-    evaluation_54:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_55:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_56:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_1"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_57:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_1"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_58:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_59:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_60:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_2"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_61:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_2"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_62:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_3"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_63:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_3"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_64:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_65:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_66:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_4"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_67:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_4"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_68:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_69:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_70:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_5"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_71:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_5"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_72:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_73:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_74:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_6"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_75:
-        createdAt: <(new \DateTime('02-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_6"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    evaluation_76:
-        createdAt: <(new \DateTime('03-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>1
-    evaluation_77:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>2
-    evaluation_78:
-        createdAt: <(new \DateTime('04-09-2018'))>
-        evaluationType: "@evaluation_type_1"
-        sequence: "@sequence_3"
-        program: "@program_7"
-        section: "@section_1"
-        name: Devoire N<sup>o</sup>3
-    evaluation_79:
-        createdAt: <(new \DateTime('01-09-2018'))>
-        evaluationType: "@evaluation_type_2"
-        sequence: "@sequence_3"
-        program: "@program_7"
-        section: "@section_1"
-        name: Composition 3em Tr.
-    
-    
         
-AppBundle\Entity\Student:
-    #student_1:
-     #   name: Melvi
-      #  barcode(unique): <numberBetween(1, 3000)>
-        
+AppBundle\Entity\Student:    
     student_1:
-        name: Melvi
+        name: Eleve_8
         barcode: 6954941712178
         section: "@section_1"
     student_2:
-        name: Jowys
+        name: Eleve_1
         barcode: 9782608123015
         section: "@section_2"
-    student_2:
-        name: Mexan
-        barcode: 9782608123015
-        section: "@section_3"
         
 AppBundle\Entity\Mark:
     mark_1:

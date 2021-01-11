@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="sequence")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SequenceRepository")
- * @UniqueEntity("order", message="An other sequence already have this value")
+ * @UniqueEntity("sequenceOrder", message="An other sequence already have this value")
  */
 class Sequence
 {
@@ -38,7 +38,7 @@ class Sequence
     /**
      * @var string
      *
-     * @ORM\Column(name="sequence_order", type="string", length=255)
+     * @ORM\Column(name="sequence_order", type="integer", length=255)
      */
     private $sequenceOrder;
 
@@ -84,6 +84,7 @@ class Sequence
     {
         return $this->name;
     }
+    
     /**
      * Constructor
      */
@@ -144,5 +145,29 @@ class Sequence
         }
         
         return $selected;
+    }
+
+    /**
+     * Set sequenceOrder
+     *
+     * @param string $sequenceOrder
+     *
+     * @return Sequence
+     */
+    public function setSequenceOrder($sequenceOrder)
+    {
+        $this->sequenceOrder = $sequenceOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get sequenceOrder
+     *
+     * @return string
+     */
+    public function getSequenceOrder()
+    {
+        return $this->sequenceOrder;
     }
 }

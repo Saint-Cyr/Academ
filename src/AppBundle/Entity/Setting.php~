@@ -31,7 +31,7 @@ class Setting
     /**
      * @var string
      *
-     * @ORM\Column(name="language", type="string", length=255)
+     * @ORM\Column(name="language", type="string", length=255, nullable=true)
      */
     private $language;
     
@@ -240,5 +240,29 @@ class Setting
     public function getDefinedYearlySequenceNumber()
     {
         return $this->definedYearlySequenceNumber;
+    }
+
+    /**
+     * Set language.
+     *
+     * @param string $language
+     *
+     * @return Setting
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language.
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

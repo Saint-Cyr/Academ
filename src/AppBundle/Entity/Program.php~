@@ -36,16 +36,6 @@ class Program
     private $teacher;
     
     /**
-     * @ORM\OneToMany(targetEntity="AbsenceCompter", mappedBy="program")
-     */
-    private $absenceCompters;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="program")
-     */
-    private $evaluations;
-    
-    /**
      * @var type 
      * @ORM\ManyToOne(targetEntity="Coefficient", inversedBy="programs")
      * @ORM\JoinColumn(nullable=true)
@@ -62,7 +52,7 @@ class Program
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", nullable=true, length=255)
      */
     private $name;
 
@@ -75,6 +65,14 @@ class Program
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function __toString() {
+        if($this->name){
+            return $this->name." #".$this->getLevel();
+        };
+        
+        return 'New Program';
     }
 
     /**
@@ -155,74 +153,6 @@ class Program
     public function getTeacher()
     {
         return $this->teacher;
-    }
-
-    /**
-     * Add absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     *
-     * @return Program
-     */
-    public function addAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters[] = $absenceCompter;
-
-        return $this;
-    }
-
-    /**
-     * Remove absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     */
-    public function removeAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters->removeElement($absenceCompter);
-    }
-
-    /**
-     * Get absenceCompters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbsenceCompters()
-    {
-        return $this->absenceCompters;
-    }
-
-    /**
-     * Add evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return Program
-     */
-    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations[] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     */
-    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations->removeElement($evaluation);
-    }
-
-    /**
-     * Get evaluations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
     }
 
     /**
