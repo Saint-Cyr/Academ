@@ -141,3 +141,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Admin, label: Cycle }
         public: true
+
+    app.admin.affected_program:
+        class: AppBundle\Admin\AffectedProgramAdmin
+        arguments: [~, AppBundle\Entity\AffectedProgram, AppBundle:AffectedProgramAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: AffectedProgram }
+        public: true
