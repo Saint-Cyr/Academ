@@ -162,6 +162,7 @@ AppBundle\Entity\EvaluationType:
         name: Composition
         
 AppBundle\Entity\Evaluation:
+#Evaluation 1er trimestre
     evaluation_1:
         createdAt: <(new \DateTime('01-09-2018'))>
         evaluationType: "@evaluation_type_1"
@@ -169,6 +170,35 @@ AppBundle\Entity\Evaluation:
         affectedProgram: "@affected_program_fr_6em_1"
         section: "@section_6em_1"
         name: Devoire N<sup>o</sup>1
+    evaluation_2:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_fr_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_3:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_fr_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_4:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_fr_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+
+    evaluation_29:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_2"
+        affectedProgram: "@affected_program_fr_6em_1"
+        section: "@section_6em_1"
+        name: Devoir
         
 AppBundle\Entity\Student:    
     student_1:
@@ -184,6 +214,22 @@ AppBundle\Entity\Mark:
     mark_1:
         value: 10
         evaluation: "@evaluation_1"
+        student: "@student_1"
+    mark_2:
+        value: 10
+        evaluation: "@evaluation_2"
+        student: "@student_1"
+    mark_3:
+        value: 10
+        evaluation: "@evaluation_3"
+        student: "@student_1"
+    mark_4:
+        value: 9.5
+        evaluation: "@evaluation_4"
+        student: "@student_1"
+    mark_29:
+        value: 10
+        evaluation: "@evaluation_29"
         student: "@student_1"
     
 AppBundle\Entity\Setting:

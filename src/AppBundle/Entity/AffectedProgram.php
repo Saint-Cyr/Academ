@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Sequence;
 
 /**
  * AffectedProgram
@@ -62,6 +63,26 @@ class AffectedProgram
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * return marks related to a sequence
+     */
+    public function getMarksBySequence(Sequence $sequence)
+    {
+        $selectedMark = [];
+        foreach($this->getEvaluations() as $evaluation){
+            $markFromEvaluations = $evaluation->getMarks();
+            foreach($markFromEvaluations as $mFE){
+                if($mFE->getEvaluation()->getSequence()->getName() == $sequence->getName())
+                {
+                    $selectedMark[] = $mFE;
+                }
+            }
+        }
+
+        return $selectedMark;
+
     }
 
     /**

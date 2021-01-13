@@ -3,8 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Program as Program;
+use AppBundle\Entity\Program;
 use AppBundle\Entity\Sequence;
+use AppBundle\Entity\AffectedProgram;
 
 /**
  * Student
@@ -107,20 +108,25 @@ class Student
         return $this->id;
     }
     
-    public function getMarksBySequence(Sequence $sequence)
+    /**
+     * return array() of marks for a given sequence
+     */
+    public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence)
     {
-        //Collect all the marks for the current $sequence
-        $sequenceMarks = array();
-        foreach ($sequence->getEvaluations() as $evaluations){
-            foreach ($evaluations as $eval){
-                //Make sure the marks is for the current student
-                //if($this->getMar)
-                $sequenceMarks[] = $eval->getMark();
+        //prepare the the variable to store all the marks
+        $selectedMarks = [];
+        //Set of marks provides by the affectedProgram
+        $marksFromAffectedProgram = $affectedProgram->getMarksBySequence($sequence);
+        foreach($this->getMarks() as $markFromStd){
+            //Check wther this mark is part of the set provided by the affectedProgram marks
+            foreach($marksFromAffectedProgram as $mFAP){
+                if($markFromStd->getId() == $mFAP->getId()){
+                    $selectedMarks [] = $mFAP;
+                }
             }
         }
-        
-        
-        return $marks;
+
+        return $selectedMarks;
     }
     
     public function getBarcodeValue()

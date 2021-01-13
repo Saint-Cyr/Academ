@@ -45,6 +45,8 @@ class BuildMarkTableHandler
     {
         //Anyway we'll need the setting
         $setting = $this->em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
+        //We will need also all the affectedProgram
+        $affectedPrograms = $student->getSection()->getAffectedPrograms();
         $programs = $student->getSection()->getLevel()->getPrograms();
         //Prepare the variable that can content the markTable for one student
         $param['student_name'] = $student->getName();
@@ -54,12 +56,12 @@ class BuildMarkTableHandler
         }
         //Prepare the variable for totalMarkCoefficient
         $totalMarkCoefficient = null;
-        //For each program belonging to the section of the current student,
+        //For each affected program belonging to the section of the current student,
         //Build column one after another
-        foreach ($programs as $prog){
+        foreach ($affectedPrograms as $affectedProg){
             //get the computed mark (for Devoir only) from a service
             //Notice that only mark for the right sequence (the activated one) must be used
-            $computedMark = $student->getDevoirMarksBySequenceByProgram($sequence, $prog);
+            $computedMark = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence);
             //$computedMark = number_format($this->utils->getComputedMark($student, $prog, false, $sequence), 2);
             //Get mark for Composition
             $markForComposition = $this->utils->getMarkForComposition($student, $prog, $sequence);
