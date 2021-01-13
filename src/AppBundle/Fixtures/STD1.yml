@@ -147,7 +147,7 @@ AppBundle\Entity\Sequence:
     
 AppBundle\Entity\Section:
     section_6em_1:
-        name: 6em
+        name: 6em 1
         level: "@level_6em"
         mainTeacher: "@main_teacher_6em"
     section_2nd_c1:

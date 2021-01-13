@@ -146,5 +146,5 @@ services:
         class: AppBundle\Admin\AffectedProgramAdmin
         arguments: [~, AppBundle\Entity\AffectedProgram, AppBundle:AffectedProgramAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: AffectedProgram }
+            - { name: sonata.admin, manager_type: orm, group: Admin, label: AffectedProgram }
         public: true

@@ -42,6 +42,7 @@ sonata_admin:
                     - app.admin.level
                     - app.admin.field
                     - app.admin.program
+                    - app.admin.affected_program
                     - app.admin.coefficient
                     - app.admin.cycle
                     - app.admin.sequence
