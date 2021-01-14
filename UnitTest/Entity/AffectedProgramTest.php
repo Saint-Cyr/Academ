@@ -41,12 +41,12 @@ class AffectedProgramTest extends WebTestCase
         //Get the sequence from the fixture
         $student = $this->em->getRepository('AppBundle:Student')->find(1);
         //Get the affectedProgram from the fixture
-        $affectedProgram = $this->em->getRepository('AppBundle:AffectedProgram')->find(1);
+        $affectedProgramFrancais = $this->em->getRepository('AppBundle:AffectedProgram')->findOneBy(array('name' => 'Francais'));
         //Test the getMarksBySequence() method
-        $marksForFirstSequence = $affectedProgram->getMarksBySequence($sequence1);
-        $marksForSecondSequence = $affectedProgram->getMarksBySequence($sequence2);
+        $marksForFirstSequence = $affectedProgramFrancais->getMarksBySequence($sequence1);
+        //$marksForSecondSequence = $affectedProgram->getMarksBySequence($sequence2);
         $this->assertEquals(count($marksForFirstSequence), 4);
-        $this->assertEquals(count($marksForSecondSequence), 1);
+        //$this->assertEquals(count($marksForSecondSequence), 1);
         
     }
 }

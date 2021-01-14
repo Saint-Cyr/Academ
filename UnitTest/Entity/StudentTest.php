@@ -39,13 +39,13 @@ class StudentTest extends WebTestCase
         $student = $this->em->getRepository('AppBundle:Student')->findOneBy(array('name' => 'Eleve 6em 1'));
         //Get the sequence from the fixture
         $sequence1 = $this->em->getRepository('AppBundle:Sequence')->findOneBy(array('name' => '1er Trimestre'));
-        $sequence2 = $this->em->getRepository('AppBundle:Sequence')->findOneBy(array('name' => '2em Trimestre'));
+        //$sequence2 = $this->em->getRepository('AppBundle:Sequence')->findOneBy(array('name' => '2em Trimestre'));
         //Get the affectedProgram from the fixture
-        $affectedProgram = $this->em->getRepository('AppBundle:AffectedProgram')->find(1);
-        $marks1 = $student->getMarksByAffectedProgramAndSequence($affectedProgram, $sequence1);
-        $marks2 = $student->getMarksByAffectedProgramAndSequence($affectedProgram, $sequence2);
+        $affectedProgramFrancais = $this->em->getRepository('AppBundle:AffectedProgram')->findOneBy(array('name' => 'Francais'));
+        $marks1 = $student->getMarksByAffectedProgramAndSequence($affectedProgramFrancais, $sequence1);
+        //$marks2 = $student->getMarksByAffectedProgramAndSequence($affectedProgramFrancais, $sequence2);
         $this->assertEquals(count($marks1), 4);
-        $this->assertEquals(count($marks2), 1);
+        //$this->assertEquals(count($marks2), 1);
     }
 }
 

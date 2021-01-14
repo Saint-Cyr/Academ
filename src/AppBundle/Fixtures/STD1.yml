@@ -24,26 +24,6 @@ UserBundle\Entity\User:
         roles: [ROLE_LEVEL2]
         barcode: 2345234232312
 
-AppBundle\Entity\Field:
-    field_maths:
-        name: Maths
-    field_svt:
-        name: SVT
-    field_pc:
-        name: Physique Chimie
-    field_fr:
-        name: Francais
-    field_ang:
-        name: Anglais
-    field_philo:
-        name: Philosophie
-    field_ecofa:
-        name: ECOFA
-    field_eps:
-        name: EPS
-    field_hg:
-        name: Hist/Geo
-
 AppBundle\Entity\Cycle:
     cycle_1:
         name: 2nd Cycle
@@ -115,23 +95,93 @@ AppBundle\Entity\MainTeacher:
         teacher: "@teacher_fr_1"
     main_teacher_2nd_c:
         teacher: "@teacher_ang_1"
+AppBundle\Entity\Field:
+    field_maths:
+        name: Maths
+    field_svt:
+        name: SVT
+    field_pc:
+        name: Physique Chimie
+    field_fr:
+        name: Francais
+    field_ang:
+        name: Anglais
+    field_philo:
+        name: Philosophie
+    field_ecofa:
+        name: ECOFA
+    field_eps:
+        name: EPS
+    field_hg:
+        name: Hist/Geo
+    field_bio:
+        name: Biologie
 
 AppBundle\Entity\Program:
-    program_maths_6em:
-        name: Maths
-        level: "@level_6em"
-        field: "@field_maths"
-        coefficient: "@coefficient_5"
     program_fr_6em:
         name: Francais 6em
         level: "@level_6em"
         field: "@field_fr"
         coefficient: "@coefficient_6"
+    program_ang_6em:
+        name: Anglais 6em
+        level: "@level_6em"
+        field: "@field_ang"
+        coefficient: "@coefficient_3"
+    program_ecofa_6em:
+        name: ECOFA 6em
+        level: "@level_6em"
+        field: "@field_ecofa"
+        coefficient: "@coefficient_2"
+    program_hg_6em:
+        name: Hist / Geo 6em
+        level: "@level_6em"
+        field: "@field_hg"
+        coefficient: "@coefficient_3"
+    program_bio_6em:
+        name: Biologie 6em
+        level: "@level_6em"
+        field: "@field_bio"
+        coefficient: "@coefficient_3"
+    program_maths_6em:
+        name: Maths
+        level: "@level_6em"
+        field: "@field_maths"
+        coefficient: "@coefficient_5"
+    program_pc_6em:
+        name: Physique / Chimie 6em
+        level: "@level_6em"
+        field: "@field_pc"
+        coefficient: "@coefficient_5"
 
 AppBundle\Entity\AffectedProgram:
     affected_program_fr_6em_1:
         name: Francais
         program: "@program_fr_6em"
+        section: "@section_6em_1"
+    affected_program_ang_6em_1:
+        name: Anglais
+        program: "@program_ang_6em"
+        section: "@section_6em_1"
+    affected_program_hg_6em_1:
+        name: Hist / Geo
+        program: "@program_hg_6em"
+        section: "@section_6em_1"
+    affected_program_ecofa_6em_1:
+        name: ECOFA
+        program: "@program_ecofa_6em"
+        section: "@section_6em_1"
+    affected_program_bio_6em_1:
+        name: Biologie
+        program: "@program_bio_6em"
+        section: "@section_6em_1"
+    affected_program_maths_6em_1:
+        name: Maths
+        program: "@program_maths_6em"
+        section: "@section_6em_1"
+    affected_program_pc_6em_1:
+        name: Physique / Chimie
+        program: "@program_pc_6em"
         section: "@section_6em_1"
 
 AppBundle\Entity\Sequence:
@@ -162,7 +212,7 @@ AppBundle\Entity\EvaluationType:
         name: Composition
         
 AppBundle\Entity\Evaluation:
-#Evaluation 1er trimestre
+#Evaluation 1er Trimestre Francais 6em1
     evaluation_1:
         createdAt: <(new \DateTime('01-09-2018'))>
         evaluationType: "@evaluation_type_1"
@@ -191,6 +241,181 @@ AppBundle\Entity\Evaluation:
         affectedProgram: "@affected_program_fr_6em_1"
         section: "@section_6em_1"
         name: Composition
+    #Evaluation 1er Trimestre Anglais 6em1
+    evaluation_5:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ang_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_6:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ang_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_7:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ang_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_8:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ang_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    #Evaluation 1er Trimestre H/G 6em1
+    evaluation_9:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_hg_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_10:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_hg_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_11:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_hg_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_12:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_hg_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    #Evaluation 1er Trimestre ECOFA 6em1
+    evaluation_13:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ecofa_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_14:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ecofa_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_15:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ecofa_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_16:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_ecofa_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    #Evaluation 1er Trimestre Biologie 6em1
+    evaluation_17:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_bio_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_18:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_bio_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_19:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_bio_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_20:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_bio_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    #Evaluation 1er Trimestre Maths 6em1
+    evaluation_21:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_maths_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_22:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_maths_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_23:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_maths_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_24:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_maths_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    #Evaluation 1er Trimestre Physique / Chimie 6em1
+    evaluation_25:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_pc_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>1
+    evaluation_26:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_pc_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>2
+    evaluation_27:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_1"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_pc_6em_1"
+        section: "@section_6em_1"
+        name: Devoire N<sup>o</sup>3
+    evaluation_28:
+        createdAt: <(new \DateTime('01-09-2018'))>
+        evaluationType: "@evaluation_type_2"
+        sequence: "@sequence_1"
+        affectedProgram: "@affected_program_pc_6em_1"
+        section: "@section_6em_1"
+        name: Composition
+    
 
     evaluation_29:
         createdAt: <(new \DateTime('01-09-2018'))>
@@ -211,6 +436,7 @@ AppBundle\Entity\Student:
         section: "@section_2nd_c1"
         
 AppBundle\Entity\Mark:
+    #Evaluation for Affectedprogram Francais
     mark_1:
         value: 10
         evaluation: "@evaluation_1"
@@ -227,9 +453,107 @@ AppBundle\Entity\Mark:
         value: 9.5
         evaluation: "@evaluation_4"
         student: "@student_1"
-    mark_29:
+    #Evaluation for AffectedProgram Anglais
+    mark_5:
+        value: 7.5
+        evaluation: "@evaluation_5"
+        student: "@student_1"
+    mark_6:
+        value: 8.5
+        evaluation: "@evaluation_6"
+        student: "@student_1"
+    mark_7:
+        value: 9.5
+        evaluation: "@evaluation_7"
+        student: "@student_1"
+    mark_8:
         value: 10
-        evaluation: "@evaluation_29"
+        evaluation: "@evaluation_8"
+        student: "@student_1"
+    #Evaluation for AffectedProgram Hist/Geo
+    mark_9:
+        value: 10
+        evaluation: "@evaluation_9"
+        student: "@student_1"
+    mark_10:
+        value: 10
+        evaluation: "@evaluation_10"
+        student: "@student_1"
+    mark_11:
+        value: 10
+        evaluation: "@evaluation_11"
+        student: "@student_1"
+    mark_12:
+        value: 9.5
+        evaluation: "@evaluation_12"
+        student: "@student_1"
+    #Evaluation for AffectedProgram ECOFA
+    mark_13:
+        value: 10
+        evaluation: "@evaluation_13"
+        student: "@student_1"
+    mark_14:
+        value: 10
+        evaluation: "@evaluation_14"
+        student: "@student_1"
+    mark_15:
+        value: 10
+        evaluation: "@evaluation_15"
+        student: "@student_1"
+    mark_16:
+        value: 9.5
+        evaluation: "@evaluation_16"
+        student: "@student_1"
+    #Evaluation for AffectedProgram Biologie
+    mark_17:
+        value: 10
+        evaluation: "@evaluation_17"
+        student: "@student_1"
+    mark_18:
+        value: 10
+        evaluation: "@evaluation_18"
+        student: "@student_1"
+    mark_19:
+        value: 10
+        evaluation: "@evaluation_19"
+        student: "@student_1"
+    mark_20:
+        value: 9.5
+        evaluation: "@evaluation_20"
+        student: "@student_1"
+    #Evaluation for AffectedProgram Maths
+    mark_21:
+        value: 10
+        evaluation: "@evaluation_21"
+        student: "@student_1"
+    mark_22:
+        value: 10
+        evaluation: "@evaluation_22"
+        student: "@student_1"
+    mark_23:
+        value: 10
+        evaluation: "@evaluation_23"
+        student: "@student_1"
+    mark_24:
+        value: 9.5
+        evaluation: "@evaluation_24"
+        student: "@student_1"
+    #Evaluation for AffectedProgram PC
+    mark_25:
+        value: 10
+        evaluation: "@evaluation_25"
+        student: "@student_1"
+    mark_26:
+        value: 10
+        evaluation: "@evaluation_26"
+        student: "@student_1"
+    mark_27:
+        value: 10
+        evaluation: "@evaluation_27"
+        student: "@student_1"
+    mark_28:
+        value: 9.5
+        evaluation: "@evaluation_28"
         student: "@student_1"
     
 AppBundle\Entity\Setting:

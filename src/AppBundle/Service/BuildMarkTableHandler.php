@@ -62,7 +62,6 @@ class BuildMarkTableHandler
             //get the computed mark (for Devoir only) from a service
             //Notice that only mark for the right sequence (the activated one) must be used
             $computedMark = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence);
-            //$computedMark = number_format($this->utils->getComputedMark($student, $prog, false, $sequence), 2);
             //Get mark for Composition
             $markForComposition = $this->utils->getMarkForComposition($student, $prog, $sequence);
             //Get the average: $composition + $computedMark / 3 according to the rule in CAR
