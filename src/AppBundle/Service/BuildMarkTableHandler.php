@@ -47,7 +47,6 @@ class BuildMarkTableHandler
         $setting = $this->em->getRepository('AppBundle:Setting')->findOneBy(array('name' => 'setting'));
         //We will need also all the affectedProgram
         $affectedPrograms = $student->getSection()->getAffectedPrograms();
-        $programs = $student->getSection()->getLevel()->getPrograms();
         //Prepare the variable that can content the markTable for one student
         $param['student_name'] = $student->getName();
         //Make sure the current student have a parent before we call the getParent() methode
@@ -56,7 +55,7 @@ class BuildMarkTableHandler
         }
         //Prepare the variable for totalMarkCoefficient
         $totalMarkCoefficient = null;
-        //For each affected program belonging to the section of the current student,
+        //For each affected program belonging to the section,
         //Build column one after another
         foreach ($affectedPrograms as $affectedProg){
             //get the computed mark (for Devoir only) from a service

@@ -67,22 +67,27 @@ class AffectedProgram
 
     /**
      * return marks related to a sequence
+     * @param $markType can be either 'devoir' or composition
      */
-    public function getMarksBySequence(Sequence $sequence)
+    public function getMarksBySequence(Sequence $sequence, $markType)
     {
         $selectedMark = [];
         foreach($this->getEvaluations() as $evaluation){
-            $markFromEvaluations = $evaluation->getMarks();
-            foreach($markFromEvaluations as $mFE){
-                if($mFE->getEvaluation()->getSequence()->getName() == $sequence->getName())
-                {
-                    $selectedMark[] = $mFE;
+            //Make sure to fetch only the evaluation for the right type
+            if($evaluation->getEvaluationType()->getName() == $markType)
+            {
+                $markFromEvaluations = $evaluation->getMarks();
+                foreach($markFromEvaluations as $mFE){
+                    if($mFE->getEvaluation()->getSequence()->getName() == $sequence->getName())
+                    {
+                        $selectedMark[] = $mFE;
+                    }
                 }
+
             }
         }
 
         return $selectedMark;
-
     }
 
     /**

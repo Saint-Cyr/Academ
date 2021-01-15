@@ -110,13 +110,14 @@ class Student
     
     /**
      * return array() of marks for a given sequence
+     * @parameter: $markType can be 'devoir' or 'composition'
      */
-    public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence)
+    public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence, $markType)
     {
         //prepare the the variable to store all the marks
         $selectedMarks = [];
         //Set of marks provides by the affectedProgram
-        $marksFromAffectedProgram = $affectedProgram->getMarksBySequence($sequence);
+        $marksFromAffectedProgram = $affectedProgram->getMarksBySequence($sequence, $markType);
         foreach($this->getMarks() as $markFromStd){
             //Check wther this mark is part of the set provided by the affectedProgram marks
             foreach($marksFromAffectedProgram as $mFAP){
