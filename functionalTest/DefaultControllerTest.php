@@ -17,10 +17,13 @@ class DefaultControllerTest extends WebTestCase
         $this->assertContains('ADMINISTRATION', $client->getResponse()->getContent());
         $this->assertContains('MARK INPUT', $client->getResponse()->getContent());
         $this->assertContains('CONFIGURATION', $client->getResponse()->getContent());
-        $crawler = $client->request('GET', '/mark_input_parameters');
+        //Check the mark input page loading 
+        $crawler = $client->request('GET', '/mark_input/1/1');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $crawler = $client->request('GET', '/admin/dashboard');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        
     }
 
     /*

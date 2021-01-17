@@ -110,7 +110,7 @@ class Student
     
     /**
      * return array() of marks for a given sequence
-     * @parameter: $markType can be 'devoir' or 'composition'
+     * @param $markType can be 'devoir' or 'composition'
      */
     public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence, $markType)
     {

@@ -159,30 +159,37 @@ AppBundle\Entity\AffectedProgram:
         name: Francais
         program: "@program_fr_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_fr_1"
     affected_program_ang_6em_1:
         name: Anglais
         program: "@program_ang_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_ang_1"
     affected_program_hg_6em_1:
         name: Hist / Geo
         program: "@program_hg_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_hg_1"
     affected_program_ecofa_6em_1:
         name: ECOFA
         program: "@program_ecofa_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_ecofa_1"
     affected_program_bio_6em_1:
         name: Biologie
         program: "@program_bio_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_bio_1"
     affected_program_maths_6em_1:
         name: Maths
         program: "@program_maths_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_maths_1"
     affected_program_pc_6em_1:
         name: Physique / Chimie
         program: "@program_pc_6em"
         section: "@section_6em_1"
+        teacher: "@teacher_maths_1"
 
 AppBundle\Entity\Sequence:
     sequence_1:

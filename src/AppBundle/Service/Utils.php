@@ -109,6 +109,7 @@ class Utils
     /*
      * return a mark (value * 2) when it related evaluation type is composition
      * this is for STD mode
+     * @deprecated since alpha1.2
      */
     public function getMarkForComposition(Student $student, Program $program, Sequence $sequence)
     {
@@ -189,12 +190,22 @@ class Utils
         
         return 'Unknown';
     }
+
+    /**
+     * This method provide return the average of a collected marks
+     */
+    public function getMarksAverage($marks){
+        $markValues = [];
+        foreach($marks as $mark){
+            $markValues[] = $mark->getValue();
+        }
+        $average = (array_sum($markValues) / count($markValues));
+        return number_format($average, 2);
+    }
     
     /**
      * @return array() like $tab['th_congratulation'], $tab['th_ this methode return the global
-     * appreciation about the globale mark for a sequence.
-     * 
-     * 
+     * appreciation about the globale mark for a sequence. 
      */
     public function getGlobalAppreciation($mark)
     {

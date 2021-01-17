@@ -24,7 +24,9 @@ final class AffectedProgramAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
+            ->add('section')
             ->add('name')
+            ->add('teacher')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

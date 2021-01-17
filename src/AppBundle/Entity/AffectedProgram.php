@@ -65,6 +65,15 @@ class AffectedProgram
         return $this->id;
     }
 
+    public function __toString() {
+        
+        if($this->name){
+            return $this->name." #".$this->getSection();
+        };
+        
+        return 'New Affected Program';
+    }
+
     /**
      * return marks related to a sequence
      * @param $markType can be either 'devoir' or composition
@@ -179,5 +188,53 @@ class AffectedProgram
     public function getSection()
     {
         return $this->section;
+    }
+
+    /**
+     * Set teacher.
+     *
+     * @param \AppBundle\Entity\Teacher|null $teacher
+     *
+     * @return AffectedProgram
+     */
+    public function setTeacher(\AppBundle\Entity\Teacher $teacher = null)
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get teacher.
+     *
+     * @return \AppBundle\Entity\Teacher|null
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
+    }
+
+    /**
+     * Set program.
+     *
+     * @param \AppBundle\Entity\Program $program
+     *
+     * @return AffectedProgram
+     */
+    public function setProgram(\AppBundle\Entity\Program $program)
+    {
+        $this->program = $program;
+
+        return $this;
+    }
+
+    /**
+     * Get program.
+     *
+     * @return \AppBundle\Entity\Program
+     */
+    public function getProgram()
+    {
+        return $this->program;
     }
 }

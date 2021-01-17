@@ -13,10 +13,10 @@ class BuildMarkTableHandler
     private $em;
     private $utils;
     
-    public function __construct($em, $utilsSTD) 
+    public function __construct($em, $utils) 
     {
         $this->em = $em;
-        $this->utils = $utilsSTD;
+        $this->utils = $utils;
     }
     
     public function generateMarkTable(Section $section, $setting)
@@ -41,6 +41,10 @@ class BuildMarkTableHandler
         return array('parameters' => $parameters, 'mark_tables' => $markTables);
     }
     
+    /**
+     * This algorithm suppose to provide one mark table data for one student, for
+     * the given sequence
+     */
     public function buildMarkTableOneStudent(Student $student, Sequence $sequence)
     {
         //Anyway we'll need the setting
@@ -58,13 +62,19 @@ class BuildMarkTableHandler
         //For each affected program belonging to the section,
         //Build column one after another
         foreach ($affectedPrograms as $affectedProg){
+            //We'll need the related program object of the current affectedProgram
+            $prog = $affectedProg->getProgram();
             //get the computed mark (for Devoir only) from a service
             //Notice that only mark for the right sequence (the activated one) must be used
-            $computedMark = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence);
+            $marksForDevoir = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence, 'Devoir');
             //Get mark for Composition
-            $markForComposition = $this->utils->getMarkForComposition($student, $prog, $sequence);
+            $markForComposition = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence, 'Composition');
+            //Get the average of marksOfDevoir
+            $averageOfDevoirMarks = $this->utils->getMarksAverage($marksForDevoir);
+            //Let's get the composition mark value first
+            $compositionMarkValue = $markForComposition[0]->getValue();
             //Get the average: $composition + $computedMark / 3 according to the rule in CAR
-            $average = number_format(($computedMark + $markForComposition)/3, 2);
+            $average = number_format((($averageOfDevoirMarks + ($compositionMarkValue*2))/3), 2);
             //Get appreciation
             $appreciation = $this->utils->getAppreciation($average);
             //Prepare the mark time coefficient
@@ -73,20 +83,21 @@ class BuildMarkTableHandler
             //Prepare total mark Coefficient
             $totalMarkCoefficient = number_format(($totalMarkCoefficient + $markCoef), 2);
             //Prepare teacher name Notice if null, then make sure to set it to unknown
-            if(is_object($prog->getTeacher())){
-                $teacherName = $prog->getTeacher()->getName();
+            if(is_object($affectedProg->getTeacher())){
+                $teacherName = $affectedProg->getTeacher()->getName();
             }else{
+                //To do: translate the following variable.
                 $teacherName = 'Unknown';
             }
             
             //Build columns for the current program or current row (program Name, coef, mark/20, mark*Coef, ...)
             $row = array('program_name' => $prog->getName(),
                          'coefficient' => $prog->getCoefficient()->getValue(),
-                         'mark' => $computedMark,
+                         'mark' => $averageOfDevoirMarks,
                          'mark_coefficient' => $markCoef,
                          'teacher' => $teacherName,
                          'appreciation' => $appreciation,
-                         'mark_composition' => $markForComposition,
+                         'mark_composition' => $compositionMarkValue,
                          'average' => $average);
                          $rows[] = $row;
         }
@@ -159,9 +170,10 @@ class BuildMarkTableHandler
     }
     
     
+
     public function getTotalMarkBySequence(Sequence $sequence, Student $student)
     {
-        $programs = $student->getSection()->getLevel()->getPrograms();
+        $affectedPrograms = $student->getSection()->getAffectedPrograms();
         //Prepare the variable that can content the markTable for one student
         $param['student_name'] = $student->getName();
         //Make sure the current student have a parent before we call the getParent() methode
@@ -173,39 +185,27 @@ class BuildMarkTableHandler
         $totalMarkCoefficient = null;
         //For each program belonging to the section of the current student,
         //Build column one after another
-        foreach ($programs as $prog){
+        foreach ($affectedPrograms as $affectedProg){
+            //We'll need the related program object of the current affectedProgram
+            $prog = $affectedProg->getProgram();
             //get the computed mark (for Devoir only) from a service
             //Notice that only mark for the right sequence (the activated one) must be used
-            $computedMark = $student->getDevoirMarksBySequenceByProgram($sequence, $prog);
-            //$computedMark = number_format($this->utils->getComputedMark($student, $prog, false, $sequence), 2);
+            $marksForDevoir = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence, 'Devoir');
             //Get mark for Composition
-            $markForComposition = $this->utils->getMarkForComposition($student, $prog, $sequence);
+            $markForComposition = $student->getMarksByAffectedProgramAndSequence($affectedProg, $sequence, 'Composition');
+            //Get the average of marksOfDevoir
+            $averageOfDevoirMarks = $this->utils->getMarksAverage($marksForDevoir);
+            //Let's get the composition mark value first
+            $compositionMarkValue = $markForComposition[0]->getValue();
             //Get the average: $composition + $computedMark / 3 according to the rule in CAR
-            $average = number_format(($computedMark + $markForComposition)/3, 2);
-            //Get appreciation
-            $appreciation = $this->utils->getAppreciation($average);
+            $average = number_format((($averageOfDevoirMarks + ($compositionMarkValue*2))/3), 2);
+            //Get the $averageTimesCoef in order to help getting the totalMarkBySequence as follow
+            //$totalMarkBySequence = SUM($averageTimesCoef / $totalCoeff)
             //Prepare the mark time coefficient
-            $markCoef = ($average * $prog->getCoefficient()->getValue());
-            $markCoef = number_format($markCoef, 2);
+            $markTimesCoef = ($average * $prog->getCoefficient()->getValue());
+            $markTimesCoef = number_format($markTimesCoef, 2);
             //Prepare total mark Coefficient
-            $totalMarkCoefficient = number_format(($totalMarkCoefficient + $markCoef), 2);
-            //Prepare teacher name Notice if null, then make sure to set it to unknown
-            if(is_object($prog->getTeacher())){
-                $teacherName = $prog->getTeacher()->getName();
-            }else{
-                $teacherName = 'Unknown';
-            }
-            
-            //Build columns for the current program or current row (program Name, coef, mark/20, mark*Coef, ...)
-            $row = array('program_name' => $prog->getName(),
-                         'coefficient' => $prog->getCoefficient()->getValue(),
-                         'mark' => $computedMark,
-                         'mark_coefficient' => $markCoef,
-                         'teacher' => $teacherName,
-                         'appreciation' => $appreciation,
-                         'mark_composition' => $markForComposition,
-                         'average' => $average);
-                         $rows[] = $row;
+            $totalMarkCoefficient = number_format(($totalMarkCoefficient + $markTimesCoef), 2);           
         }
         
         //Set the global appreciation

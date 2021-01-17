@@ -29,11 +29,11 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('sequence')
             ->add('name', 'html', array('editable' => true))
             ->add('evaluationType')
-            ->add('program')
-            ->add('section')
+            ->add('sequence')
+            ->add('affectedProgram')
+            ->add('affectedProgram.section', null, ['label' => 'Section'])
             //->add('average')
             ->add('createdAt', null, array('label' => 'Evaluation Date'))
             ->add('_action', null, [

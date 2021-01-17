@@ -22,6 +22,43 @@ class Section
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MainTeacher", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $mainTeacher;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Level", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $level;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="section")
+     */
+    private $affectedPrograms;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Student", mappedBy="section")
+     */
+    private $students;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
     
     /**
      * Unmapped property to handle file uploads
@@ -189,43 +226,6 @@ class Section
         return $this->collectedImageUpdated;
     }
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
-     */
-    private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="MainTeacher", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $mainTeacher;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Level", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $level;
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="section")
-     */
-    private $evaluations;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Student", mappedBy="section")
-     */
-    private $students;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
 
     /**
      * Get id
@@ -311,13 +311,6 @@ class Section
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Set mainTeacher
@@ -341,40 +334,6 @@ class Section
     public function getMainTeacher()
     {
         return $this->mainTeacher;
-    }
-
-    /**
-     * Add evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return Section
-     */
-    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations[] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     */
-    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations->removeElement($evaluation);
-    }
-
-    /**
-     * Get evaluations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
     }
 
     /**
@@ -433,5 +392,29 @@ class Section
     public function getLevel()
     {
         return $this->level;
+    }
+
+    /**
+     * Get collectedImageUpdated.
+     *
+     * @return bool|null
+     */
+    public function getCollectedImageUpdated()
+    {
+        return $this->collectedImageUpdated;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param string|null $image
+     *
+     * @return Section
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

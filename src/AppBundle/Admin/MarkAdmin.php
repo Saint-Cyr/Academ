@@ -18,7 +18,7 @@ class MarkAdmin extends AbstractAdmin
             ->add('value')
             ->add('evaluation', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('evaluation.section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('evaluation.program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('evaluation.affectedProgram', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('evaluation.sequence', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
@@ -29,7 +29,7 @@ class MarkAdmin extends AbstractAdmin
             ->add('value', 'number', array('editable' => true))
             ->add('student')
             ->add('evaluation', 'html')
-            ->add('evaluation.program')
+            ->add('evaluation.affectedProgram')
             ->add('evaluation.sequence')
             
             ->add('_action', null, [
