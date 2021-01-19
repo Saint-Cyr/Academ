@@ -9,14 +9,17 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 final class AffectedProgramAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
-            ->add('id')
-            ->add('name')
+            ->add('program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('section.level', ModelAutocompleteFilter::class, ['label' => 'Level'], null, ['property' => 'name'])
+            
         ;
     }
 
@@ -26,6 +29,8 @@ final class AffectedProgramAdmin extends AbstractAdmin
             ->add('id')
             ->add('section')
             ->add('name')
+            ->add('program')
+            ->add('program.level')
             ->add('teacher')
             ->add('_action', null, [
                 'actions' => [
@@ -40,9 +45,11 @@ final class AffectedProgramAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->add('id')
-            ->add('name')
-        ;
+        ->with('Section Information', array('class' => 'col-md-4'))
+            ->add('program', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('section', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('teacher', null, array('attr' => array('style' => 'width: 450px')))
+        ->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void

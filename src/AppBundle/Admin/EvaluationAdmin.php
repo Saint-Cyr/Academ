@@ -55,10 +55,9 @@ class EvaluationAdmin extends AbstractAdmin
                 ->add('sequence', null, array('attr' => array('style' => 'width: 450px')))
                 ->add('name')
                 ->add('evaluationType', null, array('attr' => array('style' => 'width: 455px')))
-                ->add('program', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
             ->with('Second section', array('class' => 'col-md-4'))
-                ->add('section', null, array('attr' => array('style' => 'width: 450px')))
+                ->add('affectedProgram', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
         ;
     }
@@ -73,7 +72,7 @@ class EvaluationAdmin extends AbstractAdmin
     }
 
     public function getExportFields() {
-        return array('Barcode'=>'code', 'Sequence'=>'sequence', 'Type Evaluation'=>'evaluationType', 'Program'=>'program', 'Section'=>'section');
+        return array('Barcode'=>'code', 'Sequence'=>'sequence', 'Type Evaluation'=>'evaluationType', 'Program'=>'affectedProgram', 'Section'=>'affectedProgram.section');
     }
     
     public function getExportFormats() {

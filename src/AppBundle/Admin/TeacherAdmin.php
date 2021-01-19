@@ -14,7 +14,7 @@ class TeacherAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
-            ->add('programs')
+            ->add('affectedPrograms')
         ;
     }
 
@@ -23,7 +23,7 @@ class TeacherAdmin extends AbstractAdmin
         $listMapper
             ->add('firstname', null, ['editable' => true])
             ->add('name', null, ['editable' => true])
-            ->add('programs', null, ['editable' => true])
+            ->add('affectedPrograms')
             ->add('sections', null, ['editable' => true])
             ->add('phoneNumber', null, ['editable' => true])
             ->add('adress', null, ['editable' => true])
@@ -47,7 +47,7 @@ class TeacherAdmin extends AbstractAdmin
             ->add('firstName', null, array('attr' => array('style' => 'width:450px')))
             ->add('phoneNumber', null, array('attr' => array('style' => 'width:450px')))
             ->add('adress', null, array('attr' => array('style' => 'width:450px')))
-            ->add('programs', null, array('attr' => array('style' => 'width:450px')))
+            ->add('affectedPrograms', null, array('attr' => array('style' => 'width:450px')))
         ->end()
         ;
     }

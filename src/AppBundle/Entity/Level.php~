@@ -20,6 +20,13 @@ class Level
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="affected_programs_built", type="boolean", nullable=true)
+     */
+    private $affectedProgramsBuilt;
     
     /**
      * @ORM\OneToMany(targetEntity="Program", mappedBy="level")
@@ -32,7 +39,7 @@ class Level
     private $sections;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Cycle", inversedBy="levels")
+     * @ORM\ManyToOne(targetEntity="Cycle")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cycle;

@@ -23,13 +23,16 @@ class SectionAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('id')
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
             ->add('name', null, ['editable' => true])
             ->add('level')
             ->add('studentNumber')
+            ->add('studentCsvList')
             ->add('studentLeader')
             ->add('evaluations')
             ->add('mainTeacher')
+            ->add('level.programs')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

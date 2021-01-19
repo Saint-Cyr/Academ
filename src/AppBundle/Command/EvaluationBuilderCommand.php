@@ -5,10 +5,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Component\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface as OutputOutputInterface;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EvaluationBuilderCommand extends Command
 {
+    private $em;
+    
+    public function __construct(EntityManagerInterface $em) 
+    {
+        parent::__construct();
+        $this->em = $em;
+        
+    }
+
     public function configure()
     {
         $this
@@ -16,16 +25,14 @@ class EvaluationBuilderCommand extends Command
             ->setDescription('some description of the command go here....')
             ->setHelp('This command make it possible for building evaluations')
             ->addArgument('level', InputArgument::REQUIRED, 'The level #ID or Name');
-
     }
 
     protected function interact(InputInterface $input, OutputOutputInterface $outPut)
     {
-        $this->setHelp('help1');
+        //$this->setHelp('help1');
         $helper = $this->getHelp();
-        $helper2 = $this->getHelper('help1');
-        //$questionHelper = $this->getQuestionHelper();
-
+        //$helper2 = $this->getHelper('help1');
+        
     }
 
     public function execute(InputInterface $input, OutputOutputInterface $outPut)

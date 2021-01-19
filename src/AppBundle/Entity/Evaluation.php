@@ -71,6 +71,11 @@ class Evaluation
     {
         return $this->id;
     }
+
+    public function getCode()
+    {
+        return $this->getId()."/".$this->getAffectedProgram()->getSection()->getId();
+    }
     
     public function getAverage()
     {

@@ -390,4 +390,40 @@ class Teacher
     {
         return $this->age;
     }
+
+    /**
+     * Add affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Teacher
+     */
+    public function addAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        $this->affectedPrograms[] = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        return $this->affectedPrograms->removeElement($affectedProgram);
+    }
+
+    /**
+     * Get affectedPrograms.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAffectedPrograms()
+    {
+        return $this->affectedPrograms;
+    }
 }

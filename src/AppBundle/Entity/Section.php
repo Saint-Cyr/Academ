@@ -26,6 +26,13 @@ class Section
     /**
      * @var string
      *
+     * @ORM\Column(name="studentCsvList", type="boolean", nullable=true)
+     */
+    private $studentCsvList;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
      */
     private $image;
@@ -106,6 +113,7 @@ class Section
         if($this->getFile()){
             $this->setCollectedImageUpdated(true);
             $this->setCollectedImage($this->getName().'.'.$this->getFile()->guessExtension());
+            $this->setStudentCsvList(true);
         }
         
         $this->setUpdated(new \DateTime());
@@ -120,7 +128,6 @@ class Section
         if (file_exists(getcwd().'/upload/section/'.$this->getImage())){
             //Remove it
             @unlink(getcwd().'/upload/section/'.$this->getImage());
-            
         }
         
         return;
@@ -134,7 +141,7 @@ class Section
         }
         
         // move takes the target directory and target filename as params
-        $this->getFile()->move(getcwd().'/upload/section', $this->getName().'.csv');
+        $this->getFile()->move(getcwd().'/upload/section', $this->getId().'.csv');
         // clean up the file property as you won't need it anymore
         $this->setFile(null);
     }
@@ -460,5 +467,29 @@ class Section
     public function getAffectedPrograms()
     {
         return $this->affectedPrograms;
+    }
+
+    /**
+     * Set studentCsvList.
+     *
+     * @param bool|null $studentCsvList
+     *
+     * @return Section
+     */
+    public function setStudentCsvList($studentCsvList = null)
+    {
+        $this->studentCsvList = $studentCsvList;
+
+        return $this;
+    }
+
+    /**
+     * Get studentCsvList.
+     *
+     * @return bool|null
+     */
+    public function getStudentCsvList()
+    {
+        return $this->studentCsvList;
     }
 }

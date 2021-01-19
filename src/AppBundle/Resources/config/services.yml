@@ -51,6 +51,20 @@ services:
             -  "@doctrine.orm.entity_manager"
         tags: 
             - { name: console.command }
+
+    console_command.affected_program_builder:
+        class: AppBundle\Command\AffectedProgramBuilderCommand
+        arguments:
+            -  "@doctrine.orm.entity_manager"
+        tags: 
+            - { name: console.command }
+
+    console_command.evaluation_builder:
+        class: AppBundle\Command\EvaluationBuilderCommand
+        arguments:
+            -  "@doctrine.orm.entity_manager"
+        tags: 
+            - { name: console.command }
             
     app.utils:
         class: AppBundle\Service\Utils

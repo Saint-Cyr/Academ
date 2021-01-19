@@ -20,6 +20,13 @@ class Level
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="affected_programs_built", type="boolean", nullable=true)
+     */
+    private $affectedProgramsBuilt;
     
     /**
      * @ORM\OneToMany(targetEntity="Program", mappedBy="level")
@@ -190,5 +197,29 @@ class Level
     public function getSections()
     {
         return $this->sections;
+    }
+
+    /**
+     * Set affectedProgramsBuilt.
+     *
+     * @param bool|null $affectedProgramsBuilt
+     *
+     * @return Level
+     */
+    public function setAffectedProgramsBuilt($affectedProgramsBuilt = null)
+    {
+        $this->affectedProgramsBuilt = $affectedProgramsBuilt;
+
+        return $this;
+    }
+
+    /**
+     * Get affectedProgramsBuilt.
+     *
+     * @return bool|null
+     */
+    public function getAffectedProgramsBuilt()
+    {
+        return $this->affectedProgramsBuilt;
     }
 }
