@@ -25,6 +25,7 @@ sonata_block:
             contexts: [admin]
         
 sonata_admin:
+    
     templates:
         layout: AppBundle::standard_layout.html.twig
     title: Academ

@@ -27,6 +27,13 @@ class Level
      * @ORM\Column(name="affected_programs_built", type="boolean", nullable=true)
      */
     private $affectedProgramsBuilt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="evaluations_built", type="boolean", nullable=true)
+     */
+    private $evaluationsBuilt;
     
     /**
      * @ORM\OneToMany(targetEntity="Program", mappedBy="level")
@@ -221,5 +228,29 @@ class Level
     public function getAffectedProgramsBuilt()
     {
         return $this->affectedProgramsBuilt;
+    }
+
+    /**
+     * Set evaluationsBuilt.
+     *
+     * @param bool|null $evaluationsBuilt
+     *
+     * @return Level
+     */
+    public function setEvaluationsBuilt($evaluationsBuilt = null)
+    {
+        $this->evaluationsBuilt = $evaluationsBuilt;
+
+        return $this;
+    }
+
+    /**
+     * Get evaluationsBuilt.
+     *
+     * @return bool|null
+     */
+    public function getEvaluationsBuilt()
+    {
+        return $this->evaluationsBuilt;
     }
 }

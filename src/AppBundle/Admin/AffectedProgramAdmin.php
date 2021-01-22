@@ -16,6 +16,7 @@ final class AffectedProgramAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
+            ->add('teacher', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('section.level', ModelAutocompleteFilter::class, ['label' => 'Level'], null, ['property' => 'name'])
@@ -26,11 +27,11 @@ final class AffectedProgramAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('id')
+            ->add('id', null, ['header_style' => 'width: 2%;'])
             ->add('section')
             ->add('name')
-            ->add('program')
-            ->add('program.level')
+            //->add('program')
+            //->add('program.level')
             ->add('teacher')
             ->add('_action', null, [
                 'actions' => [

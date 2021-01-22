@@ -21,6 +21,7 @@ class FieldAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name', null, array('editable' => true))
+            ->add('programs', null, ['header_style' => 'width: 60%;'])
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -35,7 +36,7 @@ class FieldAdmin extends AbstractAdmin
     {
         $formMapper
         ->with('Field Information', array('class' => 'col-md-4'))
-            ->add('name')
+            ->add('name', null, ['attr' => ['autocomplete' => 'off']])
         ->end()
         ;
     }

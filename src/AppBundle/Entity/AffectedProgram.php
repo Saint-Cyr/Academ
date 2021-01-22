@@ -31,7 +31,7 @@ class AffectedProgram
 
     /**
      * @var type 
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="affectedPrograms")
+     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="affectedPrograms", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $teacher;

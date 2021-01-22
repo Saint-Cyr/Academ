@@ -20,6 +20,11 @@ class Program
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="program")
+     */
+    private $affectedPrograms;
     
     /**
      * @var type 
@@ -30,15 +35,8 @@ class Program
     
     /**
      * @var type 
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $teacher;
-    
-    /**
-     * @var type 
      * @ORM\ManyToOne(targetEntity="Coefficient", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $coefficient;
     
@@ -129,30 +127,6 @@ class Program
     public function getLevel()
     {
         return $this->level;
-    }
-
-    /**
-     * Set teacher
-     *
-     * @param \AppBundle\Entity\Teacher $teacher
-     *
-     * @return Program
-     */
-    public function setTeacher(\AppBundle\Entity\Teacher $teacher = null)
-    {
-        $this->teacher = $teacher;
-
-        return $this;
-    }
-
-    /**
-     * Get teacher
-     *
-     * @return \AppBundle\Entity\Teacher
-     */
-    public function getTeacher()
-    {
-        return $this->teacher;
     }
 
     /**

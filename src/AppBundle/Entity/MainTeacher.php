@@ -31,7 +31,12 @@ class MainTeacher
     /**
      * @ORM\OneToMany(targetEntity="Section", mappedBy="mainTeacher")
      */
-    private $sections;  
+    private $sections;
+    
+    public function getName()
+    {
+        return $this->teacher->getName();
+    }
 
 
     /**

@@ -13,7 +13,7 @@ class CycleAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
+            
         ;
     }
 

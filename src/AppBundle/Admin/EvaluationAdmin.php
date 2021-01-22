@@ -17,11 +17,10 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('sequence', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('createdAt')
             ->add('name')
             ->add('evaluationType', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('affectedProgram.program', ModelAutocompleteFilter::class, ['label' => 'Program'], null, ['property' => 'name'])
+            ->add('affectedProgram.section', ModelAutocompleteFilter::class, ['label' => 'Section'], null, ['property' => 'name'])
         ;
     }
 

@@ -58,8 +58,6 @@ class AffectedProgramBuilderCommand extends Command
                 
                 foreach($section->getlevel()->getPrograms() as $program)
                 {
-                    //Make sure the section does not yet have any affected program that is related to the current programs
-                    if($program)
                     $affectedProgram = new AffectedProgram();
                     $affectedProgram->setName($program->getName());
                     $affectedProgram->setProgram($program);

@@ -16,7 +16,8 @@ class StudentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('studentParent', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])     
             ->add('name')       
         ;
     }

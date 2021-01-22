@@ -17,22 +17,27 @@ class SectionAdmin extends AbstractAdmin
         $datagridMapper
             ->add('name')
             ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('mainTeacher')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->add('id', null, [
+            'header_style' => 'width: 2%; text-align: center',
+            'row_align' => 'center'
+        ])
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
             ->add('name', null, ['editable' => true])
-            ->add('level')
+            ->add('level', null, ['label_icon' => 'fa fa-book',
+                                  'lable' => false])
             ->add('studentNumber')
             ->add('studentCsvList')
             ->add('studentLeader')
-            ->add('evaluations')
+            //->add('evaluations')
             ->add('mainTeacher')
-            ->add('level.programs')
+            ->add('level.programs', null, ['label' => 'Programs'])
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

@@ -22,7 +22,7 @@ class Teacher
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="teacher")
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="teacher", cascade={"persist"})
      */
     private $affectedPrograms;
     
@@ -80,6 +80,8 @@ class Teacher
      */
     private $contractualized;
 
+    private $clearAffectedPrograms;
+
     /**
      * @var string
      *
@@ -89,6 +91,20 @@ class Teacher
     
     private $barcode;
 
+    public function getClearAffectedPrograms()
+    {
+        return $this->clearAffectedPrograms;
+    }
+
+    public function setClearAffectedPrograms($value)
+    {
+        $this->clearAffectedPrograms = $value;
+    }
+    
+    public function getMainTeacherNumber()
+    {
+        return count($this->getMainTeachers());
+    }
 
     /**
      * Get id
@@ -187,6 +203,7 @@ class Teacher
     public function __construct()
     {
         $this->mainTeachers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->affectedPrograms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -390,6 +407,7 @@ class Teacher
     {
         return $this->age;
     }
+
 
     /**
      * Add affectedProgram.
