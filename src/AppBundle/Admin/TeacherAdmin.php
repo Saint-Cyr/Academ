@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 
 class TeacherAdmin extends AbstractAdmin
 {
@@ -51,7 +53,7 @@ class TeacherAdmin extends AbstractAdmin
         ->end();
         $formMapper
             ->with('Affected Programs', array('class' => 'col-md-4'))
-            ->add('affectedPrograms')
+            ->add('affectedPrograms', null, ['attr' => ['style' => 'width: 500px']])
             ->add('clearAffectedPrograms', CheckboxType::class, ['label' => 'Unlink Affected Programs ?',
                                                                  'required' => false])
         ->end();
