@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class StudentAdmin extends AbstractAdmin
 {
@@ -48,13 +49,20 @@ class StudentAdmin extends AbstractAdmin
         ->with('Student Information', array('class' => 'col-md-4'))
             ->add('name')
             ->add('firstName')
-            ->add('phoneNumber')
-            ->add('adress')
-            ->add('email', 'email', ['required' => false])
+            ->add('sexe', ChoiceType::class, ['help' => 'Choose the student sexe please', 'choices' => ['Garçon' => 'male',
+                                                            'Fille' => 'female'],
+                                              'expanded' => true])
         ->end();
         $formMapper
+        ->with('Contact', array('class' => 'col-md-4'))
+            ->add('phoneNumber')
+            ->add('adress')
+            ->add('email')
+        ->end();
+
+        $formMapper
         ->with('Academic status', array('class' => 'col-md-4'))
-            ->add('section', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Current Section'])
+            ->add('section', null, ['attr' => ['style' => 'width: 500px'], 'label' => 'Current Section'])
             ->add('lastSchoolInstitution')
             ->add('leader')
             ->add('studentParent', ModelListType::class)

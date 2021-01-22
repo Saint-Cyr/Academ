@@ -60,6 +60,8 @@ class Student
      */
     private $firstName;
 
+
+
     /**
      * @var string
      *
@@ -73,6 +75,27 @@ class Student
      * @ORM\Column(name="adress", type="string", length=255, nullable=true)
      */
     private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age", type="integer", length=2, nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="boolean", nullable=true)
+     */
+    private $sexe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=false)
+     */
+    private $validated;
 
     /**
      * @var string
@@ -425,5 +448,113 @@ class Student
     public function getLeader()
     {
         return $this->leader;
+    }
+
+    /**
+     * Set age.
+     *
+     * @param int|null $age
+     *
+     * @return Student
+     */
+    public function setAge($age = null)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age.
+     *
+     * @return int|null
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set sexe.
+     *
+     * @param bool|null $sexe
+     *
+     * @return Student
+     */
+    public function setSexe($sexe = null)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe.
+     *
+     * @return bool|null
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Add absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return Student
+     */
+    public function addAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        $this->absences[] = $absence;
+
+        return $this;
+    }
+
+    /**
+     * Remove absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        return $this->absences->removeElement($absence);
+    }
+
+    /**
+     * Get absences.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAbsences()
+    {
+        return $this->absences;
+    }
+
+    /**
+     * Set validated.
+     *
+     * @param bool $validated
+     *
+     * @return Student
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated.
+     *
+     * @return bool
+     */
+    public function getValidated()
+    {
+        return $this->validated;
     }
 }

@@ -3,8 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Program as Program;
+use AppBundle\Entity\Program;
 use AppBundle\Entity\Sequence;
+use AppBundle\Entity\AffectedProgram;
 
 /**
  * Student
@@ -41,6 +42,11 @@ class Student
     private $marks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Absence", mappedBy="student", cascade="remove")
+     */
+    private $absences;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -53,6 +59,8 @@ class Student
      * @ORM\Column(name="frist_name", type="string", length=255, nullable=true)
      */
     private $firstName;
+
+
 
     /**
      * @var string
@@ -67,6 +75,27 @@ class Student
      * @ORM\Column(name="adress", type="string", length=255, nullable=true)
      */
     private $adress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age", type="integer", length=2, nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="boolean", nullable=true)
+     */
+    private $sexe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=false)
+     */
+    private $validated;
 
     /**
      * @var string
@@ -102,20 +131,26 @@ class Student
         return $this->id;
     }
     
-    public function getMarksBySequence(Sequence $sequence)
+    /**
+     * return array() of marks for a given sequence
+     * @param $markType can be 'devoir' or 'composition'
+     */
+    public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence, $markType)
     {
-        //Collect all the marks for the current $sequence
-        $sequenceMarks = array();
-        foreach ($sequence->getEvaluations() as $evaluations){
-            foreach ($evaluations as $eval){
-                //Make sure the marks is for the current student
-                //if($this->getMar)
-                $sequenceMarks[] = $eval->getMark();
+        //prepare the the variable to store all the marks
+        $selectedMarks = [];
+        //Set of marks provides by the affectedProgram
+        $marksFromAffectedProgram = $affectedProgram->getMarksBySequence($sequence, $markType);
+        foreach($this->getMarks() as $markFromStd){
+            //Check wther this mark is part of the set provided by the affectedProgram marks
+            foreach($marksFromAffectedProgram as $mFAP){
+                if($markFromStd->getId() == $mFAP->getId()){
+                    $selectedMarks [] = $mFAP;
+                }
             }
         }
-        
-        
-        return $marks;
+
+        return $selectedMarks;
     }
     
     public function getBarcodeValue()
@@ -186,6 +221,7 @@ class Student
     {
         return $this->studentParent;
     }
+
 
     /**
      * Set section
@@ -259,41 +295,6 @@ class Student
         return $this->barcode;
     }
     
-    /*
-     * @deprecated since 0.5.1
-     * This method suppose to return the average of marks
-     *  for the current student that are related to a given
-     * Sequence and a given program
-     * 
-     */
-    public function getDevoirMarksBySequenceByProgram(Sequence $sequence, Program $program)
-    {
-        $nb = 0;
-        //Prepare a tab to store filtered marks
-        $marksTab = array();
-        //Filter marks by theire sequence: going firstly by Evaluation
-        //and then by sequence
-        foreach ($this->getMarks() as $mark){
-            //Make sure the current mark is related to $sequence
-            if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
-                    && 
-                $mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir'
-                    &&
-                $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
-                
-                $marksTab[] = $mark->getvalue();
-                //Count the number of the values
-                $nb++;
-            }
-        }
-        
-        if($nb == 0){
-            return null;
-        }else{
-            return number_format((array_sum($marksTab)/$nb), 2);
-        }
-        
-    }
 
     /**
      * Set leader.
@@ -447,5 +448,89 @@ class Student
     public function getLeader()
     {
         return $this->leader;
+    }
+
+    /**
+     * Set age.
+     *
+     * @param int|null $age
+     *
+     * @return Student
+     */
+    public function setAge($age = null)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age.
+     *
+     * @return int|null
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set sexe.
+     *
+     * @param bool|null $sexe
+     *
+     * @return Student
+     */
+    public function setSexe($sexe = null)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe.
+     *
+     * @return bool|null
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Add absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return Student
+     */
+    public function addAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        $this->absences[] = $absence;
+
+        return $this;
+    }
+
+    /**
+     * Remove absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        return $this->absences->removeElement($absence);
+    }
+
+    /**
+     * Get absences.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAbsences()
+    {
+        return $this->absences;
     }
 }
