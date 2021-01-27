@@ -20,6 +20,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('studentParent', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])     
             ->add('name')       
+            ->add('sexe')       
         ;
     }
 
@@ -28,10 +29,11 @@ class StudentAdmin extends AbstractAdmin
         $listMapper
             ->add('name', null, array('editable' => true))
             ->add('section')
-            ->add('leader', null, ['editable' => true])
+            ->add('sexe')
+            ->add('validated', null, ['editable' => true])
             ->add('studentParent')
             ->add('barcodeValue', null, array('editable' => true))
-            ->add('barcode')
+            ->add('leader', null, ['editable' => true])
             ->add('image')
             ->add('_action', null, [
                 'actions' => [

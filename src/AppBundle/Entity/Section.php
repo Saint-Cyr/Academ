@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Section
@@ -11,6 +12,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SectionRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="This name is already in use."
+ * )
  */
 class Section
 {
@@ -85,6 +90,15 @@ class Section
      * @ORM\Column(name="collected_image_updated", type="boolean", unique=false, nullable=true)
      */
     private $collectedImageUpdated;
+
+    public function getStudentLeaderInfo()
+    {
+        foreach($this->getStudents() as $student){
+            if($student->getLeader()){
+                return $student->getName().' #'.$student->getPhoneNumber();
+            }
+        }
+    }
 
     /**
     * Get file.

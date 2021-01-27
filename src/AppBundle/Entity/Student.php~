@@ -61,7 +61,6 @@ class Student
     private $firstName;
 
 
-
     /**
      * @var string
      *
@@ -86,7 +85,7 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="sexe", type="boolean", nullable=true)
+     * @ORM\Column(name="sexe", type="string", length=255, nullable=true)
      */
     private $sexe;
 
@@ -195,6 +194,7 @@ class Student
      */
     public function __construct()
     {
+        $this->setValidated(true);
         $this->absenceCompters = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -475,30 +475,6 @@ class Student
     }
 
     /**
-     * Set sexe.
-     *
-     * @param bool|null $sexe
-     *
-     * @return Student
-     */
-    public function setSexe($sexe = null)
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    /**
-     * Get sexe.
-     *
-     * @return bool|null
-     */
-    public function getSexe()
-    {
-        return $this->sexe;
-    }
-
-    /**
      * Add absence.
      *
      * @param \AppBundle\Entity\Absence $absence
@@ -532,5 +508,29 @@ class Student
     public function getAbsences()
     {
         return $this->absences;
+    }
+
+    /**
+     * Set validated.
+     *
+     * @param bool $validated
+     *
+     * @return Student
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated.
+     *
+     * @return bool
+     */
+    public function getValidated()
+    {
+        return $this->validated;
     }
 }

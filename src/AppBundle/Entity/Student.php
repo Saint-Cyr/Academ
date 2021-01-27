@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Program;
 use AppBundle\Entity\Sequence;
 use AppBundle\Entity\AffectedProgram;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Student
@@ -61,7 +61,6 @@ class Student
     private $firstName;
 
 
-
     /**
      * @var string
      *
@@ -86,7 +85,7 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="sexe", type="boolean", nullable=true)
+     * @ORM\Column(name="sexe", type="string", length=255, nullable=true)
      */
     private $sexe;
 
@@ -129,6 +128,31 @@ class Student
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Only one student can be a leader at a time within a Section")
+     */
+    public function isStudentLeaderValid()
+    {
+        //Validation is processing only if studentLeader has been checked
+        if($this->getLeader()){
+            $numberOfLeader = 0;
+            foreach($this->getSection()->getStudents() as $student){
+                if($student->getLeader()){
+                    $numberOfLeader++;
+                }
+            }
+
+            //if the number of leader reached 1 then return false
+            if($numberOfLeader > 1){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
     }
     
     /**
@@ -195,6 +219,7 @@ class Student
      */
     public function __construct()
     {
+        $this->setValidated(true);
         $this->absenceCompters = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -475,30 +500,6 @@ class Student
     }
 
     /**
-     * Set sexe.
-     *
-     * @param bool|null $sexe
-     *
-     * @return Student
-     */
-    public function setSexe($sexe = null)
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    /**
-     * Get sexe.
-     *
-     * @return bool|null
-     */
-    public function getSexe()
-    {
-        return $this->sexe;
-    }
-
-    /**
      * Add absence.
      *
      * @param \AppBundle\Entity\Absence $absence
@@ -556,5 +557,29 @@ class Student
     public function getValidated()
     {
         return $this->validated;
+    }
+
+    /**
+     * Set sexe.
+     *
+     * @param string|null $sexe
+     *
+     * @return Student
+     */
+    public function setSexe($sexe = null)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe.
+     *
+     * @return string|null
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
     }
 }

@@ -30,7 +30,7 @@ final class AffectedProgramAdmin extends AbstractAdmin
             ->add('id', null, ['header_style' => 'width: 2%;'])
             ->add('section')
             ->add('name')
-            //->add('program')
+            ->add('program')
             //->add('program.level')
             ->add('teacher')
             ->add('_action', null, [

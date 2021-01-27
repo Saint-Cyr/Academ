@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SectionAdmin extends AbstractAdmin
 {
@@ -18,6 +19,7 @@ class SectionAdmin extends AbstractAdmin
             ->add('name')
             ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('mainTeacher')
+            ->add('studentCsvList', null, ['expanded' => true])
         ;
     }
 
@@ -34,7 +36,7 @@ class SectionAdmin extends AbstractAdmin
                                   'lable' => false])
             ->add('studentNumber')
             ->add('studentCsvList')
-            ->add('studentLeader')
+            ->add('studentLeaderInfo')
             //->add('evaluations')
             ->add('mainTeacher')
             ->add('level.programs', null, ['label' => 'Programs'])

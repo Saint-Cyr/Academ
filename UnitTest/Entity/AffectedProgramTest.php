@@ -47,7 +47,13 @@ class AffectedProgramTest extends WebTestCase
         //$marksForSecondSequence = $affectedProgram->getMarksBySequence($sequence2);
         $this->assertEquals(count($devoirMarksForFirstSequence), 3);
         //$this->assertEquals(count($marksForSecondSequence), 1);
-        
+    }
+
+    public function testIsAffectedValide()
+    {
+        //Get and existing affectedProgram
+        $affectedProgram = $this->em->getRepository('AppBundle:AffectedProgram')->find(1);
+        $this->assertEquals($affectedProgram->getName(), 'Francais');
     }
 }
 

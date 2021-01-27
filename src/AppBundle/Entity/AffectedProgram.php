@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Sequence;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AffectedProgram
@@ -54,6 +55,27 @@ class AffectedProgram
      * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="affectedProgram")
      */
     private $evaluations;
+
+    /**
+     * @Assert\IsTrue(message="This affected program has been created already")
+     */
+    public function isAffectedProgramValide()
+    {
+        $teacherHasChanged = null;
+        
+        foreach($this->section->getAffectedPrograms() as $afp){
+            
+            //$formerTeacherName = $afp->getTeacher()->getName();
+            //$currentTeacherName = $this->getTeacher()->getName();
+            
+            if($afp->getProgram()->getId() == $this->getProgram()->getId()){
+                
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Get id.

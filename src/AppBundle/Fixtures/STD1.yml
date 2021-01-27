@@ -437,10 +437,12 @@ AppBundle\Entity\Student:
         name: Eleve 6em 1
         barcode: 6954941712178
         section: "@section_6em_1"
+        validated: true
     student_2:
         name: Eleve 2nd C1
         barcode: 9782608123015
         section: "@section_2nd_c1"
+        validated: true
         
 AppBundle\Entity\Mark:
     #Evaluation for Affectedprogram Francais
