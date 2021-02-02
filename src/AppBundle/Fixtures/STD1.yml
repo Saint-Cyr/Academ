@@ -423,7 +423,6 @@ AppBundle\Entity\Evaluation:
         section: "@section_6em_1"
         name: Composition
     
-
     evaluation_29:
         createdAt: <(new \DateTime('01-09-2018'))>
         evaluationType: "@evaluation_type_1"
@@ -434,13 +433,20 @@ AppBundle\Entity\Evaluation:
         
 AppBundle\Entity\Student:    
     student_1:
-        name: Eleve 6em 1
-        barcode: 6954941712178
+        name: Eleve1 6em1
         section: "@section_6em_1"
         validated: true
+        leader: true
     student_2:
-        name: Eleve 2nd C1
-        barcode: 9782608123015
+        name: Eleve2 6em1
+        section: "@section_6em_1"
+        validated: true
+    student_3:
+        name: Eleve3 6em1
+        section: "@section_6em_1"
+        validated: true
+    student_4:
+        name: Eleve1 2ndC1
         section: "@section_2nd_c1"
         validated: true
         

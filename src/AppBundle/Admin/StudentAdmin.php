@@ -28,6 +28,8 @@ class StudentAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name', null, array('editable' => true))
+            ->add('firstName', null, array('editable' => true))
+            ->add('phoneNumber', null, array('editable' => true))
             ->add('section')
             ->add('sexe')
             ->add('validated', null, ['editable' => true])
@@ -66,7 +68,7 @@ class StudentAdmin extends AbstractAdmin
         ->with('Academic status', array('class' => 'col-md-4'))
             ->add('section', null, ['attr' => ['style' => 'width: 500px'], 'label' => 'Current Section'])
             ->add('lastSchoolInstitution')
-            ->add('leader')
+            //->add('leader')
             ->add('studentParent', ModelListType::class)
         ->end();
     }

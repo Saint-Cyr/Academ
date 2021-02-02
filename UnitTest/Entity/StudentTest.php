@@ -36,7 +36,7 @@ class StudentTest extends WebTestCase
     public function testGetMarksByAffectedProgramAndSequence()
     {
         //Get the student from the fixture
-        $student = $this->em->getRepository('AppBundle:Student')->findOneBy(array('name' => 'Eleve 6em 1'));
+        $student = $this->em->getRepository('AppBundle:Student')->findOneBy(array('name' => 'Eleve1 6em1'));
         //Get the sequence from the fixture
         $sequence1 = $this->em->getRepository('AppBundle:Sequence')->findOneBy(array('name' => '1er Trimestre'));
         //Get the affectedProgram from the fixture
@@ -47,7 +47,24 @@ class StudentTest extends WebTestCase
         $compositionMarks = $student->getMarksByAffectedProgramAndSequence($affectedProgramFrancais, $sequence1, 'Composition');
         $this->assertEquals(count($devoirMarks), 3);
         $this->assertEquals(count($compositionMarks), 1);
-        
+    }
+
+    /**
+     * this method aims to test the validation method of a student 
+     * in order to make sure only one student at a time should be a leader
+     * in a given section
+     */
+    public function testIsLeader()
+    {
+        //Get the student_2 from the section 6em 1
+        $student_1 = $this->em->getRepository('AppBundle:Student')->findOneBy(['name' => 'Eleve1 6em1']);
+        $student_2 = $this->em->getRepository('AppBundle:Student')->findOneBy(['name' => 'Eleve1 6em1']);
+        $student_3 = $this->em->getRepository('AppBundle:Student')->findOneBy(['name' => 'Eleve1 2ndC1']);
+        $student_2->setLeader(false);
+        //1st case : the section 6em 1 already have a student leader (Eleve1 6em 1)
+        $this->assertEquals($student_1->isStudentLeaderValid(), true);
+        //2nd case : trying to test the validity for a section with o student
+        $this->assertEquals($student_3->isStudentLeaderValid(), true);
     }
 }
 
