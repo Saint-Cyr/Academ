@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class StudentParentAdmin extends AbstractAdmin
 {
@@ -42,11 +41,9 @@ class StudentParentAdmin extends AbstractAdmin
     {
         $formMapper
         ->with('Student Parent Information', array('class' => 'col-md-4'))
-            ->add('firstName')
             ->add('name')
-            ->add('students', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Students'])
+            ->add('students', null, ['attr' => ['style' => 'width: 515px'], 'label' => 'Students'])
             ->add('profession')
-            ->add('adress')
             ->add('email', 'email', ['required' => false])
         ->end();
     }
