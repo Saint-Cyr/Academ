@@ -20,6 +20,11 @@ class Program
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="program")
+     */
+    private $affectedPrograms;
     
     /**
      * @var type 
@@ -30,25 +35,8 @@ class Program
     
     /**
      * @var type 
-     * @ORM\ManyToOne(targetEntity="Teacher", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $teacher;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="AbsenceCompter", mappedBy="program")
-     */
-    private $absenceCompters;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="program")
-     */
-    private $evaluations;
-    
-    /**
-     * @var type 
      * @ORM\ManyToOne(targetEntity="Coefficient", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $coefficient;
     
@@ -142,98 +130,6 @@ class Program
     }
 
     /**
-     * Set teacher
-     *
-     * @param \AppBundle\Entity\Teacher $teacher
-     *
-     * @return Program
-     */
-    public function setTeacher(\AppBundle\Entity\Teacher $teacher = null)
-    {
-        $this->teacher = $teacher;
-
-        return $this;
-    }
-
-    /**
-     * Get teacher
-     *
-     * @return \AppBundle\Entity\Teacher
-     */
-    public function getTeacher()
-    {
-        return $this->teacher;
-    }
-
-    /**
-     * Add absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     *
-     * @return Program
-     */
-    public function addAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters[] = $absenceCompter;
-
-        return $this;
-    }
-
-    /**
-     * Remove absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     */
-    public function removeAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters->removeElement($absenceCompter);
-    }
-
-    /**
-     * Get absenceCompters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbsenceCompters()
-    {
-        return $this->absenceCompters;
-    }
-
-    /**
-     * Add evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return Program
-     */
-    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations[] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     */
-    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations->removeElement($evaluation);
-    }
-
-    /**
-     * Get evaluations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
-    }
-
-    /**
      * Set coefficient
      *
      * @param \AppBundle\Entity\Coefficient $coefficient
@@ -279,5 +175,41 @@ class Program
     public function getField()
     {
         return $this->field;
+    }
+
+    /**
+     * Add affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Program
+     */
+    public function addAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        $this->affectedPrograms[] = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        return $this->affectedPrograms->removeElement($affectedProgram);
+    }
+
+    /**
+     * Get affectedPrograms.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAffectedPrograms()
+    {
+        return $this->affectedPrograms;
     }
 }

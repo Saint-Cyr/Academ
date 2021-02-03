@@ -3,12 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Coefficient
  *
  * @ORM\Table(name="coefficient")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CoefficientRepository")
+ * @UniqueEntity(
+ *     fields={"value"},
+ *     message="This value is already in use."
+ * )
  */
 class Coefficient
 {

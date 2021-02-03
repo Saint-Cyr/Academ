@@ -84,6 +84,7 @@ class Sequence
     {
         return $this->name;
     }
+    
     /**
      * Constructor
      */

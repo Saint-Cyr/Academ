@@ -55,28 +55,6 @@ class StudentParent
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="fristName", type="string", length=255, nullable=true)
-     */
-    private $firstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
-     */
-    private $adress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sex", type="boolean", nullable=true)
-     */
-    private $sex;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -227,77 +205,5 @@ class StudentParent
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * Set firstName.
-     *
-     * @param string|null $firstName
-     *
-     * @return StudentParent
-     */
-    public function setFirstName($firstName = null)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName.
-     *
-     * @return string|null
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set adress.
-     *
-     * @param string|null $adress
-     *
-     * @return StudentParent
-     */
-    public function setAdress($adress = null)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get adress.
-     *
-     * @return string|null
-     */
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
-     * Set sex.
-     *
-     * @param bool|null $sex
-     *
-     * @return StudentParent
-     */
-    public function setSex($sex = null)
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
-    /**
-     * Get sex.
-     *
-     * @return bool|null
-     */
-    public function getSex()
-    {
-        return $this->sex;
     }
 }

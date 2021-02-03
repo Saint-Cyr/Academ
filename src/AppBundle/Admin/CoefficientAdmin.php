@@ -39,8 +39,7 @@ class CoefficientAdmin extends AbstractAdmin
     {
         $formMapper
         ->with('Coefficient Information', array('class' => 'col-md-4'))
-            ->add('value')
-            ->add('programs', null, array('attr' => array('style' => 'width:450px')))
+            ->add('value', null, ['attr' => ['min' => 1]])
         ->end()
         ;
     }

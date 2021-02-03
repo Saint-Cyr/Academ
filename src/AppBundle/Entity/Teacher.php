@@ -20,11 +20,11 @@ class Teacher
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="teacher", cascade={"persist"})
      */
-    private $programs;
+    private $affectedPrograms;
     
     /**
      * @ORM\OneToMany(targetEntity="MainTeacher", mappedBy="teacher")
@@ -80,6 +80,8 @@ class Teacher
      */
     private $contractualized;
 
+    private $clearAffectedPrograms;
+
     /**
      * @var string
      *
@@ -89,6 +91,20 @@ class Teacher
     
     private $barcode;
 
+    public function getClearAffectedPrograms()
+    {
+        return $this->clearAffectedPrograms;
+    }
+
+    public function setClearAffectedPrograms($value)
+    {
+        $this->clearAffectedPrograms = $value;
+    }
+    
+    public function getMainTeacherNumber()
+    {
+        return count($this->getMainTeachers());
+    }
 
     /**
      * Get id
@@ -117,6 +133,10 @@ class Teacher
         };
     }
     
+    /**
+     * @deprecated since alpha1.2
+     * 
+     */
     public function setPrograms($programs)
     {
         if (count($programs) > 0) {
@@ -182,45 +202,8 @@ class Teacher
      */
     public function __construct()
     {
-        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mainTeachers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add program
-     *
-     * @param \AppBundle\Entity\Program $program
-     *
-     * @return Teacher
-     */
-    public function addProgram(\AppBundle\Entity\Program $program)
-    {
-        $program->setTeacher($this);
-        $this->programs->add($program);
-    
-        //$this->programs[] = $program;
-
-        //return $this;
-    }
-
-    /**
-     * Remove program
-     *
-     * @param \AppBundle\Entity\Program $program
-     */
-    public function removeProgram(\AppBundle\Entity\Program $program)
-    {
-        $this->programs->removeElement($program);
-    }
-
-    /**
-     * Get programs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrograms()
-    {
-        return $this->programs;
+        $this->affectedPrograms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -423,5 +406,42 @@ class Teacher
     public function getAge()
     {
         return $this->age;
+    }
+
+
+    /**
+     * Add affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Teacher
+     */
+    public function addAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        $this->affectedPrograms[] = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        return $this->affectedPrograms->removeElement($affectedProgram);
+    }
+
+    /**
+     * Get affectedPrograms.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAffectedPrograms()
+    {
+        return $this->affectedPrograms;
     }
 }

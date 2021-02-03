@@ -52,7 +52,7 @@ class DefaultController extends Controller
         //Make sure the evaluation is related to the current section
         //Exemple we want to avoid a situation where 1ere G3B evaluation
         //is loaded when student of 1ere G3A suppose to receive mark...
-        if($evaluation->getSection()->getId() == $section_id){
+        if($evaluation->getAffectedProgram()->getSection()->getId() == $section_id){
             $section = $em->getRepository('AppBundle:Section')->find($section_id);
             $students = $section->getStudents();
             return $this->render("@App/Teacher/input_mark.html.twig", array('students' => $students, 
@@ -111,11 +111,9 @@ class DefaultController extends Controller
             $em->flush();
             
             return new JsonResponse('[ok] Sucessfull mark submission for '.$student->getName().' Mark: '.$markValue);
-            
         }
                 
         return new JsonResponse('Error: Wrong parameters.');
-        
     }
     
     /*

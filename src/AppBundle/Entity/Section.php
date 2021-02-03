@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Section
@@ -11,6 +12,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SectionRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="This name is already in use."
+ * )
  */
 class Section
 {
@@ -22,6 +27,50 @@ class Section
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="studentCsvList", type="boolean", nullable=true)
+     */
+    private $studentCsvList;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MainTeacher", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $mainTeacher;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Level", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $level;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="section")
+     */
+    private $affectedPrograms;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Student", mappedBy="section")
+     */
+    private $students;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
     
     /**
      * Unmapped property to handle file uploads
@@ -41,6 +90,15 @@ class Section
      * @ORM\Column(name="collected_image_updated", type="boolean", unique=false, nullable=true)
      */
     private $collectedImageUpdated;
+
+    public function getStudentLeaderInfo()
+    {
+        foreach($this->getStudents() as $student){
+            if($student->getLeader()){
+                return $student->getName().' #'.$student->getPhoneNumber();
+            }
+        }
+    }
 
     /**
     * Get file.
@@ -69,6 +127,7 @@ class Section
         if($this->getFile()){
             $this->setCollectedImageUpdated(true);
             $this->setCollectedImage($this->getName().'.'.$this->getFile()->guessExtension());
+            $this->setStudentCsvList(true);
         }
         
         $this->setUpdated(new \DateTime());
@@ -83,7 +142,6 @@ class Section
         if (file_exists(getcwd().'/upload/section/'.$this->getImage())){
             //Remove it
             @unlink(getcwd().'/upload/section/'.$this->getImage());
-            
         }
         
         return;
@@ -97,7 +155,7 @@ class Section
         }
         
         // move takes the target directory and target filename as params
-        $this->getFile()->move(getcwd().'/upload/section', $this->getName().'.csv');
+        $this->getFile()->move(getcwd().'/upload/section', $this->getId().'.csv');
         // clean up the file property as you won't need it anymore
         $this->setFile(null);
     }
@@ -189,43 +247,6 @@ class Section
         return $this->collectedImageUpdated;
     }
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, unique=false, nullable=true)
-     */
-    private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="MainTeacher", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $mainTeacher;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Level", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $level;
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="section")
-     */
-    private $evaluations;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Student", mappedBy="section")
-     */
-    private $students;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
 
     /**
      * Get id
@@ -311,13 +332,6 @@ class Section
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Set mainTeacher
@@ -341,40 +355,6 @@ class Section
     public function getMainTeacher()
     {
         return $this->mainTeacher;
-    }
-
-    /**
-     * Add evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return Section
-     */
-    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations[] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     */
-    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations->removeElement($evaluation);
-    }
-
-    /**
-     * Get evaluations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
     }
 
     /**
@@ -433,5 +413,97 @@ class Section
     public function getLevel()
     {
         return $this->level;
+    }
+
+    /**
+     * Get collectedImageUpdated.
+     *
+     * @return bool|null
+     */
+    public function getCollectedImageUpdated()
+    {
+        return $this->collectedImageUpdated;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param string|null $image
+     *
+     * @return Section
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->affectedPrograms = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->students = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Section
+     */
+    public function addAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        $this->affectedPrograms[] = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        return $this->affectedPrograms->removeElement($affectedProgram);
+    }
+
+    /**
+     * Get affectedPrograms.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAffectedPrograms()
+    {
+        return $this->affectedPrograms;
+    }
+
+    /**
+     * Set studentCsvList.
+     *
+     * @param bool|null $studentCsvList
+     *
+     * @return Section
+     */
+    public function setStudentCsvList($studentCsvList = null)
+    {
+        $this->studentCsvList = $studentCsvList;
+
+        return $this;
+    }
+
+    /**
+     * Get studentCsvList.
+     *
+     * @return bool|null
+     */
+    public function getStudentCsvList()
+    {
+        return $this->studentCsvList;
     }
 }

@@ -15,7 +15,6 @@ class ProgramAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
-            ->add('teacher', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('coefficient', ModelAutocompleteFilter::class, [], null, ['property' => 'value'])
             ->add('field', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
             ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
@@ -45,10 +44,10 @@ class ProgramAdmin extends AbstractAdmin
         $formMapper
         ->with('Program Information', array('class' => 'col-md-4'))
             ->add('name')
-            ->add('teacher', null, array('attr' => array('style' => 'width:450px')))
-            ->add('coefficient', null, ['attr' => ['style' => 'width:450px'], 'required' => true])
-            ->add('level', null, array('attr' => array('style' => 'width:450px')))
-            ->add('field', null, array('attr' => array('style' => 'width: 450px')))
+            ->add('coefficient', null, ['attr' => ['style' => 'width:500px'], 'required' => true])
+            ->add('level', null, array('attr' => array('style' => 'width:500px')))
+            ->add('field', null, array('attr' => array('style' => 'width: 500px')))
+            ->add('affectedPrograms', null, array('attr' => array('style' => 'width: 500px')))
         ->end()
         ;
     }

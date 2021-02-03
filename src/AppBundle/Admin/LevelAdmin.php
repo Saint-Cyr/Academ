@@ -15,6 +15,8 @@ class LevelAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
+            ->add('affectedProgramsBuilt')
+            ->add('evaluationsBuilt')
             ->add('cycle', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
         ;
     }
@@ -24,6 +26,8 @@ class LevelAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('name')
+            ->add('affectedProgramsBuilt', null, ['editable' => true])
+            ->add('evaluationsBuilt', null, ['editable' => true])
             ->add('programs')
             ->add('_action', null, [
                 'actions' => [
@@ -39,8 +43,8 @@ class LevelAdmin extends AbstractAdmin
     {
         $formMapper
         ->with('Level Information', array('class' => 'col-md-4'))
-            ->add('name', null, array('attr' => array('style' => 'width:450px')))
-            ->add('cycle', null, array('attr' => array('style' => 'width:450px')))
+            ->add('name', null, array('attr' => array('style' => 'width:500px')))
+            ->add('cycle', null, array('attr' => array('style' => 'width:500px')))
         ->end()
         ;
     }

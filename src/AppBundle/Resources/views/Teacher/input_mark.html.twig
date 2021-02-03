@@ -30,7 +30,7 @@
         </style>
         <br><br><br><br>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                {{ evaluation.program.name }} || {{ section.name }}
+                {{ evaluation.affectedProgram.program.name }} || {{ section.name }}
             </button>
 
 <!-- Modal -->
@@ -39,7 +39,7 @@
     <div class="modal-content">
         
       <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalLabel" style="color: red;"><b>{{ evaluation.program.name }} || {{ section.name }}</b></h3>
+          <h3 class="modal-title" id="exampleModalLabel" style="color: red;"><b>{{ evaluation.affectedProgram.program.name }} || {{ section.name }}</b></h3>
         <style>
             .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
                 background-color: #a09fa3 !important;
@@ -62,7 +62,7 @@
                 <p> <strong><u>{{ 'Evaluation'|trans }}</u>: <span id="class" style="color: red;">{{ evaluation.name|striptags }} </span></strong></p>
                 <p> <strong><u>{{ 'Evaluation date'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.createdAt|date("d/m/y") }} </span></strong></p>
                 <p> <strong><u>{{ 'Evaluation Type'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.evaluationType.name }} </span></strong></p>
-                <p> <strong><u>{{ 'Teacher'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.program.teacher }} </span></strong></p>
+                <p> <strong><u>{{ 'Teacher'|trans }}</u>: <span id="class" style="color: #a09fa3;"> {{ evaluation.affectedProgram.teacher }} </span></strong></p>
                 <p> <strong><u>{{ 'Sequence'|trans }}</u>: <span id="term" style="color: #a09fa3;"> <b> {{ evaluation.sequence }}</b> </span></strong></p>
                 <p> <strong><u>{{ 'Total number of students from'|trans }} {{ section }}</u>: <span id="class_student_number" style="color: #a09fa3;"> {{ section.students|length }} </span></strong></p>
             </div>

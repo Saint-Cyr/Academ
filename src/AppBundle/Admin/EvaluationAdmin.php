@@ -17,11 +17,10 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('sequence', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('createdAt')
             ->add('name')
             ->add('evaluationType', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('program', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
-            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('affectedProgram.program', ModelAutocompleteFilter::class, ['label' => 'Program'], null, ['property' => 'name'])
+            ->add('affectedProgram.section', ModelAutocompleteFilter::class, ['label' => 'Section'], null, ['property' => 'name'])
         ;
     }
 
@@ -29,11 +28,11 @@ class EvaluationAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('sequence')
             ->add('name', 'html', array('editable' => true))
             ->add('evaluationType')
-            ->add('program')
-            ->add('section')
+            ->add('sequence')
+            ->add('affectedProgram')
+            ->add('affectedProgram.section', null, ['label' => 'Section'])
             //->add('average')
             ->add('createdAt', null, array('label' => 'Evaluation Date'))
             ->add('_action', null, [
@@ -55,10 +54,9 @@ class EvaluationAdmin extends AbstractAdmin
                 ->add('sequence', null, array('attr' => array('style' => 'width: 450px')))
                 ->add('name')
                 ->add('evaluationType', null, array('attr' => array('style' => 'width: 455px')))
-                ->add('program', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
             ->with('Second section', array('class' => 'col-md-4'))
-                ->add('section', null, array('attr' => array('style' => 'width: 450px')))
+                ->add('affectedProgram', null, array('attr' => array('style' => 'width: 450px')))
             ->end()
         ;
     }
@@ -73,7 +71,7 @@ class EvaluationAdmin extends AbstractAdmin
     }
 
     public function getExportFields() {
-        return array('Barcode'=>'code', 'Sequence'=>'sequence', 'Type Evaluation'=>'evaluationType', 'Program'=>'program', 'Section'=>'section');
+        return array('Barcode'=>'code', 'Sequence'=>'sequence', 'Type Evaluation'=>'evaluationType', 'Program'=>'affectedProgram', 'Section'=>'affectedProgram.section');
     }
     
     public function getExportFormats() {

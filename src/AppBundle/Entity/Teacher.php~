@@ -20,11 +20,11 @@ class Teacher
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="teacher", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="AffectedProgram", mappedBy="teacher", cascade={"persist"})
      */
-    private $programs;
+    private $affectedPrograms;
     
     /**
      * @ORM\OneToMany(targetEntity="MainTeacher", mappedBy="teacher")
@@ -41,54 +41,65 @@ class Teacher
     /**
      * @var string
      *
-     * @ORM\Column(name="phone_number", type="string", length=255)
+     * @ORM\Column(name="phone_number", type="string", length=255, nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fristName", type="string", length=255)
+     * @ORM\Column(name="fristName", type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255)
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
      */
     private $adress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sex", type="boolean")
+     * @ORM\Column(name="sex", type="boolean", nullable=true)
      */
     private $sex;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contractualized", type="boolean")
+     * @ORM\Column(name="contractualized", type="boolean", nullable=true)
      */
     private $contractualized;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="age", type="integer", length=3)
+     * @ORM\Column(name="clear_affected_programs", type="boolean", nullable=true)
+     */
+    private $clearAffectedPrograms;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age", type="integer", length=3, nullable=true)
      */
     private $age;
     
     private $barcode;
 
+    public function getMainTeacherNumber()
+    {
+        return count($this->getMainTeachers());
+    }
 
     /**
      * Get id
@@ -117,6 +128,10 @@ class Teacher
         };
     }
     
+    /**
+     * @deprecated since alpha1.2
+     * 
+     */
     public function setPrograms($programs)
     {
         if (count($programs) > 0) {
@@ -182,45 +197,8 @@ class Teacher
      */
     public function __construct()
     {
-        $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mainTeachers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add program
-     *
-     * @param \AppBundle\Entity\Program $program
-     *
-     * @return Teacher
-     */
-    public function addProgram(\AppBundle\Entity\Program $program)
-    {
-        $program->setTeacher($this);
-        $this->programs->add($program);
-    
-        //$this->programs[] = $program;
-
-        //return $this;
-    }
-
-    /**
-     * Remove program
-     *
-     * @param \AppBundle\Entity\Program $program
-     */
-    public function removeProgram(\AppBundle\Entity\Program $program)
-    {
-        $this->programs->removeElement($program);
-    }
-
-    /**
-     * Get programs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrograms()
-    {
-        return $this->programs;
+        $this->affectedPrograms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -279,5 +257,186 @@ class Teacher
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string $email
+     *
+     * @return Teacher
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string $firstName
+     *
+     * @return Teacher
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName.
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set adress.
+     *
+     * @param string $adress
+     *
+     * @return Teacher
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress.
+     *
+     * @return string
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set sex.
+     *
+     * @param bool $sex
+     *
+     * @return Teacher
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * Get sex.
+     *
+     * @return bool
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * Set contractualized.
+     *
+     * @param bool $contractualized
+     *
+     * @return Teacher
+     */
+    public function setContractualized($contractualized)
+    {
+        $this->contractualized = $contractualized;
+
+        return $this;
+    }
+
+    /**
+     * Get contractualized.
+     *
+     * @return bool
+     */
+    public function getContractualized()
+    {
+        return $this->contractualized;
+    }
+
+    /**
+     * Set age.
+     *
+     * @param int $age
+     *
+     * @return Teacher
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age.
+     *
+     * @return int
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+
+    /**
+     * Add affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Teacher
+     */
+    public function addAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        $this->affectedPrograms[] = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Remove affectedProgram.
+     *
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
+    {
+        return $this->affectedPrograms->removeElement($affectedProgram);
+    }
+
+    /**
+     * Get affectedPrograms.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAffectedPrograms()
+    {
+        return $this->affectedPrograms;
     }
 }

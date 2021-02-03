@@ -3,8 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Program as Program;
 use AppBundle\Entity\Sequence;
+use AppBundle\Entity\AffectedProgram;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Student
@@ -36,14 +37,14 @@ class Student
     private $section;
     
     /**
-     * @ORM\OneToMany(targetEntity="AbsenceCompter", mappedBy="student")
-     */
-    private $absenceCompters;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Mark", mappedBy="student", cascade="remove")
      */
     private $marks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Absence", mappedBy="student", cascade="remove")
+     */
+    private $absences;
 
     /**
      * @var string
@@ -59,6 +60,7 @@ class Student
      */
     private $firstName;
 
+
     /**
      * @var string
      *
@@ -69,9 +71,30 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $adress;
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age", type="integer", length=2, nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="string", length=255, nullable=true)
+     */
+    private $sexe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=false)
+     */
+    private $validated;
 
     /**
      * @var string
@@ -106,21 +129,52 @@ class Student
     {
         return $this->id;
     }
-    
-    public function getMarksBySequence(Sequence $sequence)
+
+    /**
+     * @Assert\IsTrue(message="Only one student can be a leader at a time within a Section")
+     */
+    public function isStudentLeaderValid()
     {
-        //Collect all the marks for the current $sequence
-        $sequenceMarks = array();
-        foreach ($sequence->getEvaluations() as $evaluations){
-            foreach ($evaluations as $eval){
-                //Make sure the marks is for the current student
-                //if($this->getMar)
-                $sequenceMarks[] = $eval->getMark();
+        //Validation is processing only if studentLeader has been checked
+        if($this->getLeader()){
+            $numberOfLeader = 0;
+            foreach($this->getSection()->getStudents() as $student){
+                if($student->getLeader()){
+                    $numberOfLeader++;
+                }
+            }
+
+            //if the number of leader reached 1 then return false
+            if($numberOfLeader > 1){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+    
+    /**
+     * return array() of marks for a given sequence
+     * @param $markType can be 'devoir' or 'composition'
+     */
+    public function getMarksByAffectedProgramAndSequence(AffectedProgram $affectedProgram, Sequence $sequence, $markType)
+    {
+        //prepare the the variable to store all the marks
+        $selectedMarks = [];
+        //Set of marks provides by the affectedProgram
+        $marksFromAffectedProgram = $affectedProgram->getMarksBySequence($sequence, $markType);
+        foreach($this->getMarks() as $markFromStd){
+            //Check wther this mark is part of the set provided by the affectedProgram marks
+            foreach($marksFromAffectedProgram as $mFAP){
+                if($markFromStd->getId() == $mFAP->getId()){
+                    $selectedMarks [] = $mFAP;
+                }
             }
         }
-        
-        
-        return $marks;
+
+        return $selectedMarks;
     }
     
     public function getBarcodeValue()
@@ -165,6 +219,7 @@ class Student
      */
     public function __construct()
     {
+        $this->setValidated(true);
         $this->absenceCompters = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -192,39 +247,6 @@ class Student
         return $this->studentParent;
     }
 
-    /**
-     * Add absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     *
-     * @return Student
-     */
-    public function addAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters[] = $absenceCompter;
-
-        return $this;
-    }
-
-    /**
-     * Remove absenceCompter
-     *
-     * @param \AppBundle\Entity\AbsenceCompter $absenceCompter
-     */
-    public function removeAbsenceCompter(\AppBundle\Entity\AbsenceCompter $absenceCompter)
-    {
-        $this->absenceCompters->removeElement($absenceCompter);
-    }
-
-    /**
-     * Get absenceCompters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbsenceCompters()
-    {
-        return $this->absenceCompters;
-    }
 
     /**
      * Set section
@@ -298,41 +320,6 @@ class Student
         return $this->barcode;
     }
     
-    /*
-     * @deprecated since 0.5.1
-     * This method suppose to return the average of marks
-     *  for the current student that are related to a given
-     * Sequence and a given program
-     * 
-     */
-    public function getDevoirMarksBySequenceByProgram(Sequence $sequence, Program $program)
-    {
-        $nb = 0;
-        //Prepare a tab to store filtered marks
-        $marksTab = array();
-        //Filter marks by theire sequence: going firstly by Evaluation
-        //and then by sequence
-        foreach ($this->getMarks() as $mark){
-            //Make sure the current mark is related to $sequence
-            if($mark->getEvaluation()->getSequence()->getId() == $sequence->getId()
-                    && 
-                $mark->getEvaluation()->getEvaluationType()->getName() == 'Devoir'
-                    &&
-                $mark->getEvaluation()->getProgram()->getId() == $program->getId()){
-                
-                $marksTab[] = $mark->getvalue();
-                //Count the number of the values
-                $nb++;
-            }
-        }
-        
-        if($nb == 0){
-            return null;
-        }else{
-            return number_format((array_sum($marksTab)/$nb), 2);
-        }
-        
-    }
 
     /**
      * Set leader.
@@ -407,30 +394,6 @@ class Student
     }
 
     /**
-     * Set adress.
-     *
-     * @param string|null $adress
-     *
-     * @return Student
-     */
-    public function setAdress($adress = null)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get adress.
-     *
-     * @return string|null
-     */
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
      * Set email.
      *
      * @param string|null $email
@@ -486,5 +449,137 @@ class Student
     public function getLeader()
     {
         return $this->leader;
+    }
+
+    /**
+     * Set age.
+     *
+     * @param int|null $age
+     *
+     * @return Student
+     */
+    public function setAge($age = null)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age.
+     *
+     * @return int|null
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Add absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return Student
+     */
+    public function addAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        $this->absences[] = $absence;
+
+        return $this;
+    }
+
+    /**
+     * Remove absence.
+     *
+     * @param \AppBundle\Entity\Absence $absence
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAbsence(\AppBundle\Entity\Absence $absence)
+    {
+        return $this->absences->removeElement($absence);
+    }
+
+    /**
+     * Get absences.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAbsences()
+    {
+        return $this->absences;
+    }
+
+    /**
+     * Set validated.
+     *
+     * @param bool $validated
+     *
+     * @return Student
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated.
+     *
+     * @return bool
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * Set sexe.
+     *
+     * @param string|null $sexe
+     *
+     * @return Student
+     */
+    public function setSexe($sexe = null)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe.
+     *
+     * @return string|null
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Set address.
+     *
+     * @param string|null $address
+     *
+     * @return Student
+     */
+    public function setAddress($address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address.
+     *
+     * @return string|null
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

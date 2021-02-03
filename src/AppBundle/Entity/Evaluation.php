@@ -35,17 +35,17 @@ class Evaluation
     
     /**
      * @var type 
-     * @ORM\ManyToOne(targetEntity="EvaluationType", inversedBy="evaluations")
+     * @ORM\ManyToOne(targetEntity="EvaluationType")
      * @ORM\JoinColumn(nullable=false)
      */
     private $evaluationType;
     
     /**
      * @var type 
-     * @ORM\ManyToOne(targetEntity="Program", inversedBy="evaluations")
+     * @ORM\ManyToOne(targetEntity="AffectedProgram", inversedBy="evaluations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $program;
+    private $affectedProgram;
     
     /**
      * @var type 
@@ -53,13 +53,6 @@ class Evaluation
      * @ORM\JoinColumn(nullable=false)
      */
     private $sequence;
-    
-    /**
-     * @var type 
-     * @ORM\ManyToOne(targetEntity="Section", inversedBy="evaluations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $section;
 
     /**
      * @var string
@@ -79,13 +72,9 @@ class Evaluation
         return $this->id;
     }
 
-    /**
-     * Return the Evaluation code which is a string
-     * that can be used to generate a uniq codebar
-     */
     public function getCode()
     {
-        return $this->getSection()->getId().'/'.$this->getId();
+        return $this->getId()."/".$this->getAffectedProgram()->getSection()->getId();
     }
     
     public function getAverage()
@@ -188,7 +177,9 @@ class Evaluation
     }
 
     /**
-     * Get marks
+     * Get all the related marks; ideally, it should be
+     * marks of all the students that belong to the
+     * the section targeted by the evaluation
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -219,30 +210,6 @@ class Evaluation
     public function getEvaluationType()
     {
         return $this->evaluationType;
-    }
-
-    /**
-     * Set program
-     *
-     * @param \AppBundle\Entity\Program $program
-     *
-     * @return Evaluation
-     */
-    public function setProgram(\AppBundle\Entity\Program $program)
-    {
-        $this->program = $program;
-
-        return $this;
-    }
-
-    /**
-     * Get program
-     *
-     * @return \AppBundle\Entity\Program
-     */
-    public function getProgram()
-    {
-        return $this->program;
     }
 
     /**
@@ -283,13 +250,28 @@ class Evaluation
         return $this;
     }
 
+
     /**
-     * Get section
+     * Set affectedProgram.
      *
-     * @return \AppBundle\Entity\Section
+     * @param \AppBundle\Entity\AffectedProgram $affectedProgram
+     *
+     * @return Evaluation
      */
-    public function getSection()
+    public function setAffectedProgram(\AppBundle\Entity\AffectedProgram $affectedProgram)
     {
-        return $this->section;
+        $this->affectedProgram = $affectedProgram;
+
+        return $this;
+    }
+
+    /**
+     * Get affectedProgram.
+     *
+     * @return \AppBundle\Entity\AffectedProgram
+     */
+    public function getAffectedProgram()
+    {
+        return $this->affectedProgram;
     }
 }

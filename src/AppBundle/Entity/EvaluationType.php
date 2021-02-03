@@ -20,11 +20,6 @@ class EvaluationType
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="evaluationType")
-     */
-    private $evaluations;
 
     /**
      * @var string
@@ -75,46 +70,5 @@ class EvaluationType
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     *
-     * @return EvaluationType
-     */
-    public function addEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations[] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaluation
-     *
-     * @param \AppBundle\Entity\Evaluation $evaluation
-     */
-    public function removeEvaluation(\AppBundle\Entity\Evaluation $evaluation)
-    {
-        $this->evaluations->removeElement($evaluation);
-    }
-
-    /**
-     * Get evaluations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
     }
 }

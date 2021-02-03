@@ -22,7 +22,7 @@ class Coefficient
     private $id;
     
     /**
-     * @ORM\OneToMany(targetEntity="Program", mappedBy="coefficient")
+     * @ORM\OneToMany(targetEntity="Program", mappedBy="coefficient", cascade={"persist"}, orphanRemoval=true)
      */
     private $programs;
 
@@ -42,6 +42,16 @@ class Coefficient
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function __toString() {
+        
+        if($this->value){
+            return 'Coefficient: '.$this->value;
+        }else{
+            return 'New Coefficient';
+        }
+        
     }
 
     /**
@@ -74,6 +84,17 @@ class Coefficient
     {
         $this->programs = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function setPrograms($programs)
+    {
+        if (count($programs) > 0) {
+            foreach ($programs as $p) {
+                $this->addProgram($p);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * Add program
@@ -84,9 +105,11 @@ class Coefficient
      */
     public function addProgram(\AppBundle\Entity\Program $program)
     {
-        $this->programs[] = $program;
+        $program->setCoefficient($this);
+        $this->programs->add($program);
+        //$this->programs[] = $program;
 
-        return $this;
+        //return $this;
     }
 
     /**

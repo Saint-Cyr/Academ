@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SectionAdmin extends AbstractAdmin
 {
@@ -17,19 +18,28 @@ class SectionAdmin extends AbstractAdmin
         $datagridMapper
             ->add('name')
             ->add('level', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('mainTeacher')
+            ->add('studentCsvList', null, ['expanded' => true])
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('id', null, [
+            'header_style' => 'width: 2%; text-align: center',
+            'row_align' => 'center'
+        ])
             ->add('Mark Table', null, array('template' => '@App/Default/section_list.html.twig'))
             ->add('name', null, ['editable' => true])
-            ->add('level')
+            ->add('level', null, ['label_icon' => 'fa fa-book',
+                                  'lable' => false])
             ->add('studentNumber')
-            ->add('studentLeader')
-            ->add('evaluations')
+            ->add('studentCsvList')
+            ->add('studentLeaderInfo')
+            //->add('evaluations')
             ->add('mainTeacher')
+            ->add('level.programs', null, ['label' => 'Programs'])
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class StudentAdmin extends AbstractAdmin
 {
@@ -16,8 +17,10 @@ class StudentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('studentParent', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])
+            ->add('section', ModelAutocompleteFilter::class, [], null, ['property' => 'name'])     
             ->add('name')       
+            ->add('sexe')       
         ;
     }
 
@@ -25,11 +28,15 @@ class StudentAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name', null, array('editable' => true))
+            ->add('firstName', null, array('editable' => true))
+            ->add('phoneNumber', null, array('editable' => true))
             ->add('section')
-            ->add('leader', null, ['editable' => true])
+            ->add('sexe')
+            ->add('validated', null, ['editable' => true])
             ->add('studentParent')
             ->add('barcodeValue', null, array('editable' => true))
-            ->add('barcode')
+            ->add('address', null, ['editable' => true])
+            ->add('leader', null, ['editable' => true])
             ->add('image')
             ->add('_action', null, [
                 'actions' => [
@@ -47,15 +54,22 @@ class StudentAdmin extends AbstractAdmin
         ->with('Student Information', array('class' => 'col-md-4'))
             ->add('name')
             ->add('firstName')
-            ->add('phoneNumber')
-            ->add('adress')
-            ->add('email', 'email', ['required' => false])
+            ->add('sexe', ChoiceType::class, ['help' => 'Choose the student sexe please', 'choices' => ['Garçon' => 'male',
+                                                            'Fille' => 'female'],
+                                              'expanded' => true])
         ->end();
         $formMapper
+        ->with('Contact', array('class' => 'col-md-4'))
+            ->add('phoneNumber')
+            ->add('address')
+            ->add('email')
+        ->end();
+
+        $formMapper
         ->with('Academic status', array('class' => 'col-md-4'))
-            ->add('section', null, ['attr' => ['style' => 'width: 450px'], 'label' => 'Current Section'])
+            ->add('section', null, ['attr' => ['style' => 'width: 500px'], 'label' => 'Current Section'])
             ->add('lastSchoolInstitution')
-            ->add('leader')
+            //->add('leader')
             ->add('studentParent', ModelListType::class)
         ->end();
     }
@@ -67,7 +81,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('name')
             ->add('firstName')
             ->add('phoneNumber')
-            ->add('adress')
+            ->add('address')
             ->add('email', 'email', ['required' => false])
         ->end();
         $showMapper
