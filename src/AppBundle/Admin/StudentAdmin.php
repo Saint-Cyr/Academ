@@ -35,6 +35,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('validated', null, ['editable' => true])
             ->add('studentParent')
             ->add('barcodeValue', null, array('editable' => true))
+            ->add('address', null, ['editable' => true])
             ->add('leader', null, ['editable' => true])
             ->add('image')
             ->add('_action', null, [
@@ -60,7 +61,7 @@ class StudentAdmin extends AbstractAdmin
         $formMapper
         ->with('Contact', array('class' => 'col-md-4'))
             ->add('phoneNumber')
-            ->add('adress')
+            ->add('address')
             ->add('email')
         ->end();
 
@@ -80,7 +81,7 @@ class StudentAdmin extends AbstractAdmin
             ->add('name')
             ->add('firstName')
             ->add('phoneNumber')
-            ->add('adress')
+            ->add('address')
             ->add('email', 'email', ['required' => false])
         ->end();
         $showMapper

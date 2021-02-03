@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Program;
 use AppBundle\Entity\Sequence;
 use AppBundle\Entity\AffectedProgram;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Student
@@ -71,9 +71,9 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var string
@@ -128,6 +128,31 @@ class Student
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Only one student can be a leader at a time within a Section")
+     */
+    public function isStudentLeaderValid()
+    {
+        //Validation is processing only if studentLeader has been checked
+        if($this->getLeader()){
+            $numberOfLeader = 0;
+            foreach($this->getSection()->getStudents() as $student){
+                if($student->getLeader()){
+                    $numberOfLeader++;
+                }
+            }
+
+            //if the number of leader reached 1 then return false
+            if($numberOfLeader > 1){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
     }
     
     /**
@@ -369,30 +394,6 @@ class Student
     }
 
     /**
-     * Set adress.
-     *
-     * @param string|null $adress
-     *
-     * @return Student
-     */
-    public function setAdress($adress = null)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get adress.
-     *
-     * @return string|null
-     */
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
      * Set email.
      *
      * @param string|null $email
@@ -532,5 +533,29 @@ class Student
     public function getValidated()
     {
         return $this->validated;
+    }
+
+    /**
+     * Set sexe.
+     *
+     * @param string|null $sexe
+     *
+     * @return Student
+     */
+    public function setSexe($sexe = null)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe.
+     *
+     * @return string|null
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
     }
 }

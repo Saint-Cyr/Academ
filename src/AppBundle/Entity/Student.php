@@ -71,9 +71,9 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var string
@@ -394,30 +394,6 @@ class Student
     }
 
     /**
-     * Set adress.
-     *
-     * @param string|null $adress
-     *
-     * @return Student
-     */
-    public function setAdress($adress = null)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get adress.
-     *
-     * @return string|null
-     */
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
      * Set email.
      *
      * @param string|null $email
@@ -581,5 +557,29 @@ class Student
     public function getSexe()
     {
         return $this->sexe;
+    }
+
+    /**
+     * Set address.
+     *
+     * @param string|null $address
+     *
+     * @return Student
+     */
+    public function setAddress($address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address.
+     *
+     * @return string|null
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

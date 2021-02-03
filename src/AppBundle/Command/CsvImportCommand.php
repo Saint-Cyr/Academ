@@ -54,8 +54,14 @@ class CsvImportCommand extends Command
         foreach ($results as $row){
             //create student object
             $student = new Student();
+            //Set student properties
             $student->setName($row['name']);
-            //$student->setBarcode($row['barcode']);
+            $student->setFirstName($row['first_name']);
+            $student->setSexe($row['sexe']);
+            $student->setPhoneNumber($row['phone_number']);
+            $student->setAdress($row['address']);
+            $student->setEmail($row['email']);
+            $student->setLastSchoolInstitution($row['last_school_name']);
             
             //Check if #id for section exist both from csv and DB
             //if($row['section']){

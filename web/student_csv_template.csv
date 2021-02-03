@@ -1,2 +1,2 @@
-id,name,first_name,sexe,phone_number,adress,email,last_school_name
-1,MAPOUKA,Saint-Cyr,mal,23672803037,Bambari – Secteur,mapoukacyr@gmail.com,LAENS
+id,name,first_name,sexe,phone_number,address,email,last_school_name
+1,MAPOUKA,Saint-Cyr,mal,,Bambari – Secteur,mapoukacyr@gmail.com,LAENS
