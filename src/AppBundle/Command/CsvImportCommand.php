@@ -59,7 +59,7 @@ class CsvImportCommand extends Command
             $student->setFirstName($row['first_name']);
             $student->setSexe($row['sexe']);
             $student->setPhoneNumber($row['phone_number']);
-            $student->setAdress($row['address']);
+            $student->setAddress($row['address']);
             $student->setEmail($row['email']);
             $student->setLastSchoolInstitution($row['last_school_name']);
             
