@@ -25,7 +25,6 @@ sonata_block:
             contexts: [admin]
         
 sonata_admin:
-    
     templates:
         layout: AppBundle::standard_layout.html.twig
     title: Academ
@@ -62,19 +61,17 @@ sonata_admin:
                 icon: '<i class="fa fa-key"></i>'
                 items:
                     - user.admin.user
-
-
-            
-
         blocks:
             # display a dashboard block
             - { position: left, type: sonata.admin.block.admin_list, settings: {groups: [Admin]}}
             - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Setting Information]}}
             - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Teaching System]}}
             - { position: right, type: sonata.admin.block.admin_list, settings: {groups: [Security]}}
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-
+    assets:
+        extra_javascripts:
+            - bundles/sonatapage/sonata-page.back.min.js
+        extra_stylesheets:
+            - bundles/sonatapage/sonata-page.back.min.css
 framework:
     default_locale: en
     translator: { fallbacks: [en] }
